@@ -22,7 +22,7 @@ The goal is to keep the website as clean as possible. The user will be able to s
 https://www.coingecko.com/api/documentations/v3#/simple/get_simple_price 
 - Twitter account data; API
 https://developer.twitter.com/en/docs/twitter-api/users/lookup/introduction 
-- Telegram channel; API
+- Telegram news channel data; API
 https://core.telegram.org/widgets/post 
 - Google trends search data; Embedded script
 https://trends.google.com/trends/explore?q={coin}&geo=US 
@@ -40,8 +40,12 @@ https://trends.google.com/trends/explore?q={coin}&geo=US
   - A website that displays coin prices and blockchain block data.
   - Displays current coin price and total portfolio value.
   - https://blockchair.com/
+  
+- Differences
+  - What Cryptofolio does differently is adding social media and news data.
 
 ### Hardest part
-I think the hardest part is getting and displaying price data due to inexperience. I have done an API exercise once but I do not know what difficulties I can run into. If I am unable to retrieve price data from the cryptocurrency market, I can choose to use data from the general stock market.
+- I think the hardest part is getting and displaying price/social media data due to inexperience with APIs. I have done an API exercise once but I do not know what difficulties I can run into. If I am unable to retrieve price data from the cryptocurrency market, I can choose to use data from the general stock market.
+- Another difficulty are the graphs and how I can display historical portfolio data of the user's portfolio. If I'm not able to add graphs I can choose to drop that functionality or use an embedded price graph provided by a third party.
 
 
