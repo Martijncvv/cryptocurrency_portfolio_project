@@ -1,4 +1,4 @@
-# Application Name
+# Cryptofolio
 A cryptocurrency portfolio tracker that shows price data and data from different other sources.
 
 ## Problem statement
