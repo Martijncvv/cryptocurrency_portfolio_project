@@ -12,6 +12,7 @@ This application will solve the problem of scattered information. The user can f
 
 ## Details and sketches
 The goal is to keep the website as clean as possible. The user will be able to search and add tokens on the left side. By clicking on a certain coin the data of that specific coin will be displayed at the right side.
+
 ![Website design sketch](doc/Cryptofolio_sketch.jpeg)
 
 
@@ -27,16 +28,16 @@ https://core.telegram.org/widgets/post
 https://trends.google.com/trends/explore?q={coin}&geo=US 
 
 ### External components
-- Bootstrap; layout functionaliteit voor dynamische indeling van de website
+- Bootstrap; layout functionality for dynamic layout of the website
 
 ### Similar websites
-CoinGecko.
-- A website that displays coin prices.
-- Displays current prices, total value and difference from purchase.
+- CoinGecko.
+  - A website that displays coin prices.
+  - Displays current prices, total value and difference from purchase.
 
-Blockchair
-- A website that displays coin prices and block data.
-- Displays current coin price and total portfolio value.
+- Blockchair
+  - A website that displays coin prices and block data.
+  - Displays current coin price and total portfolio value.
 
 ### Hardest part
 I think the hardest part is getting and displaying price data due to inexperience. I have done an API exercise once but I do not know what difficulties I can run into. If I am unable to retrieve price data from the cryptocurrency market, I can choose to use data from the general stock market.
