@@ -1,10 +1,10 @@
 # Application Name
-A cryptocurrency portfolio tracker that shows data from multiple sources.
+A cryptocurrency portfolio tracker that shows price data and data from different other sources.
 
 ## Problem statement
 
-The cryptocurrency industry has developed in recent years and is expected to grow significantly in the coming years. This can be seen, among other things, in the dozens of new startups that are added daily with the accompanying coins and tokens, each with their own value.
-Due to the immature and small market, these prices fluctuate a lot and information about these coins can be found scattered on many different platforms.
+The cryptocurrency industry has developed in recent years and is expected to grow significantly in the coming years. This can be seen from the dozens of new startups that are added daily with the accompanying coins and tokens, each with their own value.
+Due to the immature and small market, these prices fluctuate a lot and information about these coins can be found scattered on many different platforms. This can be very unclear and inefficient for the investor.
 
 
 ## Solution description
@@ -33,10 +33,10 @@ https://trends.google.com/trends/explore?q={coin}&geo=US
 ### Similar websites
 - CoinGecko.
   - A website that displays coin prices.
-  - Displays current prices, total value and difference from purchase.
+  - Displays current prices, total value and profit/loss.
 
 - Blockchair
-  - A website that displays coin prices and block data.
+  - A website that displays coin prices and blockchain block data.
   - Displays current coin price and total portfolio value.
 
 ### Hardest part
