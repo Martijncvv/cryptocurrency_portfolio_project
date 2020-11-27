@@ -31,13 +31,15 @@ https://trends.google.com/trends/explore?q={coin}&geo=US
 - Bootstrap; layout functionality for dynamic layout of the website
 
 ### Similar websites
-- CoinGecko.
+- CoinGecko
   - A website that displays coin prices.
   - Displays current prices, total value and profit/loss.
+  - https://www.coingecko.com/en
 
 - Blockchair
   - A website that displays coin prices and blockchain block data.
   - Displays current coin price and total portfolio value.
+  - https://blockchair.com/
 
 ### Hardest part
 I think the hardest part is getting and displaying price data due to inexperience. I have done an API exercise once but I do not know what difficulties I can run into. If I am unable to retrieve price data from the cryptocurrency market, I can choose to use data from the general stock market.
