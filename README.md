@@ -1,18 +1,44 @@
 # Application Name
-
-TODO: Briefly summarize your application here.
+A cryptocurrency portfolio tracker that shows data from multiple sources.
 
 ## Problem statement
 
-TODO: Describe the situation that your app is relevant to
+The cryptocurrency industry has developed in recent years and is expected to grow significantly in the coming years. This can be seen, among other things, in the dozens of new startups that are added daily with the accompanying coins and tokens, each with their own value.
+Due to the immature and small market, these prices fluctuate a lot and information about these coins can be found scattered on many different platforms.
+
 
 ## Solution description
-
-TODO: Describe the approach that your application takes to solve the problem
+This application will solve the problem of scattered information. The user can follow the developments of his or her investments on one location. 
 
 ## Details and sketches
+The goal is to keep the website as clean as possible. The user will be able to search and add tokens on the left side. By clicking on a certain coin the data of that specific coin will be displayed at the right side.
+![Website design sketch](doc/Cryptofolio_sketch.jpeg)
 
-TODO: Describe different ways that your application will be used, with all relevant screens sketched out
 
-Make sure that this readme is well-readable when viewed via GitHub! Images should be appropriately sized, text and images should be clearly related etc.
+
+### Data sources
+- Cryptocurrency price data; API
+https://www.coingecko.com/api/documentations/v3#/simple/get_simple_price 
+- Twitter account data; API
+https://developer.twitter.com/en/docs/twitter-api/users/lookup/introduction 
+- Telegram channel; API
+https://core.telegram.org/widgets/post 
+- Google trends search data; Embedded script
+https://trends.google.com/trends/explore?q={coin}&geo=US 
+
+### External components
+- Bootstrap; layout functionaliteit voor dynamische indeling van de website
+
+### Similar websites
+CoinGecko.
+- A website that displays coin prices.
+- Displays current prices, total value and difference from purchase.
+
+Blockchair
+- A website that displays coin prices and block data.
+- Displays current coin price and total portfolio value.
+
+### Hardest part
+I think the hardest part is getting and displaying price data due to inexperience. I have done an API exercise once but I do not know what difficulties I can run into. If I am unable to retrieve price data from the cryptocurrency market, I can choose to use data from the general stock market.
+
 
