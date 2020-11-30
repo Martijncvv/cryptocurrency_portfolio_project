@@ -1,5 +1,5 @@
 # Design Document
-## Main Features
+## Main Features for MVP ('+' = Optional)
 - User accounts; Sign in and register option for users.
 - Search and add cryptocurrencies to a portfolio.
 - Delete cryptocurrencies from portfolio.
@@ -21,10 +21,6 @@
 - +Explorer option: get information about  a random coin.
 - +Settings option: language and base currency
 
-.
-
-- : MVP
-- +: Optional
 
 ## User interface
 ### General overview
