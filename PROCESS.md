@@ -1,4 +1,13 @@
 # Process Book
+## Week 1
+### Monday 30-11-2020
+Project start
+- Made Design document.
+- Added all needed basic files; folders, templates, settings, urls.py, views.py.
+- Set up everything the same way as we did in previous assignments.
+
+### Tuesday 01-12-2020
+
 
 
 
