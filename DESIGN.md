@@ -22,14 +22,14 @@
 
 ## User interface
 ### General overview
-![Website UI](doc/CF_BTC_logged-in.png | width=300)
+![Website UI](doc/CF_BTC_logged-in.png)
 
 ### UI explanation
-![Website UI with information](doc/CF_overview_info.png | width=300)
+![Website UI with information](doc/CF_overview_info.png)
 
 ### Login and register screen
-![Log-in view](doc/CF_sign-in.png | width=300)
-![register view](doc/CF_register.png | width=300)
+![Log-in view](doc/CF_sign-in.png)
+![register view](doc/CF_register.png)
 
 ### Add and edit coins to portfolio
 ![Add coin to portfolio view](doc/CF_BTC_add-btc.png)
