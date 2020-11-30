@@ -7,6 +7,7 @@
 - Display general portfolio information; total value, invested amount, profit/loss, number of different coins.
 - +Display historical graph of portfolio.
 .
+
 - Display general coin information; price, market cap, trading volume and description.
 - Display latest social media updates; Twitter.
 - Display Google trends results.
@@ -14,9 +15,11 @@
 - +Display community chat; Telegram
 - +Display coin price graph.
 .
+
 - +Explorer option: get information about  a random coin.
 - +Settings option: language and base currency
 .
+
 - -: MVP
 - +: Optional
 
