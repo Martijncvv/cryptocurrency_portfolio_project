@@ -25,7 +25,7 @@ document.querySelector('form').onsubmit = () => {
     const coin = coin_name.value;
 
     // Create a list item for the new task and add the task to it
-    const li = document.createElement('li');
+    let li = document.createElement('li');
     li.innerHTML = coin;
 
     // Add new element to our unordered list:
@@ -40,17 +40,21 @@ document.querySelector('form').onsubmit = () => {
     // Stop form from submitting
    
 
-    fetch("https://api.coingecko.com/api/v3/coins/" + coin + "?localization=false&tickers=true&market_data=false&community_data=false&developer_data=false&sparkline=false")
+    fetch("https://api.coingecko.com/api/v3/coins/" + coin + "?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
     .then(response => response.json())
-    .then(data => console.log(data));
+    .then(data => {
+        
+        console.log(data)
+      
+        document.getElementById("coin_info_name").innerHTML = "Name: " + data.name;
+        document.getElementById("coin_info_ticker").innerHTML = "Ticker: " + data.symbol;
+        document.getElementById("coin_info_price").innerHTML = "Price: " + data.market_data.current_price.usd;
+        document.getElementById("coin_info_marketcap").innerHTML = "Market cap: " + data.market_data.market_cap.usd;
+        document.getElementById("coin_info_atl").innerHTML = "ATL: " + data.market_data.atl.usd + "   Date: " + data.market_data.atl_date.usd;
+        document.getElementById("coin_info_ath").innerHTML = "ATH: " + data.market_data.ath.usd + "   Date: " + data.market_data.ath_date.usd;
 
-    const li = document.createElement('li');
-    li.innerHTML = data.;
-
-    // Add new element to our unordered list:
-    document.querySelector('#coin_list').append(li);
-
-
+        // ath_date
+    });
     return false;
 
 } });
