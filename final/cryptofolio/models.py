@@ -21,7 +21,7 @@ class Coinholding(models.Model):
     price = models.DecimalField(max_digits=10000000000, decimal_places=50)
     amount = models.DecimalField(max_digits=1000000000000, decimal_places=50)
     time = models.DateTimeField(auto_now=True)
-    comment = models.CharField(max_length=350)
+    comment = models.TextField()
 
 class Settings(models.Model):
     """
@@ -30,3 +30,8 @@ class Settings(models.Model):
     userID = models.ForeignKey("User", on_delete=models.CASCADE)
     Language = models.CharField(max_length=6)
     Currency = models.CharField(max_length=10)
+
+
+    # @property boven function; geen () nodig
+
+    # class meta; extra data/limits voor de database

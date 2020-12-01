@@ -1,0 +1,77 @@
+{% extends "cryptofolio/layout.html" %}
+{% load static %}
+
+{% block title %}
+BitcoinTitle
+{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col">
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
+            </li>
+            <li class="nav-item">
+                <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
+            </li>
+          </ul>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-3">
+        Search  
+        <ul>
+            <li>Bitcoin</li>
+            <li>Ethereum</li>
+            <li>Ripple</li>
+            <li>VeChain</li>
+        </ul>
+
+    </div>
+
+    <div class="col-9">
+        <div class="row">
+            <div class="col-6">
+                <h2>Graph</h2>
+            </div>
+
+            <div class="col-6">
+                <h2>General info</h2>
+                <ul>
+                    <li>Name</li>
+                    <li>Ticker</li>
+                    <li>Price</li>
+                    <li>Marketcap</li>
+                    <li>Description</li>
+                </ul>
+            </div>
+
+            <div class="col-6">
+                <h2>Social Media</h2>
+                <div class="row">
+                    <div class="col-6">
+                        <h3>Twitter</h3>
+                    </div>
+
+                    <div class="col-6">
+                        <h3>Telegram</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <h2>Google trends</h2>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'cryptofolio/index.js' %}"></script>
+{% endblock %}

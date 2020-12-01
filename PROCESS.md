@@ -7,6 +7,7 @@ Project start
 - Set up everything the same way as we did in previous assignments.
 
 ### Tuesday 01-12-2020
+- Restarted with the document because there was something wrong with the migrations; after 1 hour of trying to fix it I decided to just restart since it costs only 15 minutes to recreate the basic folders.
 
 
 
