@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-BitcoinTitle
+<p id=""></p>
 {% endblock %}
 
 {% block body %}
@@ -10,21 +10,22 @@ BitcoinTitle
     <div class="col">
         <ul class="nav justify-content-end">
             <li class="nav-item">
-                <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
+                <button class="btn btn-sm btn-outline-primary" id="settings">Settings</button>
             </li>
             <li class="nav-item">
-                <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
+                <button class="btn btn-sm btn-outline-primary" id="login">Log-in</button>
             </li>
           </ul>
     </div>
 </div>
 
+
 <div class="row">
     <div class="col-3">
       
         <form>
-            <input id="search_value" placeholder = "New Task" type="text">
-            <input id="submit" type="submit">
+            <input id="search_value" placeholder = "Coin name" type="text">
+            <input id="submit_search" type="submit" value="Search">
         </form>
 
         <ul id="coin_list">
@@ -68,10 +69,28 @@ BitcoinTitle
                 <h2>Google trends</h2>
             </div>
         </div>
-
-
     </div>
 </div>
+
+{% if message %}
+    <div class="frontfield" style="display: block">
+        {{ message }}
+{% else %}
+    <div id="loginfield" class="frontfield">
+{% endif %}
+        <form action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <input autofocus class="form-control" type="email" name="email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" placeholder="Password">
+            </div>
+            <input class="btn btn-primary" type="submit" value="Login">
+        </form>
+
+        <input id="close_field" class="btn btn-primary" type="submit" value="close">
+    </div>
 
 {% endblock %}
 
