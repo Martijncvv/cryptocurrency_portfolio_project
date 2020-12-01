@@ -3,9 +3,6 @@ from django.db import models
 
 class User(AbstractUser):
     pass
-    portfolioID = models.ForeignKey("Portfolio", models.SET_NULL, blank=True, null=True)
-    settingsID = models.ForeignKey("Settings", models.SET_NULL, blank=True, null=True)
-
 
 class Portfolio(models.Model):
     """
@@ -30,6 +27,6 @@ class Settings(models.Model):
     """
     User settings data
     """
+    userID = models.ForeignKey("User", on_delete=models.CASCADE)
     Language = models.CharField(max_length=6)
     Currency = models.CharField(max_length=10)
-
