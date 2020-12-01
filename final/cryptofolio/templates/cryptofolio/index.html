@@ -21,12 +21,14 @@ BitcoinTitle
 
 <div class="row">
     <div class="col-3">
-        Search  
-        <ul>
-            <li>Bitcoin</li>
-            <li>Ethereum</li>
-            <li>Ripple</li>
-            <li>VeChain</li>
+      
+        <form>
+            <input id="search_value" placeholder = "New Task" type="text">
+            <input id="submit" type="submit">
+        </form>
+
+        <ul id="coin_list">
+            <li>sasas</li>
         </ul>
 
     </div>
@@ -39,7 +41,7 @@ BitcoinTitle
 
             <div class="col-6">
                 <h2>General info</h2>
-                <ul>
+                <ul id="general_info">
                     <li>Name</li>
                     <li>Ticker</li>
                     <li>Price</li>
@@ -73,5 +75,5 @@ BitcoinTitle
 {% endblock %}
 
 {% block script %}
-    <script src="{% static 'cryptofolio/index.js' %}"></script>
+    <script src="{% static 'index.js' %}"></script>
 {% endblock %}
