@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // search function
     document.querySelector('#submit_search').addEventListener('click', general_info);
-   
     // register button
     document.querySelector('#register').addEventListener('click', register);
 
@@ -17,12 +16,24 @@ document.addEventListener('DOMContentLoaded', function() {
         i.addEventListener('click',  close_field) 
       });
 
-    // Select the submit button and input to be used later
+
+
+    // Select the submit buttons and inputs to be used later
+    // search field
     const submit_search = document.querySelector('#submit_search');
     const coin_name = document.querySelector('#search_value');
-    // Disable submit button by default:
+    // login field
+    const login_password_field = document.querySelector('#login_password_field');
+    const login_field_button = document.querySelector('#login_field_button');
+    // register field
+    const register_password_field = document.querySelector('#register_password_field');
+    const register_field_button = document.querySelector('#register_field_button');
+    // Disable submit buttons
     submit_search.disabled = true;
-    // Listen for input to be typed into the input field
+    login_field_button.disabled = true;
+    register_field_button.disabled = true;
+
+    // Listen for input to be typed into coinsearch input field
     coin_name.onkeyup = () => {
         if (coin_name.value.length > 0) {
             submit_search.disabled = false;
@@ -31,6 +42,28 @@ document.addEventListener('DOMContentLoaded', function() {
             submit_search.disabled = true;
         }
     }
+    // Listen for input to be typed into login input field
+    login_password_field.onkeyup = () => {
+        if (login_password_field.value.length > 0) {
+            login_field_button.disabled = false;
+        }
+        else {
+            login_field_button.disabled = true;
+        }
+    }
+     // Listen for input to be typed into register input field
+     register_password_field.onkeyup = () => {
+        if (register_password_field.value.length > 0) {
+            register_field_button.disabled = false;
+        }
+        else {
+            register_field_button.disabled = true;
+        }
+    }
+
+
+
+
 
     general_info("bitcoin");
 

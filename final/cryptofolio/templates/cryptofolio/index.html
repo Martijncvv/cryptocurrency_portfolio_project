@@ -6,18 +6,7 @@ Title
 {% endblock %}
 
 {% block body %}
-<div class="row">
-    <div class="col">
-        <ul class="nav justify-content-end">
-            <li class="nav-item">
-                <button class="btn btn-sm btn-outline-primary" id="settings">Settings</button>
-            </li>
-            <li class="nav-item">
-                <button class="btn btn-sm btn-outline-primary  login">Log-in</button>
-            </li>
-          </ul>
-    </div>
-</div>
+
 
 
 <div class="row">
@@ -86,9 +75,9 @@ Title
                 <input autofocus class="form-control" type="email" name="email" placeholder="Email">
             </div>
             <div class="form-group">
-                <input class="form-control" type="password" name="password" placeholder="Password">
+                <input id="login_password_field" class="form-control" type="password" name="password" placeholder="Password">
             </div>
-            <input class="btn btn-primary" type="submit" value="Login">
+            <input id="login_field_button" class="btn btn-primary" type="submit" value="Login">
         </form>
         <p> Don't have an account? Register <span id="register">here</span>. </p>
         
@@ -114,15 +103,14 @@ Title
                 <input class="form-control" type="password" name="password" placeholder="Password">
             </div>
             <div class="form-group">
-                <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+                <input id="register_password_field" class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
             </div>
-            <input class="btn btn-primary" type="submit" value="Register">
+            <input id="register_field_button" class="btn btn-primary" type="submit" value="Register">
         </form>
         <p> Already have an account? Log In <span class="login">here</span>. </p>
         
         <input class="btn btn-primary close_field" type="submit" value="close">
     </div>
-
 
 
 
