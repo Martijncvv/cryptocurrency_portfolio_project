@@ -1,11 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
     // search function
     document.querySelector('#submit_search').addEventListener('click', general_info);
-    // login button
-    document.querySelector('#login').addEventListener('click', login);
-    // close field button
-    document.querySelector('#close_field').addEventListener('click', close_field);
-        
+   
+    // register button
+    document.querySelector('#register').addEventListener('click', register);
+
+     // Add eventListeners to login classes
+    let login_button = document.querySelectorAll('.login');
+    login_button.forEach(function (i) {
+        i.addEventListener('click',  login) 
+      });
+
+    // Add eventListeners to close_field classes
+    let close_field_button =  document.querySelectorAll('.close_field');
+    close_field_button.forEach(function (i) {
+        i.addEventListener('click',  close_field) 
+      });
 
     // Select the submit button and input to be used later
     const submit_search = document.querySelector('#submit_search');
@@ -28,8 +38,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function general_info(coin) {
-    document.querySelector("#loginfield").style.display = 'none';
-
     // get value from form
     let coin_name = document.querySelector('#search_value');
     if (coin_name.value !== ""){
@@ -68,9 +76,15 @@ function general_info(coin) {
 }
 
 function login() {
+    document.querySelector("#registerfield").style.display = "none";
     document.querySelector("#loginfield").style.display = "block";
+}
+function register() {
+    document.querySelector("#loginfield").style.display = "none";
+    document.querySelector("#registerfield").style.display = "block";
 }
 
 function close_field() {
     document.querySelector("#loginfield").style.display = "none";
+    document.querySelector("#registerfield").style.display = "none";
 }

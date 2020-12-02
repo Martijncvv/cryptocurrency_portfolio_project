@@ -3,7 +3,6 @@
 }
 
 .frontfield {
-    display: none;
 
     width: 40%;
     height: 60%;
@@ -17,4 +16,8 @@
     background-color: rgb(172, 233, 235);
    
     z-index: 999;
+}
+
+span {
+    color: rgb(45, 45, 231);
 }

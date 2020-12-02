@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-<p id=""></p>
+Title
 {% endblock %}
 
 {% block body %}
@@ -13,7 +13,7 @@
                 <button class="btn btn-sm btn-outline-primary" id="settings">Settings</button>
             </li>
             <li class="nav-item">
-                <button class="btn btn-sm btn-outline-primary" id="login">Log-in</button>
+                <button class="btn btn-sm btn-outline-primary  login">Log-in</button>
             </li>
           </ul>
     </div>
@@ -72,13 +72,15 @@
     </div>
 </div>
 
-{% if message %}
-    <div class="frontfield" style="display: block">
-        {{ message }}
+
+<!-- LOGIN FIELD -->
+{% if message_login %}
+    <div id="loginfield" class="frontfield" style="display: block">
+        {{ message_login }}
 {% else %}
-    <div id="loginfield" class="frontfield">
+    <div id="loginfield" class="frontfield" style="display: none">
 {% endif %}
-        <form action="{% url 'login' %}" method="post">
+        <form action="{% url 'index' %}" method="POST">
             {% csrf_token %}
             <div class="form-group">
                 <input autofocus class="form-control" type="email" name="email" placeholder="Email">
@@ -88,9 +90,46 @@
             </div>
             <input class="btn btn-primary" type="submit" value="Login">
         </form>
-
-        <input id="close_field" class="btn btn-primary" type="submit" value="close">
+        <p> Don't have an account? Register <span id="register">here</span>. </p>
+        
+        <input class="btn btn-primary close_field" type="submit" value="close">
     </div>
+
+<!-- REGISTER -->
+{% if message_register %}
+    <div id="registerfield" class="frontfield" style="display: block">
+        {{ message_register }}
+{% else %}
+    <div id="registerfield" class="frontfield" style="display: none">
+{% endif %}
+        <form action="{% url 'index' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <input class="form-control" autofocus type="text" name="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="email" name="email" placeholder="Email Address">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
+            </div>
+            <input class="btn btn-primary" type="submit" value="Register">
+        </form>
+        <p> Already have an account? Log In <span class="login">here</span>. </p>
+        
+        <input class="btn btn-primary close_field" type="submit" value="close">
+    </div>
+
+
+
+
+
+
+
+
 
 {% endblock %}
 

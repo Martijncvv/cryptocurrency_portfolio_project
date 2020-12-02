@@ -8,8 +8,11 @@ Project start
 
 ### Tuesday 01-12-2020
 - Restarted with the document because there was something wrong with the migrations; after 1 hour of trying to fix it I decided to just restart since it costs only 15 minutes to recreate the basic folders.
+- Created models file.
 - Created basic front-end with the General information connected to the CoinGecko API. 
 - Added JS login pop-up screen. Currently trying to connect it with Django views. Error message still not working. 
+
+### Wednesday 02-12-2020
 
 
 
