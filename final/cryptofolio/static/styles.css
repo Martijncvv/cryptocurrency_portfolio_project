@@ -21,3 +21,12 @@
 span {
     color: rgb(45, 45, 231);
 }
+
+#google_trends {
+    height: 400px;
+    background-color: darkkhaki;
+}
+
+#twitter_channel {
+    height: 400px;
+}

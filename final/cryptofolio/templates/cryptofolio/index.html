@@ -11,15 +11,25 @@
 
 <div class="row">
     <div class="col-3">
-      
-        <form>
-            <input id="search_value" placeholder = "Coin name" type="text">
-            <input id="submit_search" type="submit" value="Search">
-        </form>
-
-        <ul id="coin_list">
-            
-        </ul>
+        <div id="portfolio_list">
+            <form>
+                <input id="search_value" placeholder = "Coin name" type="text">
+                <input id="submit_search" type="submit" value="Search">
+            </form>
+    
+            <ul id="coin_list">
+            </ul>
+        </div>
+        <div id="">
+            <h2>Coin trade history</h2>
+            <ul>
+                <li>test item</li>
+                <li>test item</li>
+                <li>test item</li>
+                <li>test item</li>
+            </ul>
+        </div>
+        
 
     </div>
 
@@ -30,7 +40,9 @@
             </div>
 
             <div class="col-6">
-                <h2>General info</h2> <button id="add_coin" class="btn btn-sm btn-outline-primary">AddCoin</button>
+                <h2>General info</h2> 
+                <button id="add_trade" class="btn btn-sm btn-outline-primary">Add trade</button>
+
                 <ul>
                     <li id="coin_info_name"></li>
                     <li id="coin_info_ticker"></li>
@@ -46,6 +58,10 @@
                 <div class="row">
                     <div class="col-6">
                         <h3>Twitter</h3>
+                        <div id="twitter_channel">
+
+                        </div>
+                        
                     </div>
 
                     <div class="col-6">
@@ -54,12 +70,16 @@
                 </div>
             </div>
 
-            <div class="col-6">
+            <div class="col-6" >
                 <h2>Google trends</h2>
+                <div id="google_trends">
+                </div>
+                
             </div>
         </div>
     </div>
 </div>
+
 
 
 <!-- LOGIN FIELD -->
@@ -127,7 +147,7 @@
             Price in $: <input id="addcoin_input_price" class="form-control" type="text" name="coin_price" placeholder="Amount">
         </div>
       
-        <input id="login_field_button" class="btn btn-primary" type="submit" value="Add to portfolio">
+        <input id="add_portfolio_button" class="btn btn-primary" type="submit" value="Add to portfolio">
     </form>
     <p> Don't have an account? Register <span id="register">here</span>. </p>
     

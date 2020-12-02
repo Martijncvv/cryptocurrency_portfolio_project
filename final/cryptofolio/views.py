@@ -12,6 +12,15 @@ from .models import User, Portfolio, Coinholding, Settings
 
 def index(request):
     if request.method == "POST":
+        # ADD COIN
+        if "coin_amount" in request.POST:
+            coin_ticker = request.POST["coin_ticker"]
+            coin_amount = request.POST["coin_amount"]
+            coin_price = request.POST["coin_price"]
+
+
+
+
         # REGISTER 
         # username = request.POST.get("username", False)
         if "username" in request.POST:
@@ -57,8 +66,14 @@ def index(request):
         # Attempt to sign user in
         email = request.POST["email"]
         password = request.POST["password"]
-        username = User.objects.get(email = email).username
-       
+        # check if user exists
+        try:
+            username = User.objects.get(email = email).username
+        except:
+            return render(request, "cryptofolio/index.html", {
+                "message_login": "User does not exist"
+            })
+
         user = authenticate(request, username=username, password=password)
 
         # Check if authentication successful

@@ -15,8 +15,9 @@ Project start
 ### Wednesday 02-12-2020
 - Finished basic login, logout and register functionality
 - Added basic dynamic user feedback; disabled login/register button if no input was given.
-
-
+- Added basic front-end (html/js) for "add token to portfolio" pop-up screen.
+- Changed UML to be able to see portfolio trade history.
+- Added dynamic favicon
 
 
 

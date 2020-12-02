@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {
     // search function
-    document.querySelector('#submit_search').addEventListener('click', general_info);
+    document.querySelector('#submit_search').addEventListener('click', coin_info);
     // register button
     document.querySelector('#register').addEventListener('click', register);
     // add coin button
-    document.querySelector('#add_coin').addEventListener('click', add_coin);
+    document.querySelector('#add_trade').addEventListener('click', add_trade);
 
      // Add eventListeners to login classes
     let login_button = document.querySelectorAll('.login');
@@ -63,11 +63,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    general_info("bitcoin");
+    coin_info("bitcoin");
 });
 
 
-function general_info(coin) {
+function coin_info(coin) {
+    // GOOGLE TRENDS
+    
+
+
+    // GENERAL INFO FIELD
     // get value from form
     let coin_name = document.querySelector('#search_value');
     if (coin_name.value !== ""){
@@ -87,11 +92,17 @@ function general_info(coin) {
     // Disable the submit button again:
     submit_search.disabled = true;
 
-   
     fetch("https://api.coingecko.com/api/v3/coins/" + coin + "?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
     .then(response => response.json())
     .then(data => {
         
+    
+        // let favicon = document.createElement("link")
+        // favicon.rel = "icon"
+        // favicon.type = "image/png"
+        // favicon.href = data.image.thumb;
+        document.getElementById("favicon").setAttribute("href", data.image.thumb);
+
         console.log(data)  // KANN WEG
         // Add data to elements
         document.title = data.name;
@@ -101,8 +112,16 @@ function general_info(coin) {
         document.getElementById("coin_info_marketcap").innerHTML = data.market_data.market_cap.usd;
         document.getElementById("coin_info_atl").innerHTML = data.market_data.atl.usd + data.market_data.atl_date.usd;
         document.getElementById("coin_info_ath").innerHTML = data.market_data.ath.usd + data.market_data.ath_date.usd;
+
+        // twitter_name = data.links.twitter_screen_name
+        // // twitter_url = '<a href="https://twitter.com/intent/tweet?button_hashtag=' + twitter_name + '&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #' + twitter_name + '</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
+        // twitter_url = '<a class="twitter-timeline" href="https://twitter.com/' + twitter_name + '?ref_src=twsrc%5Etfw">Tweets by ' + twitter_name + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
+        // // TWITTER
+        
+        // document.getElementById("twitter_channel").innerHTML = twitter_url;
     });
 }
+
 
 function login() {
     document.querySelector("#register_field").style.display = "none";
@@ -118,7 +137,7 @@ function close_field() {
     document.querySelector("#register_field").style.display = "none";
     document.querySelector("#addcoin_field").style.display = "none";
 }
-function add_coin() {
+function add_trade() {
     // get coin name and set name in addcoin header
     coin_name = document.getElementById('coin_info_name').innerHTML;
     coin_ticker = document.getElementById('coin_info_ticker').innerHTML;
