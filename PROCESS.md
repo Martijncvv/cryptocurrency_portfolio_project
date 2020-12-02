@@ -13,6 +13,8 @@ Project start
 - Added JS login pop-up screen. Currently trying to connect it with Django views. Error message still not working. 
 
 ### Wednesday 02-12-2020
+- Finished basic login, logout and register functionality
+- Added basic dynamic user feedback; disabled login/register button if no input was given.
 
 
 

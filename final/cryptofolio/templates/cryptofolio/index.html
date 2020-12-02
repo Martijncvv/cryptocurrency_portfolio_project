@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-Title
+
 {% endblock %}
 
 {% block body %}
@@ -30,7 +30,7 @@ Title
             </div>
 
             <div class="col-6">
-                <h2>General info</h2>
+                <h2>General info</h2> <button id="add_coin" class="btn btn-sm btn-outline-primary">AddCoin</button>
                 <ul>
                     <li id="coin_info_name"></li>
                     <li id="coin_info_ticker"></li>
@@ -64,10 +64,10 @@ Title
 
 <!-- LOGIN FIELD -->
 {% if message_login %}
-    <div id="loginfield" class="frontfield" style="display: block">
+    <div id="login_field" class="frontfield" style="display: block">
         {{ message_login }}
 {% else %}
-    <div id="loginfield" class="frontfield" style="display: none">
+    <div id="login_field" class="frontfield" style="display: none">
 {% endif %}
         <form action="{% url 'index' %}" method="POST">
             {% csrf_token %}
@@ -84,12 +84,12 @@ Title
         <input class="btn btn-primary close_field" type="submit" value="close">
     </div>
 
-<!-- REGISTER -->
+<!-- REGISTER FIELD-->
 {% if message_register %}
-    <div id="registerfield" class="frontfield" style="display: block">
+    <div id="register_field" class="frontfield" style="display: block">
         {{ message_register }}
 {% else %}
-    <div id="registerfield" class="frontfield" style="display: none">
+    <div id="register_field" class="frontfield" style="display: none">
 {% endif %}
         <form action="{% url 'index' %}" method="POST">
             {% csrf_token %}
@@ -112,10 +112,30 @@ Title
         <input class="btn btn-primary close_field" type="submit" value="close">
     </div>
 
+<!-- ADD-COIN HOLDING FIELD-->
+<div id="addcoin_field" class="frontfield" style="display: none">
+    <h2 id="addcoin_header"></h2>
+    <form action="{% url 'index' %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            Ticker: <input id="addcoin_input_ticker" autofocus class="form-control" type="text" name="coin_ticker" placeholder="Coin ticker">
+        </div>
+        <div class="form-group">
+            Amount: <input class="form-control" type="text" name="coin_amount" placeholder="Amount">
+        </div>
+        <div class="form-group">
+            Price in $: <input id="addcoin_input_price" class="form-control" type="text" name="coin_price" placeholder="Amount">
+        </div>
+      
+        <input id="login_field_button" class="btn btn-primary" type="submit" value="Add to portfolio">
+    </form>
+    <p> Don't have an account? Register <span id="register">here</span>. </p>
+    
+    <input class="btn btn-primary close_field" type="submit" value="close">
+</div>  
 
 
-
-
+<!-- EDIT-COIN HOLDING FIELD-->
 
 
 

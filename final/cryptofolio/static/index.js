@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#submit_search').addEventListener('click', general_info);
     // register button
     document.querySelector('#register').addEventListener('click', register);
+    // add coin button
+    document.querySelector('#add_coin').addEventListener('click', add_coin);
 
      // Add eventListeners to login classes
     let login_button = document.querySelectorAll('.login');
@@ -61,12 +63,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-
-
-
-
     general_info("bitcoin");
-
 });
 
 
@@ -97,27 +94,41 @@ function general_info(coin) {
         
         console.log(data)  // KANN WEG
         // Add data to elements
-        
-        document.getElementById("coin_info_name").innerHTML = "Name: " + data.name;
-        document.getElementById("coin_info_ticker").innerHTML = "Ticker: $" + data.symbol;
-        document.getElementById("coin_info_price").innerHTML = "Price: $" + data.market_data.current_price.usd;
-        document.getElementById("coin_info_marketcap").innerHTML = "Market cap: $" + data.market_data.market_cap.usd;
-        document.getElementById("coin_info_atl").innerHTML = "ATL: " + data.market_data.atl.usd + "   Date: " + data.market_data.atl_date.usd;
-        document.getElementById("coin_info_ath").innerHTML = "ATH: " + data.market_data.ath.usd + "   Date: " + data.market_data.ath_date.usd;
-
+        document.title = data.name;
+        document.getElementById("coin_info_name").innerHTML = data.name;
+        document.getElementById("coin_info_ticker").innerHTML = data.symbol;
+        document.getElementById("coin_info_price").innerHTML = data.market_data.current_price.usd;
+        document.getElementById("coin_info_marketcap").innerHTML = data.market_data.market_cap.usd;
+        document.getElementById("coin_info_atl").innerHTML = data.market_data.atl.usd + data.market_data.atl_date.usd;
+        document.getElementById("coin_info_ath").innerHTML = data.market_data.ath.usd + data.market_data.ath_date.usd;
     });
 }
 
 function login() {
-    document.querySelector("#registerfield").style.display = "none";
-    document.querySelector("#loginfield").style.display = "block";
+    document.querySelector("#register_field").style.display = "none";
+    document.querySelector("#login_field").style.display = "block";
 }
 function register() {
-    document.querySelector("#loginfield").style.display = "none";
-    document.querySelector("#registerfield").style.display = "block";
+    document.querySelector("#login_field").style.display = "none";
+    document.querySelector("#register_field").style.display = "block";
 }
 
 function close_field() {
-    document.querySelector("#loginfield").style.display = "none";
-    document.querySelector("#registerfield").style.display = "none";
+    document.querySelector("#login_field").style.display = "none";
+    document.querySelector("#register_field").style.display = "none";
+    document.querySelector("#addcoin_field").style.display = "none";
+}
+function add_coin() {
+    // get coin name and set name in addcoin header
+    coin_name = document.getElementById('coin_info_name').innerHTML;
+    coin_ticker = document.getElementById('coin_info_ticker').innerHTML;
+    coin_price = document.getElementById('coin_info_price').innerHTML;
+
+    document.getElementById("addcoin_header").innerHTML = coin_name;
+    document.getElementById("addcoin_input_ticker").value = coin_ticker;
+    document.getElementById("addcoin_input_price").value = coin_price;
+
+    // element.setAttribute(attributeName, attributeValue)
+    document.querySelector("#addcoin_field").style.display = "block";
+
 }
