@@ -19,6 +19,8 @@ Project start
 - Changed UML to be able to see portfolio trade history.
 - Added dynamic favicon
 
+### Thursday 03-12-2020
+- Added "add trade" frontend button and views.py back-end
 
 
 

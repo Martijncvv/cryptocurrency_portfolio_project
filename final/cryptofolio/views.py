@@ -8,21 +8,53 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django import forms
 
-from .models import User, Settings, Portfoliocoin, Trades
+from .models import User, Settings, Portfoliocoin, Trade
 
 def index(request):
     if request.method == "POST":
-        # ADD TRADE
-        if "coin_amount" in request.POST:
+        # get user data
+        if request.user.is_authenticated:
+            user = User.objects.get(username = request.user)
+        else:
+            user = None
+
+        # ADD TRADE FORM
+        if "add_trade" in request.POST:
             coin_ticker = request.POST["coin_ticker"]
-            coin_amount = request.POST["coin_amount"]
             coin_price = request.POST["coin_price"]
+            coin_amount = request.POST["coin_amount"]
+            trade_type = "SELL"
+            if "trade_type" in request.POST:
+                trade_type = "BUY"
+            
+            
+            # if coin not in user's portfolio, add coin to portfolio
+            if not (Portfoliocoin.objects.filter(user = user, coinTicker = coin_ticker).exists()):
+                coin = Portfoliocoin(user = user,
+                                    coinTicker = coin_ticker)
+                coin.save()
+
+            #add trade to DB
+            trade = Trade(user = user,
+                        coinTicker = coin_ticker,
+                        price = coin_price,
+                        amount = coin_amount,
+                        tradetype = trade_type)
+            trade.save()
+            
+            return render(request, "cryptofolio/index.html", {
+                    "HELPMESSAGE": "TRADE ADDED"
+                })
+
+        
+
 
         # ADD PORTFOLIO
-          # LOGOUT
         if "addportfolio" in request.POST:
             
-            return render(request, "cryptofolio/index.html")
+            return render(request, "cryptofolio/index.html", {
+                "HELPMESSAGE": "ADDED TO PORTFOLIO"
+            })
 
 
 

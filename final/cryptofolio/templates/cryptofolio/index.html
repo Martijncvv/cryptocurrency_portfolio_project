@@ -135,30 +135,35 @@
         <input class="btn btn-primary close_field" type="submit" value="close">
     </div>
 
-<!-- ADD-COIN HOLDING FIELD-->
-<div id="addcoin_field" class="frontfield" style="display: none">
-    <h2 id="addcoin_header"></h2>
+<!-- ADD-TRADE HOLDING FIELD-->
+<div id="addtrade_field" class="frontfield" style="display: none">
+    <h2 id="addtrade_header"></h2>
     <form action="{% url 'index' %}" method="POST">
         {% csrf_token %}
         <div class="form-group">
-            Ticker: <input id="addcoin_input_ticker" autofocus class="form-control" type="text" name="coin_ticker" placeholder="Coin ticker">
+            Ticker: <input id="addtrade_input_ticker" autofocus class="form-control" type="text" name="coin_ticker" placeholder="Coin ticker" required>
         </div>
         <div class="form-group">
-            Amount: <input class="form-control" type="text" name="coin_amount" placeholder="Amount">
+            Amount: <input class="form-control" type="text" name="coin_amount" placeholder="Amount" required>
         </div>
         <div class="form-group">
-            Price in $: <input id="addcoin_input_price" class="form-control" type="text" name="coin_price" placeholder="Amount">
+            Price in $: <input id="addtrade_input_price" class="form-control" type="text" name="coin_price" placeholder="Amount" required>
+        </div>
+        <div class="form-group">
+            SELL
+            <label class="switch">
+                <input type="checkbox" name="trade_type" checked>
+                <span class="slider round"></span>
+              </label>
+            BUY
         </div>
       
-        <input id="add_portfolio_button" class="btn btn-primary" type="submit" value="Add to portfolio">
+        <input class="btn btn-primary" type="submit" value="Add trade" name="add_trade">
     </form>
     <p> Don't have an account? Register <span id="register">here</span>. </p>
     
     <input class="btn btn-primary close_field" type="submit" value="close">
 </div>  
-
-
-<!-- EDIT-COIN HOLDING FIELD-->
 
 
 

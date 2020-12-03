@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // register field
     const register_password_field = document.querySelector('#register_password_field');
     const register_field_button = document.querySelector('#register_field_button');
+    
     // Disable submit buttons
     submit_search.disabled = true;
     login_field_button.disabled = true;
@@ -87,7 +88,7 @@ function coin_info(coin) {
     document.querySelector('#coin_list').append(li);
 
     // Clear out input field:
-    coin_name.value = '';
+    coin_name.value = "";
 
     // Disable the submit button again:
     submit_search.disabled = true;
@@ -135,19 +136,19 @@ function register() {
 function close_field() {
     document.querySelector("#login_field").style.display = "none";
     document.querySelector("#register_field").style.display = "none";
-    document.querySelector("#addcoin_field").style.display = "none";
+    document.querySelector("#addtrade_field").style.display = "none";
 }
+
 function add_trade() {
     // get coin name and set name in addcoin header
     coin_name = document.getElementById('coin_info_name').innerHTML;
     coin_ticker = document.getElementById('coin_info_ticker').innerHTML;
     coin_price = document.getElementById('coin_info_price').innerHTML;
 
-    document.getElementById("addcoin_header").innerHTML = coin_name;
-    document.getElementById("addcoin_input_ticker").value = coin_ticker;
-    document.getElementById("addcoin_input_price").value = coin_price;
+    document.getElementById("addtrade_header").innerHTML = coin_name;
+    document.getElementById("addtrade_input_ticker").value = coin_ticker;
+    document.getElementById("addtrade_input_price").value = coin_price;
 
     // element.setAttribute(attributeName, attributeValue)
-    document.querySelector("#addcoin_field").style.display = "block";
-
+    document.querySelector("#addtrade_field").style.display = "block";
 }
