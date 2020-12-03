@@ -19,7 +19,8 @@
 .
 
 - +Explorer option: get information about  a random coin.
-- +Settings option: language and base currency
+- +Settings option: language and base currency.
+- +Export data option: Export trade data to a CSV file.
 
 
 ## User interface

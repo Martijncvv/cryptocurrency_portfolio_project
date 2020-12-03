@@ -8,16 +8,21 @@ from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django import forms
 
-from .models import User, Portfolio, Coinholding, Settings
+from .models import User, Settings, Portfoliocoin, Trades
 
 def index(request):
     if request.method == "POST":
-        # ADD COIN
+        # ADD TRADE
         if "coin_amount" in request.POST:
             coin_ticker = request.POST["coin_ticker"]
             coin_amount = request.POST["coin_amount"]
             coin_price = request.POST["coin_price"]
 
+        # ADD PORTFOLIO
+          # LOGOUT
+        if "addportfolio" in request.POST:
+            
+            return render(request, "cryptofolio/index.html")
 
 
 
