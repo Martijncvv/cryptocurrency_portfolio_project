@@ -18,6 +18,20 @@ def index(request):
          user = None
 
     if request.method == "POST":
+        # ADD note 
+        if "add_note_button" in request.POST:
+            coin_ticker = request.POST["add_note_button"]
+            coin_note = request.POST["coin_note"]
+            # Add new portfolio coin if coin didn't exist, else existing update DB.
+            if Portfolio.objects.filter(user = user, coinTicker = coin_ticker).exists():
+                coin = Portfolio.objects.get(user = user, coinTicker = coin_ticker)
+                coin.note = coin_note
+            else:
+                coin = Portfolio(user = user, 
+                                coinTicker = coin_ticker,
+                                note = coin_note)
+            coin.save()
+
 
         # ADD TRADE 
         if "add_trade" in request.POST:

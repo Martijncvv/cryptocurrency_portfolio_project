@@ -69,47 +69,74 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function coin_info(coin) {
-    // GOOGLE TRENDS
-    
 
 
     // GENERAL INFO FIELD
-    // get value from form
+    // get value from searchbar if there is searchbar was used
     let coin_name = document.querySelector('#search_value');
     if (coin_name.value !== ""){
         coin = coin_name.value;
     }
-
     // Clear out input field:
     coin_name.value = "";
-
     // Disable the submit button again:
     submit_search.disabled = true;
+
+
 
     fetch("https://api.coingecko.com/api/v3/coins/" + coin + "?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
     .then(response => response.json())
     .then(data => {
         
+    // PORTFOLIO
+
+
+
+
+
+
+
+
+
+
         // change "add portfolio" button if coin is in portfolio      
         let double_value = false;
         let portfolio_coin = document.querySelectorAll('.portfolio_coin');
-        portfolio_coin.forEach(function (i) {
-            if (i.innerHTML == data.symbol) {
+        // loop over portfolio list
+        portfolio_coin.forEach(function (coin_ticker_i) {
+            if (coin_ticker_i.innerHTML == data.symbol) {
                 double_value = true;
+
+                
+
+
+
+
             }
         });
         // if coin found in list, change "add to portfolio button"  
         if (double_value) {
             document.getElementById("portfolio_button").innerHTML = "Delete from portfolio";
+
         }
         else {
             document.getElementById("portfolio_button").innerHTML = "Add to portfolio";
         }
-        // set 'add portfolio' button value
+        // set 'add portfolio' button value to currently opened coin
         document.getElementById("portfolio_button").setAttribute("value", data.symbol);
+        // set 'add_note_button' value to currently opened coin
+        document.getElementById("add_note_button").setAttribute("value", data.symbol);
 
-        // set favicoin image
+        // set favicon image to currently opened coin
         document.getElementById("favicon").setAttribute("href", data.image.thumb);
+        
+
+
+
+
+
+
+
 
         console.log(data)  // KANN WEG
         // Add data to elements
@@ -120,6 +147,7 @@ function coin_info(coin) {
         document.getElementById("coin_info_marketcap").innerHTML = data.market_data.market_cap.usd;
         document.getElementById("coin_info_atl").innerHTML = data.market_data.atl.usd + data.market_data.atl_date.usd;
         document.getElementById("coin_info_ath").innerHTML = data.market_data.ath.usd + data.market_data.ath_date.usd;
+        document.getElementById("coin_info_description").innerHTML = data.description.en;
 
         // twitter_name = data.links.twitter_screen_name
         // // twitter_url = '<a href="https://twitter.com/intent/tweet?button_hashtag=' + twitter_name + '&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #' + twitter_name + '</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'

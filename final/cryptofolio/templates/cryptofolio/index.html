@@ -14,15 +14,51 @@
                 <input id="search_value" placeholder = "Coin name" type="text">
                 <input id="submit_search" type="submit" value="Search">
             </form>
-            <h2>portfolio</h2>
-            <ul>
-                {% for coin in user_portfolio %}
-                    <li class="portfolio_coin">{{ coin.coinTicker }}</li>
-                {%  endfor %}
-            </ul>
         </div>
 
-        <div id="">
+        <h2>portfolio</h2>
+
+
+        <div class="row">
+            <div id="portfolio_ticker_list" class="col-4">
+                <ul>
+                    {% for coin in user_portfolio %}
+                        <li class="portfolio_coin">{{ coin.coinTicker }}</li>
+                    {%  endfor %}
+                </ul>
+            </div>
+            <div id="portfolio_price_list" class="col-4">
+                
+            </div>
+
+            <div id="portfolio_button_list" class="col-4">
+                
+            </div>
+
+        </div>
+        
+
+
+
+
+
+
+
+
+        <div>
+            <h2> Coin Note</h2> 
+            <form action="{% url 'index' %}" method="POST">
+                {% csrf_token %}
+                <input class="form-control" type="text" name="coin_note" placeholder="Write a note">
+                <button class="btn btn-sm btn-primary" value="" id="add_note_button" name="add_note_button">Add Note</button>
+            </form>
+
+            <p>
+                
+            </p>
+        </div>
+
+        <div>
             <h2>Trade history</h2>
             <ul>
                 {% for trade in trade_history %}
@@ -54,6 +90,7 @@
                     <li id="coin_info_marketcap"></li>
                     <li id="coin_info_atl"></li>
                     <li id="coin_info_ath"></li>
+                    <li id="coin_info_description"></li>
                 </ul>
             </div>
 
@@ -136,7 +173,7 @@
         <input class="btn btn-primary close_field" type="submit" value="close">
     </div>
 
-<!-- ADD-TRADE HOLDING FIELD-->
+<!-- ADD-TRADE FIELD-->
 <div id="addtrade_field" class="frontfield" style="display: none">
     <h2 id="addtrade_header"></h2>
     <form action="{% url 'index' %}" method="POST">
