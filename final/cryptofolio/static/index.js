@@ -64,11 +64,11 @@ document.addEventListener('DOMContentLoaded', function() {
             register_field_button.disabled = true;
         }
     }
+
+
     coin_page_name = document.getElementById('coin_page_name').innerHTML;
-    document.getElementById("TEST").innerHTML = coin_page_name;
     coin_info(coin_page_name);
 });
-
 
 function coin_info(coin) {
     // GENERAL INFO FIELD
@@ -89,8 +89,6 @@ function coin_info(coin) {
     .then(data => {
         
     // PORTFOLIO
-
-
         // change "add portfolio" button if coin is in portfolio      
         let double_value = false;
         let portfolio_coin = document.querySelectorAll('.portfolio_coin');
@@ -113,13 +111,11 @@ function coin_info(coin) {
         document.getElementById("portfolio_button").setAttribute("value", data.id);
         // set 'add_note_button' value to currently opened coin
         document.getElementById("add_note_button").setAttribute("value", data.id);
-
         // set favicon image to currently opened coin
         document.getElementById("favicon").setAttribute("href", data.image.thumb);
         
-
-
         console.log(data)  // KANN WEG
+
         // Add data to elements
         document.title = data.id;
         document.getElementById("coin_info_name").innerHTML = data.id;
@@ -130,6 +126,19 @@ function coin_info(coin) {
         document.getElementById("coin_info_ath").innerHTML = data.market_data.ath.usd + data.market_data.ath_date.usd;
         document.getElementById("coin_info_description").innerHTML = data.description.en;
 
+
+
+        document.getElementById("portfolio_price_list").innerHTML = "";
+        portfolio_coin = document.querySelectorAll('.portfolio_coin');
+        portfolio_coin.forEach(function (coin_name_i) {
+        fetch("https://api.coingecko.com/api/v3/coins/"+ coin_name_i.innerHTML +"?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
+        .then(response => response.json())
+        .then(data => {
+            let li_coin_price  = document.createElement('li');
+            li_coin_price.innerHTML = data.market_data.current_price.usd;
+            document.querySelector('#portfolio_price_list').append(li_coin_price);
+        });
+    });
         // twitter_name = data.links.twitter_screen_name
         // // twitter_url = '<a href="https://twitter.com/intent/tweet?button_hashtag=' + twitter_name + '&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #' + twitter_name + '</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
         // twitter_url = '<a class="twitter-timeline" href="https://twitter.com/' + twitter_name + '?ref_src=twsrc%5Etfw">Tweets by ' + twitter_name + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
@@ -137,6 +146,9 @@ function coin_info(coin) {
         
         // document.getElementById("twitter_channel").innerHTML = twitter_url;
     });
+
+
+    
 }
 
 

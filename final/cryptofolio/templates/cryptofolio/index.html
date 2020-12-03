@@ -22,20 +22,20 @@
         <div class="row">
             <div id="portfolio_name_list" class="col-5">
                 {% for coin in user_portfolio %}
-                    <button class="btn btn-sm btn-primary portfolio_coin" id="add_note_button" onClick="coin_info('{{coin.coinName}}')" >{{ coin.coinName }}</button>
+                    <button class="portfolio_coin" id="portfolio_overview_button" onClick="coin_info('{{coin.coinName}}')" >{{ coin.coinName }}</button>
                 {%  endfor %}
             </div>
 
             <div class="col-2">
+
             </div>
             
-            <div id="portfolio_price_list" class="col-5">
+            <div class="col-5">
+                <ul id="portfolio_price_list">
+
+                </ul>
             </div>
-
-    
         </div>
-        
-
 
         <div>
             <h2> Coin Note</h2> 
@@ -94,7 +94,6 @@
                         <div id="twitter_channel">
 
                         </div>
-                        
                     </div>
 
                     <div class="col-6">
