@@ -15,12 +15,14 @@ Project start
 ### Wednesday 02-12-2020
 - Finished basic login, logout and register functionality
 - Added basic dynamic user feedback; disabled login/register button if no input was given.
-- Added basic front-end (html/js) for "add token to portfolio" pop-up screen.
+- Added basic front-end (html/js) for "add coin to portfolio" pop-up screen.
 - Changed UML to be able to see portfolio trade history.
 - Added dynamic favicon
 
 ### Thursday 03-12-2020
-- Added "add trade" frontend button and views.py back-end
+- Added "add trade" frontend button and django back-end
+- Changed "add coin to portfolio" screen to "add portfolio button"
+- Added "delete from portfolio" button if coin is already in portfolio. 
 
 
 

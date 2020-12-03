@@ -79,13 +79,6 @@ function coin_info(coin) {
     if (coin_name.value !== ""){
         coin = coin_name.value;
     }
-    
-    // Create a list item
-    let li = document.createElement('li');
-    li.innerHTML = coin;
-
-    // Add new element to our unordered list:
-    document.querySelector('#coin_list').append(li);
 
     // Clear out input field:
     coin_name.value = "";
@@ -97,11 +90,25 @@ function coin_info(coin) {
     .then(response => response.json())
     .then(data => {
         
-    
-        // let favicon = document.createElement("link")
-        // favicon.rel = "icon"
-        // favicon.type = "image/png"
-        // favicon.href = data.image.thumb;
+        // change "add portfolio" button if coin is in portfolio      
+        let double_value = false;
+        let portfolio_coin = document.querySelectorAll('.portfolio_coin');
+        portfolio_coin.forEach(function (i) {
+            if (i.innerHTML == data.symbol) {
+                double_value = true;
+            }
+        });
+        // if coin found in list, change "add to portfolio button"  
+        if (double_value) {
+            document.getElementById("portfolio_button").innerHTML = "Delete from portfolio";
+        }
+        else {
+            document.getElementById("portfolio_button").innerHTML = "Add to portfolio";
+        }
+        // set 'add portfolio' button value
+        document.getElementById("portfolio_button").setAttribute("value", data.symbol);
+
+        // set favicoin image
         document.getElementById("favicon").setAttribute("href", data.image.thumb);
 
         console.log(data)  // KANN WEG

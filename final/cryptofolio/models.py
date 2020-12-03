@@ -13,7 +13,7 @@ class Settings(models.Model):
     Currency = models.CharField(max_length=10)
 
 
-class Portfoliocoin(models.Model):
+class Portfolio(models.Model):
     """
     Information about coin 
     """
