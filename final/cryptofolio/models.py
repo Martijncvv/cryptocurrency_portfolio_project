@@ -18,7 +18,7 @@ class Portfolio(models.Model):
     Information about coin 
     """
     user = models.ForeignKey("User", on_delete=models.CASCADE)
-    coinTicker = models.CharField(max_length=6)
+    coinName = models.CharField(max_length=30)
     note = models.TextField()
 
 class Trade(models.Model):
@@ -26,7 +26,7 @@ class Trade(models.Model):
     Information about coin 
     """
     user = models.ForeignKey("User", on_delete=models.CASCADE)
-    coinTicker = models.CharField(max_length=6)
+    coinName = models.CharField(max_length=30)
     price = models.DecimalField(max_digits=10000000000, decimal_places=50)
     amount = models.DecimalField(max_digits=1000000000000, decimal_places=50)
     tradetype = models.CharField(max_length=4)

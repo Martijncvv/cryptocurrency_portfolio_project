@@ -5,7 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#register').addEventListener('click', register);
     // add coin button
     document.querySelector('#add_trade').addEventListener('click', add_trade);
-
+    // portfolio list
+    
+    
      // Add eventListeners to login classes
     let login_button = document.querySelectorAll('.login');
     login_button.forEach(function (i) {
@@ -19,11 +21,10 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
 
-
     // Select the submit buttons and inputs to be used later
     // search field
     const submit_search = document.querySelector('#submit_search');
-    const coin_name = document.querySelector('#search_value');
+    const coin_name_search = document.querySelector('#search_value');
     // login field
     const login_password_field = document.querySelector('#login_password_field');
     const login_field_button = document.querySelector('#login_field_button');
@@ -37,8 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
     register_field_button.disabled = true;
 
     // Listen for input to be typed into coinsearch input field
-    coin_name.onkeyup = () => {
-        if (coin_name.value.length > 0) {
+    coin_name_search.onkeyup = () => {
+        if (coin_name_search.value.length > 0) {
             submit_search.disabled = false;
         }
         else {
@@ -63,54 +64,40 @@ document.addEventListener('DOMContentLoaded', function() {
             register_field_button.disabled = true;
         }
     }
-
-    coin_info("bitcoin");
+    coin_page_name = document.getElementById('coin_page_name').innerHTML;
+    document.getElementById("TEST").innerHTML = coin_page_name;
+    coin_info(coin_page_name);
 });
 
 
 function coin_info(coin) {
-
-
     // GENERAL INFO FIELD
-    // get value from searchbar if there is searchbar was used
-    let coin_name = document.querySelector('#search_value');
-    if (coin_name.value !== ""){
-        coin = coin_name.value;
+    // get value from searchbar if the searchbar was used
+    let coin_name_search = document.querySelector('#search_value');
+    if (coin_name_search.value !== ""){
+        coin = coin_name_search.value;
     }
     // Clear out input field:
-    coin_name.value = "";
+    coin_name_search.value = "";
     // Disable the submit button again:
     submit_search.disabled = true;
 
+    // coin = coin.toLowerCase()
 
-
-    fetch("https://api.coingecko.com/api/v3/coins/" + coin + "?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
+    fetch("https://api.coingecko.com/api/v3/coins/"+ coin.toLowerCase() +"?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
     .then(response => response.json())
     .then(data => {
         
     // PORTFOLIO
 
 
-
-
-
-
-
-
-
-
         // change "add portfolio" button if coin is in portfolio      
         let double_value = false;
         let portfolio_coin = document.querySelectorAll('.portfolio_coin');
         // loop over portfolio list
-        portfolio_coin.forEach(function (coin_ticker_i) {
-            if (coin_ticker_i.innerHTML == data.symbol) {
+        portfolio_coin.forEach(function (coin_name_i) {
+            if (coin_name_i.innerHTML == data.id) {
                 double_value = true;
-
-                
-
-
-
 
             }
         });
@@ -123,25 +110,19 @@ function coin_info(coin) {
             document.getElementById("portfolio_button").innerHTML = "Add to portfolio";
         }
         // set 'add portfolio' button value to currently opened coin
-        document.getElementById("portfolio_button").setAttribute("value", data.symbol);
+        document.getElementById("portfolio_button").setAttribute("value", data.id);
         // set 'add_note_button' value to currently opened coin
-        document.getElementById("add_note_button").setAttribute("value", data.symbol);
+        document.getElementById("add_note_button").setAttribute("value", data.id);
 
         // set favicon image to currently opened coin
         document.getElementById("favicon").setAttribute("href", data.image.thumb);
         
 
 
-
-
-
-
-
-
         console.log(data)  // KANN WEG
         // Add data to elements
-        document.title = data.name;
-        document.getElementById("coin_info_name").innerHTML = data.name;
+        document.title = data.id;
+        document.getElementById("coin_info_name").innerHTML = data.id;
         document.getElementById("coin_info_ticker").innerHTML = data.symbol;
         document.getElementById("coin_info_price").innerHTML = data.market_data.current_price.usd;
         document.getElementById("coin_info_marketcap").innerHTML = data.market_data.market_cap.usd;
@@ -175,13 +156,12 @@ function close_field() {
 }
 
 function add_trade() {
-    // get coin name and set name in addcoin header
+    // get coin name and set name in "add trade field"
     coin_name = document.getElementById('coin_info_name').innerHTML;
-    coin_ticker = document.getElementById('coin_info_ticker').innerHTML;
     coin_price = document.getElementById('coin_info_price').innerHTML;
 
     document.getElementById("addtrade_header").innerHTML = coin_name;
-    document.getElementById("addtrade_input_ticker").value = coin_ticker;
+    document.getElementById("addtrade_input_name").value = coin_name;
     document.getElementById("addtrade_input_price").value = coin_price;
 
     // element.setAttribute(attributeName, attributeValue)

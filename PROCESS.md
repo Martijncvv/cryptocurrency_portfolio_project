@@ -23,6 +23,11 @@ Project start
 - Added "add trade" frontend button and django back-end
 - Changed "add coin to portfolio" screen to "add portfolio button"
 - Added "delete from portfolio" button if coin is already in portfolio. 
+- Added "create a note" input field.
+
+- Decided to change database from 'storing 'coin_tickers' to storing 'coin_names' for an easier commmunication with the API.
+- Mental breakdown confirmed
+- Fixed refresh bug; when adding a coin to your portfolio, coin changed to the homepage instead of the same coin page.
 
 
 

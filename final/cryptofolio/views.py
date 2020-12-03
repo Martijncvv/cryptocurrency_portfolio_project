@@ -17,25 +17,29 @@ def index(request):
     else:
          user = None
 
+    # set default page
+    coin_page_name = "bitcoin"
+
     if request.method == "POST":
         # ADD note 
         if "add_note_button" in request.POST:
-            coin_ticker = request.POST["add_note_button"]
+            coin_name = request.POST["add_note_button"]
             coin_note = request.POST["coin_note"]
             # Add new portfolio coin if coin didn't exist, else existing update DB.
-            if Portfolio.objects.filter(user = user, coinTicker = coin_ticker).exists():
-                coin = Portfolio.objects.get(user = user, coinTicker = coin_ticker)
+            if Portfolio.objects.filter(user = user, coinName = coin_name).exists():
+                coin = Portfolio.objects.get(user = user, coinName = coin_name)
                 coin.note = coin_note
             else:
                 coin = Portfolio(user = user, 
-                                coinTicker = coin_ticker,
+                                coinName = coin_name,
                                 note = coin_note)
             coin.save()
+            coin_page_name = coin_name
 
 
         # ADD TRADE 
         if "add_trade" in request.POST:
-            coin_ticker = request.POST["coin_ticker"]
+            coin_name = request.POST["coin_name"]
             coin_price = request.POST["coin_price"]
             coin_amount = request.POST["coin_amount"]
             trade_type = "SELL"
@@ -43,31 +47,31 @@ def index(request):
                 trade_type = "BUY"
             
             # if coin not in user's portfolio, add coin to portfolio
-            if not (Portfolio.objects.filter(user = user, coinTicker = coin_ticker).exists()):
+            if not (Portfolio.objects.filter(user = user, coinName = coin_name).exists()):
                 coin = Portfolio(user = user,
-                                    coinTicker = coin_ticker)
+                                    coinName = coin_name)
                 coin.save()
 
             #add trade to DB
             trade = Trade(user = user,
-                        coinTicker = coin_ticker,
+                        coinName = coin_name,
                         price = coin_price,
                         amount = coin_amount,
                         tradetype = trade_type)
             trade.save()
-               
+            coin_page_name = coin_name
 
 
         # ADD PORTFOLIO
         if "addportfolio" in request.POST:
-            coin_ticker = request.POST["addportfolio"]
-            if not (Portfolio.objects.filter(user = user, coinTicker = coin_ticker).exists()):
+            coin_name = request.POST["addportfolio"]
+            if not (Portfolio.objects.filter(user = user, coinName = coin_name).exists()):
                 coin = Portfolio( user = user,
-                                    coinTicker = request.POST["addportfolio"])
+                                    coinName = request.POST["addportfolio"])
                 coin.save()              
             else: 
-                Portfolio.objects.filter(user = user, coinTicker = coin_ticker).delete()
-
+                Portfolio.objects.filter(user = user, coinName = coin_name).delete()
+            coin_page_name = coin_name
 
 
         # REGISTER 
@@ -133,5 +137,6 @@ def index(request):
     user_portfolio = Portfolio.objects.filter(user = user)
     return render(request, "cryptofolio/index.html", {
         "trade_history": trade_history,
-        "user_portfolio": user_portfolio
+        "user_portfolio": user_portfolio,
+        "coin_page_name": coin_page_name.strip()
     })
