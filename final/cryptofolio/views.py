@@ -108,6 +108,7 @@ def index(request):
         # LOGOUT
         if "logout" in request.POST:
             logout(request)
+            return render(request, "cryptofolio/index.html")
 
 
         #LOGIN
@@ -128,7 +129,6 @@ def index(request):
             # Check if authentication successful
             if user is not None:
                 login(request, user)
-                return render(request, "cryptofolio/index.html")
             else:
                 return render(request, "cryptofolio/index.html", {
                     "message_login": "Invalid email and/or password."})
