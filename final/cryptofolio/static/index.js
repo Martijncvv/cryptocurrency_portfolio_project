@@ -113,10 +113,12 @@ function coin_info(coin) {
         document.getElementById("add_note_button").setAttribute("value", data.id);
         // set favicon image to currently opened coin
         document.getElementById("favicon").setAttribute("href", data.image.thumb);
+        // set coin logo to currently opened coin       
+        document.getElementById("coin_image").setAttribute("src", data.image.small );
         
         console.log(data)  // KANN WEG
 
-        // Add data to elements
+        // Add data to General Info elements
         document.title = data.id;
         document.getElementById("coin_info_name").innerHTML = data.id;
         document.getElementById("coin_info_ticker").innerHTML = data.symbol;
@@ -125,11 +127,10 @@ function coin_info(coin) {
         document.getElementById("coin_info_atl").innerHTML = data.market_data.atl.usd + data.market_data.atl_date.usd;
         document.getElementById("coin_info_ath").innerHTML = data.market_data.ath.usd + data.market_data.ath_date.usd;
         document.getElementById("coin_info_description").innerHTML = data.description.en;
+        
 
-
-
+        // Add prices to portfolio overview table
         document.getElementById("portfolio_price_list").innerHTML = "";
-
         portfolio_coin = document.querySelectorAll('.portfolio_coin');
         portfolio_coin.forEach(function (coin_name_i) {
             fetch("https://api.coingecko.com/api/v3/coins/"+ coin_name_i.innerHTML +"?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")

@@ -1,3 +1,6 @@
+body {
+    margin: 0 4%;
+}
 .row {
     border: 1px solid blue;
 }
@@ -20,6 +23,18 @@
 
 span {
     color: rgb(45, 45, 231);
+}
+
+#portfolio_overview_button {
+    background-color: #4caf4f00; /* Green */
+    border: none;
+    
+}
+
+#coin_image_div {
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }
 
 /* #google_trends {

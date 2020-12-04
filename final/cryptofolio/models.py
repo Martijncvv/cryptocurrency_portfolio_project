@@ -27,8 +27,8 @@ class Trade(models.Model):
     """
     user = models.ForeignKey("User", on_delete=models.CASCADE)
     coinName = models.CharField(max_length=30)
-    price = models.DecimalField(max_digits=10000000000, decimal_places=50)
-    amount = models.DecimalField(max_digits=1000000000000, decimal_places=50)
+    price = models.DecimalField(max_digits=10000000000, decimal_places=20)
+    amount = models.DecimalField(max_digits=1000000000000, decimal_places=20)
     tradetype = models.CharField(max_length=4)
     time = models.DateTimeField(auto_now=True)
 

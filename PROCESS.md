@@ -30,7 +30,8 @@ Project start
 - Fixed refresh bug; when adding a coin to your portfolio, coin changed to the homepage instead of the same coin page.
 - Added basic recent prices in portfolio overview
 
-
+### Friday 04-12-2020
+- added coin logos
 
 
 

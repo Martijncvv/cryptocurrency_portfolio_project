@@ -10,41 +10,41 @@
     </head>
 
     <body>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <ul class="nav justify-content-end">
-                        {% if user.is_authenticated %}
-                            <li class="nav-item">
-                                <button class="btn btn-sm btn-outline-primary" id="settings">Settings</button>
-                            </li>
-               
-                            <form action="{% url 'index' %}" method="POST">
-                                {% csrf_token %}
-                                <button class="btn btn-sm btn-outline-primary" id="logout" name="logout">Log-Out</button>
-                            </form>
-
-                        {% else %}
-                            <li class="nav-item">
-                                <button class="btn btn-sm btn-outline-primary  login">Log-in</button>
-                            </li>
-                        {% endif %}                       
-                    </ul>
-                </div>
-            </div>
-            
-            {% if user.is_authenticated %}
-                Signed in as <strong>{{ user.username }}</strong>.
-            {% else %}
-                Not signed in.
-            {% endif %}
-
-
-
         
-            {% block body %}
-            {% endblock %}
+        <div class="row">
+            <div class="col">
+                <ul class="nav justify-content-end">
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <button class="btn btn-sm btn-outline-primary" id="settings">Settings</button>
+                        </li>
+            
+                        <form action="{% url 'index' %}" method="POST">
+                            {% csrf_token %}
+                            <button class="btn btn-sm btn-outline-primary" id="logout" name="logout">Log-Out</button>
+                        </form>
+
+                    {% else %}
+                        <li class="nav-item">
+                            <button class="btn btn-sm btn-outline-primary  login">Log-in</button>
+                        </li>
+                    {% endif %}                       
+                </ul>
+            </div>
         </div>
+        
+        {% if user.is_authenticated %}
+            Signed in as <strong>{{ user.username }}</strong>.
+        {% else %}
+            Not signed in.
+        {% endif %}
+
+
+
+    
+        {% block body %}
+        {% endblock %}
+        
       <h2>{{ HELPMESSAGE }}</h2>
     </body>
     {% block script %}
