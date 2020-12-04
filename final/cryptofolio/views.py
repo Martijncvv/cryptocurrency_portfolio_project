@@ -17,6 +17,7 @@ def index(request):
     else:
          user = None
 
+
     # set default page
     coin_page_name = "bitcoin"
 
@@ -35,7 +36,11 @@ def index(request):
                                 note = coin_note)
             coin.save()
             coin_page_name = coin_name
-
+        # DELETE note
+        if "delete_note_button" in request.POST:
+            coin = Portfolio.objects.get( user = user, coinName = request.POST["delete_note_button"])
+            coin.note = "None"
+            coin.save()
 
         # ADD TRADE 
         if "add_trade" in request.POST:

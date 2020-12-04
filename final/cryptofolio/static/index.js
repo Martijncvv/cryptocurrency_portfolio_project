@@ -109,8 +109,11 @@ function coin_info(coin) {
         }
         // set 'add portfolio' button value to currently opened coin
         document.getElementById("portfolio_button").setAttribute("value", data.id);
-        // set 'add_note_button' value to currently opened coin
+        // set 'add_note_button' value attribute to currently opened coin
         document.getElementById("add_note_button").setAttribute("value", data.id);
+        // set 'delete_note_button' value attribute to currently opened coin
+        document.getElementById("delete_note_button").setAttribute("value", data.id);
+        
         // set favicon image to currently opened coin
         document.getElementById("favicon").setAttribute("href", data.image.thumb);
         // set coin logo to currently opened coin       

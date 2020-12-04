@@ -19,7 +19,7 @@ class Portfolio(models.Model):
     """
     user = models.ForeignKey("User", on_delete=models.CASCADE)
     coinName = models.CharField(max_length=30)
-    note = models.TextField()
+    note = models.TextField(null=True, blank=True)
 
 class Trade(models.Model):
     """
