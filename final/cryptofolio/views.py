@@ -27,18 +27,18 @@ def index(request):
             coin_name = request.POST["add_note_button"]
             coin_note = request.POST["coin_note"]
             # Add new portfolio coin if coin didn't exist, else existing update DB.
-            if Portfolio.objects.filter(user = user, coinName = coin_name).exists():
-                coin = Portfolio.objects.get(user = user, coinName = coin_name)
+            if Portfolio.objects.filter(user = user, coin_name = coin_name).exists():
+                coin = Portfolio.objects.get(user = user, coin_name = coin_name)
                 coin.note = coin_note
             else:
                 coin = Portfolio(user = user, 
-                                coinName = coin_name,
+                                coin_name = coin_name,
                                 note = coin_note)
             coin.save()
             coin_page_name = coin_name
         # DELETE note
         if "delete_note_button" in request.POST:
-            coin = Portfolio.objects.get( user = user, coinName = request.POST["delete_note_button"])
+            coin = Portfolio.objects.get( user = user, coin_name = request.POST["delete_note_button"])
             coin.note = "None"
             coin.save()
 
@@ -52,14 +52,14 @@ def index(request):
                 trade_type = "BUY"
             
             # if coin not in user's portfolio, add coin to portfolio
-            if not (Portfolio.objects.filter(user = user, coinName = coin_name).exists()):
+            if not (Portfolio.objects.filter(user = user, coin_name = coin_name).exists()):
                 coin = Portfolio(user = user,
-                                    coinName = coin_name)
+                                    coin_name = coin_name)
                 coin.save()
 
             #add trade to DB
             trade = Trade(user = user,
-                        coinName = coin_name,
+                        coin_name = coin_name,
                         price = coin_price,
                         amount = coin_amount,
                         tradetype = trade_type)
@@ -70,12 +70,12 @@ def index(request):
         # ADD PORTFOLIO
         if "addportfolio" in request.POST:
             coin_name = request.POST["addportfolio"]
-            if not (Portfolio.objects.filter(user = user, coinName = coin_name).exists()):
+            if not (Portfolio.objects.filter(user = user, coin_name = coin_name).exists()):
                 coin = Portfolio( user = user,
-                                    coinName = request.POST["addportfolio"])
+                                    coin_name = request.POST["addportfolio"])
                 coin.save()              
             else: 
-                Portfolio.objects.filter(user = user, coinName = coin_name).delete()
+                Portfolio.objects.filter(user = user, coin_name = coin_name).delete()
             coin_page_name = coin_name
 
 
@@ -138,10 +138,18 @@ def index(request):
                 return render(request, "cryptofolio/index.html", {
                     "message_login": "Invalid email and/or password."})
     
+    # current holdings of user
+    trade_buy_history = Trade.objects.filter(user = user, tradetype = "BUY")
+    # coin_buy_amount = 
+    
+    # coin_sell_amount =
+    # coin_balance = coin_buy_amount - coin_sell_amount
+
     trade_history = Trade.objects.filter(user = user)
     user_portfolio = Portfolio.objects.filter(user = user)
     return render(request, "cryptofolio/index.html", {
         "trade_history": trade_history,
         "user_portfolio": user_portfolio,
-        "coin_page_name": coin_page_name.strip()
+        "coin_page_name": coin_page_name.strip(),
+        "TEST": trade_buy_history
     })

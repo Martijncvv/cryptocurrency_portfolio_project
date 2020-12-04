@@ -17,17 +17,24 @@
             </form>
         </div>
 
+
+        
+        <h2>Trending</h2>
+
+
         <h2>portfolio</h2>
         <div class="row">
-            <div id="portfolio_name_list" class="col-5">
+            <div id="portfolio_name_list" class="col-4">
                 {% for coin in user_portfolio %}
-                    <button class="portfolio_coin" id="portfolio_overview_button" onClick="coin_info('{{coin.coinName}}')" >{{ coin.coinName }}</button>
+                    <button class="portfolio_coin" id="portfolio_overview_button" onClick="coin_info('{{coin.coin_name}}')" >{{ coin.coin_name }}</button>
                 {%  endfor %}
             </div>
 
-            <div class="col-2"> </div>
+            <div id="portfolio_amount_list" class="col-4">
+               
+            </div>
             
-            <div class="col-5">
+            <div class="col-4">
                 <ul id="portfolio_price_list"> </ul>
             </div>
         </div>
@@ -55,7 +62,7 @@
             <div class="col-3">
                 <ul>
                     {% for trade in trade_history %}
-                    <li> {{ trade.coinName }} </li>
+                    <li> {{ trade.coin_name }} </li>
                     {%  endfor %}
                 </ul>
             </div>
@@ -220,14 +227,23 @@
 
     <div>
         {% for coin in user_portfolio %}
-        <p id="{{coin.coinName}}">
+        <p id="{{coin.coin_name}}">
             {{ coin.note }}
         </p>
         {%  endfor %}
     </div>
 
 <div id="TEST">
-    {{ TEST }}
+    <ul>
+        {% for coin in TEST %}
+        <li>
+            {{ coin }}
+        </li>
+    
+    {%  endfor %}
+    </ul>
+    
+    <!-- {{ TEST }} -->
 </div>
 
 {% endblock %}

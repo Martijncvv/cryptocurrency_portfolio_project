@@ -31,9 +31,10 @@ Project start
 - Added basic recent prices in portfolio overview
 
 ### Friday 04-12-2020
-- added coin logos
-- added note functionality. Show note if there is one for the specific coin
-- added "delete note" functionality.
+- Added coin logos
+- Added note functionality. Show note if there is one for the specific coin.
+- Added "delete note" functionality.
+- Changed DB variable name for name consistency; coinName -> coin_name
 
 
 

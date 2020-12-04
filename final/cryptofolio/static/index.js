@@ -122,7 +122,7 @@ function coin_info(coin) {
         console.log(data)  // KANN WEG
 
         // Add data to General Info elements
-        document.title = data.id;
+        document.title = data.name;
         document.getElementById("coin_info_name").innerHTML = data.id;
         document.getElementById("coin_info_ticker").innerHTML = data.symbol;
         document.getElementById("coin_info_price").innerHTML = data.market_data.current_price.usd;

@@ -18,19 +18,25 @@ class Portfolio(models.Model):
     Information about coin 
     """
     user = models.ForeignKey("User", on_delete=models.CASCADE)
-    coinName = models.CharField(max_length=30)
+    coin_name = models.CharField(max_length=30)
     note = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return f"User:{self.user} | CoinName:{self.coinName}  | Note:{self.note}"
 
 class Trade(models.Model):
     """
     Information about coin 
     """
     user = models.ForeignKey("User", on_delete=models.CASCADE)
-    coinName = models.CharField(max_length=30)
+    coin_name = models.CharField(max_length=30)
     price = models.DecimalField(max_digits=10000000000, decimal_places=20)
     amount = models.DecimalField(max_digits=1000000000000, decimal_places=20)
     tradetype = models.CharField(max_length=4)
     time = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"OBJECT: User:{self.user} | CoinName:{self.coin_name}  | Tradetype:{self.tradetype}"
 
 
     # @property boven function; geen () nodig
