@@ -38,16 +38,17 @@
         </div>
 
         <div>
+            
             <h2> Coin Note</h2> 
+           <p id="coin_note_field"></p>   
+
             <form action="{% url 'index' %}" method="POST">
                 {% csrf_token %}
                 <input class="form-control" type="text" name="coin_note" placeholder="Write a note">
                 <button class="btn btn-sm btn-primary" value="" id="add_note_button" name="add_note_button">Add Note</button>
             </form>
 
-            <p>
-                
-            </p>
+           
         </div>
 
         <h2>Trade history</h2>
@@ -215,8 +216,18 @@
     <input class="btn btn-primary close_field" type="submit" value="close">
 </div>  
 
+<!-- HIDDEN DATA FOR JS -->
 
-    <p id="coin_page_name">{{coin_page_name}}</p>
+
+    <p style="visibility: hidden;" id="coin_page_name">{{coin_page_name}}</p>
+
+    <div>
+        {% for coin in user_portfolio %}
+        <p id="{{coin.coinName}}">
+            {{ coin.note }}
+        </p>
+        {%  endfor %}
+    </div>
 
 <div id="TEST">
 

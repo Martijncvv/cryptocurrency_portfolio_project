@@ -128,6 +128,9 @@ function coin_info(coin) {
         document.getElementById("coin_info_ath").innerHTML = data.market_data.ath.usd + data.market_data.ath_date.usd;
         document.getElementById("coin_info_description").innerHTML = data.description.en;
         
+        // Add note to note field
+        let coin_note = document.getElementById(data.id).innerHTML;
+        document.getElementById("coin_note_field").innerHTML = coin_note;
 
         // Add prices to portfolio overview table
         document.getElementById("portfolio_price_list").innerHTML = "";
@@ -136,11 +139,16 @@ function coin_info(coin) {
             fetch("https://api.coingecko.com/api/v3/coins/"+ coin_name_i.innerHTML +"?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
             .then(response => response.json())
             .then(data => {
-                let li_coin_price  = document.createElement('li');
+                let li_coin_price  = document.createElement('p');
                 li_coin_price.innerHTML = data.market_data.current_price.usd;
                 document.querySelector('#portfolio_price_list').append(li_coin_price);
             });
         });
+
+
+        
+
+
         // twitter_name = data.links.twitter_screen_name
         // // twitter_url = '<a href="https://twitter.com/intent/tweet?button_hashtag=' + twitter_name + '&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #' + twitter_name + '</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
         // twitter_url = '<a class="twitter-timeline" href="https://twitter.com/' + twitter_name + '?ref_src=twsrc%5Etfw">Tweets by ' + twitter_name + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
@@ -149,8 +157,6 @@ function coin_info(coin) {
         // document.getElementById("twitter_channel").innerHTML = twitter_url;
     });
 
-
-    
 }
 
 

@@ -32,6 +32,7 @@ Project start
 
 ### Friday 04-12-2020
 - added coin logos
+- added note functionality. Show note if there is one for the specific coin
 
 
 
