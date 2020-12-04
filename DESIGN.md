@@ -4,6 +4,7 @@
 - Search and add cryptocurrencies to a portfolio.
 - Delete cryptocurrencies from portfolio.
 - For each coin in portfolio: display number of coins user holds and total value of the holding.
+- Display trade history.
 - Display general portfolio information; total value, invested amount, profit/loss, number of different coins.
 - +Display historical graph of portfolio.
 
