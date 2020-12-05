@@ -36,7 +36,8 @@ Project start
 - Added "delete note" functionality.
 - Changed DB variable name for name consistency; coinName -> coin_name
 
-
+### Saturday 05-12-2020
+- Added portfolio holdings amount back-end and front-end
 
 
 

@@ -22,7 +22,7 @@ class Portfolio(models.Model):
     note = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return f"User:{self.user} | CoinName:{self.coinName}  | Note:{self.note}"
+        return f"User:{self.user} | Coin name:{self.coin_name}  | Note:{self.note}"
 
 class Trade(models.Model):
     """
@@ -36,7 +36,7 @@ class Trade(models.Model):
     time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"OBJECT: User:{self.user} | CoinName:{self.coin_name}  | Tradetype:{self.tradetype}"
+        return f"OBJECT: User:{self.user} | Coin name:{self.coin_name}  | Trade type:{self.tradetype}"
 
 
     # @property boven function; geen () nodig

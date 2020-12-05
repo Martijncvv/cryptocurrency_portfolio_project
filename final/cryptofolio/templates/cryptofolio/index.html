@@ -26,16 +26,27 @@
         <div class="row">
             <div id="portfolio_name_list" class="col-4">
                 {% for coin in user_portfolio %}
+                <div>
                     <button class="portfolio_coin" id="portfolio_overview_button" onClick="coin_info('{{coin.coin_name}}')" >{{ coin.coin_name }}</button>
+                </div>
+                    
                 {%  endfor %}
             </div>
 
             <div id="portfolio_amount_list" class="col-4">
-               
+                <ul>
+                    {% for coin in TEST %}
+                    <li>
+                        {{ coin }}
+                    </li>
+                    {%  endfor %}
+                </ul>
             </div>
             
             <div class="col-4">
-                <ul id="portfolio_price_list"> </ul>
+                <ul id="portfolio_price_list"> 
+
+                </ul>
             </div>
         </div>
 
@@ -223,27 +234,21 @@
 <!-- HIDDEN DATA FOR JS -->
 
 
-    <p style="visibility: hidden;" id="coin_page_name">{{coin_page_name}}</p>
+    <p id="coin_page_name" style="visibility: hidden;">{{coin_page_name}}</p>
 
     <div>
         {% for coin in user_portfolio %}
-        <p id="{{coin.coin_name}}">
+        <p id="{{coin.coin_name}}" style="visibility: hidden;">
             {{ coin.note }}
         </p>
         {%  endfor %}
     </div>
 
 <div id="TEST">
-    <ul>
-        {% for coin in TEST %}
-        <li>
-            {{ coin }}
-        </li>
     
-    {%  endfor %}
-    </ul>
-    
-    <!-- {{ TEST }} -->
+   Test2: {{ TEST2 }}
+   <p></p>
+   Test3: {{ TEST3 }}
 </div>
 
 {% endblock %}

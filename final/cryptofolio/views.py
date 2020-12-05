@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
+from django.db.models import Sum
 from django import forms
 
 from .models import User, Settings, Portfolio, Trade
@@ -38,7 +39,7 @@ def index(request):
             coin_page_name = coin_name
         # DELETE note
         if "delete_note_button" in request.POST:
-            coin = Portfolio.objects.get( user = user, coin_name = request.POST["delete_note_button"])
+            coin = Portfolio.objects.get(user = user, coin_name = request.POST["delete_note_button"])
             coin.note = "None"
             coin.save()
 
@@ -129,7 +130,7 @@ def index(request):
                     "message_login": "User does not exist"
                 })
 
-            user = authenticate(request, username=username, password=password)
+            user = authenticate(request, username = username, password = password)
 
             # Check if authentication successful
             if user is not None:
@@ -138,18 +139,29 @@ def index(request):
                 return render(request, "cryptofolio/index.html", {
                     "message_login": "Invalid email and/or password."})
     
-    # current holdings of user
-    trade_buy_history = Trade.objects.filter(user = user, tradetype = "BUY")
-    # coin_buy_amount = 
-    
-    # coin_sell_amount =
-    # coin_balance = coin_buy_amount - coin_sell_amount
-
+    # user trade history and portfolio
     trade_history = Trade.objects.filter(user = user)
     user_portfolio = Portfolio.objects.filter(user = user)
+
+    # current holdings of user
+    # iterate over every coin in portfolio, calculate current balance and add to list
+    user_holdings = []
+    for coin in user_portfolio:
+        current_coin_holding = 0
+
+        trade_buy_history = Trade.objects.filter(user = user, coin_name = coin.coin_name, tradetype = "BUY").aggregate(Sum('amount'))
+        if trade_buy_history["amount__sum"] != None:
+            current_coin_holding = current_coin_holding + trade_buy_history["amount__sum"]
+      
+        trade_sell_history = Trade.objects.filter(user = user, coin_name = coin.coin_name, tradetype = "SELL").aggregate(Sum('amount'))
+        if trade_sell_history["amount__sum"] != None:
+            current_coin_holding = current_coin_holding - trade_sell_history["amount__sum"]
+          
+        user_holdings.append(current_coin_holding)
+    
     return render(request, "cryptofolio/index.html", {
         "trade_history": trade_history,
         "user_portfolio": user_portfolio,
         "coin_page_name": coin_page_name.strip(),
-        "TEST": trade_buy_history
+        "TEST": user_holdings
     })

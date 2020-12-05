@@ -142,7 +142,7 @@ function coin_info(coin) {
             fetch("https://api.coingecko.com/api/v3/coins/"+ coin_name_i.innerHTML +"?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
             .then(response => response.json())
             .then(data => {
-                let li_coin_price  = document.createElement('p');
+                let li_coin_price  = document.createElement('li');
                 li_coin_price.innerHTML = data.market_data.current_price.usd;
                 document.querySelector('#portfolio_price_list').append(li_coin_price);
             });
