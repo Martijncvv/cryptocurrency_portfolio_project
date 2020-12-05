@@ -15,7 +15,7 @@ class Settings(models.Model):
 
 class Portfolio(models.Model):
     """
-    Information about coin 
+    Information about portfolio
     """
     user = models.ForeignKey("User", on_delete=models.CASCADE)
     coin_name = models.CharField(max_length=30)
@@ -26,7 +26,7 @@ class Portfolio(models.Model):
 
 class Trade(models.Model):
     """
-    Information about coin 
+    Information about trade 
     """
     user = models.ForeignKey("User", on_delete=models.CASCADE)
     coin_name = models.CharField(max_length=30)
@@ -34,6 +34,8 @@ class Trade(models.Model):
     amount = models.DecimalField(max_digits=1000000000000, decimal_places=20)
     tradetype = models.CharField(max_length=4)
     time = models.DateTimeField(auto_now=True)
+
+    
 
     def __str__(self):
         return f"OBJECT: User:{self.user} | Coin name:{self.coin_name}  | Trade type:{self.tradetype}"

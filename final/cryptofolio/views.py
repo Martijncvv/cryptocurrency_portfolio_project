@@ -139,20 +139,21 @@ def index(request):
                 return render(request, "cryptofolio/index.html", {
                     "message_login": "Invalid email and/or password."})
     
-    # user trade history and portfolio
+    # user's trade history, portfolio coins
     trade_history = Trade.objects.filter(user = user)
     user_portfolio = Portfolio.objects.filter(user = user)
+
 
     # current holdings of user
     # iterate over every coin in portfolio, calculate current balance and add to list
     user_holdings = []
     for coin in user_portfolio:
         current_coin_holding = 0
-
+        # get total amount bought
         trade_buy_history = Trade.objects.filter(user = user, coin_name = coin.coin_name, tradetype = "BUY").aggregate(Sum('amount'))
         if trade_buy_history["amount__sum"] != None:
             current_coin_holding = current_coin_holding + trade_buy_history["amount__sum"]
-      
+        # get total amount sold
         trade_sell_history = Trade.objects.filter(user = user, coin_name = coin.coin_name, tradetype = "SELL").aggregate(Sum('amount'))
         if trade_sell_history["amount__sum"] != None:
             current_coin_holding = current_coin_holding - trade_sell_history["amount__sum"]
@@ -163,5 +164,5 @@ def index(request):
         "trade_history": trade_history,
         "user_portfolio": user_portfolio,
         "coin_page_name": coin_page_name.strip(),
-        "TEST": user_holdings
+        "user_holdings_amount": user_holdings
     })

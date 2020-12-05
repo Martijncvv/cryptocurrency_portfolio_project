@@ -21,10 +21,10 @@
         
         <h2>Trending</h2>
 
-
+<!-- PORTFOLIO -->
         <h2>portfolio</h2>
         <div class="row">
-            <div id="portfolio_name_list" class="col-4">
+            <div class="col-3">
                 {% for coin in user_portfolio %}
                 <div>
                     <button class="portfolio_coin" id="portfolio_overview_button" onClick="coin_info('{{coin.coin_name}}')" >{{ coin.coin_name }}</button>
@@ -33,23 +33,26 @@
                 {%  endfor %}
             </div>
 
-            <div id="portfolio_amount_list" class="col-4">
+            <div class="col-3">
                 <ul>
-                    {% for coin in TEST %}
-                    <li>
+                    {% for coin in user_holdings_amount %}
+                    <li class="portfolio_coin_amount">
                         {{ coin }}
                     </li>
                     {%  endfor %}
                 </ul>
             </div>
             
-            <div class="col-4">
-                <ul id="portfolio_price_list"> 
+            <div class="col-3">
+                <ul class="portfolio_price_list"> </ul>
+            </div>
 
-                </ul>
+            <div class="col-3">
+                <ul class="portfolio_total_value_list"> </ul>
             </div>
         </div>
 
+<!-- NOTE  -->
         <div>
             <h2> Coin Note</h2> 
            <p id="coin_note_field"> </p>   
@@ -67,7 +70,7 @@
 
             
         </div>
-
+<!-- Trade History  -->
         <h2>Trade history</h2>
         <div class="row">
             <div class="col-3">
@@ -129,7 +132,7 @@
                     <div class="col-6">
                         <h3>Twitter</h3>
                         <div id="twitter_channel">
-
+                            <a class="twitter-timeline" href="https://twitter.com/Bitcoin?ref_src=twsrc%5Etfw">Tweets by Bitcoin</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
                         </div>
                     </div>
 
@@ -244,11 +247,12 @@
         {%  endfor %}
     </div>
 
-<div id="TEST">
+<div>
+    <ul id="TEST"></ul>
     
-   Test2: {{ TEST2 }}
+   <!-- Test2: {{ TEST2 }}
    <p></p>
-   Test3: {{ TEST3 }}
+   Test3: {{ TEST3 }} -->
 </div>
 
 {% endblock %}

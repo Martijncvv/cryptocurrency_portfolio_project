@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     coin_page_name = document.getElementById('coin_page_name').innerHTML;
     coin_info(coin_page_name);
+    // location.reload();
 });
 
 function coin_info(coin) {
@@ -82,6 +83,8 @@ function coin_info(coin) {
     // Disable the submit button again:
     submit_search.disabled = true;
 
+
+    
     // coin = coin.toLowerCase()
 
     fetch("https://api.coingecko.com/api/v3/coins/"+ coin.toLowerCase() +"?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
@@ -90,17 +93,16 @@ function coin_info(coin) {
         
     // PORTFOLIO
         // change "add portfolio" button if coin is in portfolio      
-        let double_value = false;
+        let coin_in_portfolio = false;
         let portfolio_coin = document.querySelectorAll('.portfolio_coin');
         // loop over portfolio list
         portfolio_coin.forEach(function (coin_name_i) {
             if (coin_name_i.innerHTML == data.id) {
-                double_value = true;
-
+                coin_in_portfolio = true;
             }
         });
         // if coin found in list, change "add to portfolio button"  
-        if (double_value) {
+        if (coin_in_portfolio) {
             document.getElementById("portfolio_button").innerHTML = "Delete from portfolio";
 
         }
@@ -118,6 +120,15 @@ function coin_info(coin) {
         document.getElementById("favicon").setAttribute("href", data.image.thumb);
         // set coin logo to currently opened coin       
         document.getElementById("coin_image").setAttribute("src", data.image.small );
+
+        // Add Twitter Timeline
+        
+        twitter_handle = data.links.twitter_screen_name;
+        twitter_feed(twitter_handle);
+
+
+
+        
         
         console.log(data)  // KANN WEG
 
@@ -136,21 +147,60 @@ function coin_info(coin) {
         document.getElementById("coin_note_field").innerHTML = coin_note;
 
         // Add prices to portfolio overview table
-        document.getElementById("portfolio_price_list").innerHTML = "";
+        document.querySelector(".portfolio_price_list").innerHTML = "";
         portfolio_coin = document.querySelectorAll('.portfolio_coin');
+
+        // let portfolio_coin_amounts = document.querySelectorAll('.portfolio_coin_amount');
+        // let i = 0;
+        // let holding_value = [];
+
         portfolio_coin.forEach(function (coin_name_i) {
             fetch("https://api.coingecko.com/api/v3/coins/"+ coin_name_i.innerHTML +"?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
             .then(response => response.json())
             .then(data => {
                 let li_coin_price  = document.createElement('li');
                 li_coin_price.innerHTML = data.market_data.current_price.usd;
-                document.querySelector('#portfolio_price_list').append(li_coin_price);
+                li_coin_price.setAttribute("class", "portfolio_coin_price");
+                document.querySelector('.portfolio_price_list').append(li_coin_price);
+
             });
+        
         });
 
+        // holding_value = parseInt(data.market_data.current_price.usd) * parseInt(portfolio_coin_amounts[i].innerHTML)
+        // holding_value_list.push(holding_value);
+        // i = i + 1;
 
+        // let test  = document.createElement('li');
+        // test.innerHTML = holding_value_list.length;
+        // document.getElementById('TEST').append(test);
+    
         
-
+  
+        // portfolio_coin_prices = document.querySelectorAll('.portfolio_coin_price');
+        // portfolio_coin_amounts = document.querySelectorAll('.portfolio_coin_amount');
+        // total_value_list = []
+        // for (i = 0; i < portfolio_coin_prices.length; i++) {
+        //     total_value = parseInt(portfolio_coin_prices) * parseInt(portfolio_coin_amounts[i].innerHTML);
+        //     total_value_list.push(total_value);
+            
+        // }
+        // total_value_list.forEach(function (value) {
+        //     let li_total_value  = document.createElement('li');
+        //     li_total_value.innerHTML = portfolio_coin_prices;
+            
+        //     li_total_value.setAttribute("class", "portfolio_coin_total_value");
+        //     document.querySelector('.portfolio_total_value_list').append(li_total_value);
+        // });
+        
+        // portfolio_coin_prices = document.querySelectorAll('.portfolio_coin_price');
+        // // portfolio_coin_prices.forEach(function (price) {
+        //     let test  = document.createElement('li');
+        //     test.innerHTML = portfolio_coin_prices[0].innerHTML;
+        //     document.getElementById('TEST').append(test);
+        // });
+       
+        
 
         // twitter_name = data.links.twitter_screen_name
         // // twitter_url = '<a href="https://twitter.com/intent/tweet?button_hashtag=' + twitter_name + '&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #' + twitter_name + '</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
@@ -158,7 +208,8 @@ function coin_info(coin) {
         // // TWITTER
         
         // document.getElementById("twitter_channel").innerHTML = twitter_url;
-    });
+      
+    })
 
 }
 
@@ -190,3 +241,18 @@ function add_trade() {
     // element.setAttribute(attributeName, attributeValue)
     document.querySelector("#addtrade_field").style.display = "block";
 }
+
+function twitter_feed(twitter_handle) {
+    // twitter_channel = '<a class="twitter-timeline" href="https://twitter.com/' + twitter_handle + '?ref_src=twsrc%5Etfw">Tweets by ' + twitter_handle + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
+    twitter_channel = '<a class="twitter-timeline" href="https://twitter.com/' + twitter_handle + '?ref_src=twsrc%5Etfw">Tweets by ' + twitter_handle + '</a>'
+    document.getElementById("twitter_channel").innerHTML = twitter_channel;
+
+    // async src="https://platform.twitter.com/widgets.js" charset="utf-8";
+    // document.getElementById("twitter_channel").contentWindow.location.reload(true);
+}
+
+
+// function reload_page() {
+//     location.reload();
+// }
+// ; reload_page(); 
