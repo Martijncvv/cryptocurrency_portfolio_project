@@ -52,6 +52,14 @@
             </div>
         </div>
 
+<!-- PORTFOLIO DATA -->
+        <div>
+            <h2>Portfolio Info</h2> 
+           <p id="test33">non</p>   
+
+            
+        </div>
+
 <!-- NOTE  -->
         <div>
             <h2> Coin Note</h2> 
@@ -75,21 +83,21 @@
         <div class="row">
             <div class="col-3">
                 <ul>
-                    {% for trade in trade_history %}
+                    {% for trade in trade_history reversed %}
                     <li> {{ trade.coin_name }} </li>
                     {%  endfor %}
                 </ul>
             </div>
             <div class="col-3">
                 <ul>
-                    {% for trade in trade_history %}
+                    {% for trade in trade_history reversed %}
                     <li> {{ trade.tradetype }} </li>
                     {%  endfor %}
                 </ul>
             </div>
             <div class="col-3">
                 <ul>
-                    {% for trade in trade_history %}
+                    {% for trade in trade_history reversed %}
                     <li> {{ trade.amount }} </li>
                     {%  endfor %}
                 </ul>
@@ -132,7 +140,7 @@
                     <div class="col-6">
                         <h3>Twitter</h3>
                         <div id="twitter_channel">
-                            <a class="twitter-timeline" href="https://twitter.com/Bitcoin?ref_src=twsrc%5Etfw">Tweets by Bitcoin</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                            
                         </div>
                     </div>
 

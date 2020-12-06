@@ -38,6 +38,12 @@ Project start
 
 ### Saturday 05-12-2020
 - Added portfolio holdings amount back-end and front-end
+- Added total coin value
+- Added total portfolio value
+### Sunday 06-12-2020
+- Added a more effiecient way for fetching of price data; 1 request instead of a request for each coin.
+- Found out API doesn't return values in the same order as asked for.
+- Added "total current portfolio" value.
 
 
 
