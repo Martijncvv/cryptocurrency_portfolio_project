@@ -87,7 +87,6 @@ function coin_info(coin) {
     fetch("https://api.coingecko.com/api/v3/coins/"+ coin.toLowerCase() +"?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
     .then(response => response.json())
     .then(data => {
-        
     // PORTFOLIO
         // change "add portfolio" button if coin is in portfolio      
         let coin_in_portfolio = false;
@@ -118,10 +117,6 @@ function coin_info(coin) {
         // set coin logo to currently opened coin       
         document.getElementById("coin_image").setAttribute("src", data.image.small );
 
-        // Add Twitter Timeline
-        // TWITTER
-        twitter_handle = data.links.twitter_screen_name;
-        twitter_feed(twitter_handle);
 
         console.log(data)  // KANN WEG
 
@@ -139,24 +134,23 @@ function coin_info(coin) {
         let coin_note = document.getElementById(data.id).innerHTML;
         document.getElementById("coin_note_field").innerHTML = coin_note;
 
+        // Get current coin prices
         // Add prices to portfolio overview table
         document.querySelector(".portfolio_price_list").innerHTML = "";
         let portfolio_coins = document.querySelectorAll('.portfolio_coin');
 
+        // Create list with portfolio coins to use as API input
         let portfolio_coins_list = []
-        
         portfolio_coins.forEach(function (coin_name) {
             portfolio_coins_list.push(coin_name.innerHTML);
         });
         portfolio_coins_string = portfolio_coins_list.join('%2C')
 
-        
-
         fetch("https://api.coingecko.com/api/v3/simple/price?ids=" + portfolio_coins_string + "&vs_currencies=usd")
         .then(response => response.json())
         .then(data => {
 
-            // API doesn't return values in the same order; add the right coin value at the right line in portfolio overview
+            // API doesn't return values in the same order as the given list; add the right coin value at the right line in portfolio overview
             document.querySelector(".portfolio_price_list").innerHTML = "";
             portfolio_coins.forEach(function (coin_name) {
                 for (const [key, value] of Object.entries(data)) {
@@ -171,20 +165,12 @@ function coin_info(coin) {
                     }
                 }
             });  
-            total_coin_values()        
+            total_coin_values()  
         })
-                            
-
-            // twitter_name = data.links.twitter_screen_name
-            // // twitter_url = '<a href="https://twitter.com/intent/tweet?button_hashtag=' + twitter_name + '&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #' + twitter_name + '</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
-            // twitter_url = '<a class="twitter-timeline" href="https://twitter.com/' + twitter_name + '?ref_src=twsrc%5Etfw">Tweets by ' + twitter_name + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
-            // // TWITTER
-            
-            // document.getElementById("twitter_channel").innerHTML = twitter_url;
-        });
-
-  
-
+        // Add Twitter Timeline
+        twitter_handle = data.links.twitter_screen_name;
+        twitter_feed(twitter_handle)
+    });
 }
 
 
@@ -219,11 +205,11 @@ function add_trade() {
 
 function twitter_feed(twitter_handle) {
     twitter_channel = '<a class="twitter-timeline" href="https://twitter.com/' + twitter_handle + '?ref_src=twsrc%5Etfw">Tweets by ' + twitter_handle + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
-    // twitter_channel = '<a class="twitter-timeline" href="https://twitter.com/' + twitter_handle + '?ref_src=twsrc%5Etfw">Tweets by ' + twitter_handle + '</a>'
     document.getElementById("twitter_channel").innerHTML = twitter_channel;
 
-    // async src="https://platform.twitter.com/widgets.js" charset="utf-8";
-    // document.getElementById("twitter_channel").contentWindow.location.reload(true);
+    twttr.widgets.load(
+        document.getElementById("twitter_channel")
+    );
 }
 
 
@@ -245,7 +231,7 @@ function total_coin_values() {
         total_portfolio_value = total_portfolio_value + total_value;
     }
     document.getElementById("test33").innerHTML = total_portfolio_value
-    
+
     total_value_list.forEach(function (value) {
         let li_total_value  = document.createElement('li');
         li_total_value.innerHTML = value;
@@ -253,7 +239,6 @@ function total_coin_values() {
         li_total_value.setAttribute("class", "portfolio_coin_total_value");
         document.querySelector('.portfolio_total_value_list').append(li_total_value);
 
-        
     });
 }
 
