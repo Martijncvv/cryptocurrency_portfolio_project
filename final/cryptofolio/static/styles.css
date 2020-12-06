@@ -36,14 +36,9 @@ span {
     right: 0px;
 }
 
-/* #google_trends {
-    height: 400px;
-} */
-
-/* #twitter_channel {
-    height: 400px;
-} */
-
+#area-chart {
+  min-height: 250px;
+}
 
 
 

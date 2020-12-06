@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-
     coin_page_name = document.getElementById('coin_page_name').innerHTML;
     coin_info(coin_page_name);
     // location.reload();
@@ -128,7 +127,7 @@ function coin_info(coin) {
         document.getElementById("coin_info_marketcap").innerHTML = data.market_data.market_cap.usd;
         document.getElementById("coin_info_atl").innerHTML = data.market_data.atl.usd + data.market_data.atl_date.usd;
         document.getElementById("coin_info_ath").innerHTML = data.market_data.ath.usd + data.market_data.ath_date.usd;
-        document.getElementById("coin_info_description").innerHTML = data.description.en;
+        // document.getElementById("coin_info_description").innerHTML = data.description.en;
         
         // Add note to note field
         let coin_note = document.getElementById(data.id).innerHTML;
@@ -154,9 +153,6 @@ function coin_info(coin) {
             document.querySelector(".portfolio_price_list").innerHTML = "";
             portfolio_coins.forEach(function (coin_name) {
                 for (const [key, value] of Object.entries(data)) {
-                    console.log(coin_name.innerHTML);
-                    console.log(value);
-
                     if (coin_name.innerHTML == key) {
                         let li_coin_price  = document.createElement('li');
                         li_coin_price.innerHTML = value.usd;
@@ -168,11 +164,11 @@ function coin_info(coin) {
             total_coin_values()  
         })
         // Add Twitter Timeline
-        twitter_handle = data.links.twitter_screen_name;
-        twitter_feed(twitter_handle)
+        twitter_feed(data.links.twitter_screen_name)
     });
+    // Draw coin chart
+    coin_chart(coin.toLowerCase());
 }
-
 
 function login() {
     document.querySelector("#register_field").style.display = "none";
@@ -204,9 +200,29 @@ function add_trade() {
 
 
 function twitter_feed(twitter_handle) {
+    // Twitter widget script OPEN
+    window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+          t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      
+        t._e = [];
+        t.ready = function(f) {
+          t._e.push(f);
+        };
+        return t;
+    }(document, "script", "twitter-wjs"));
+    // Twitter script CLOSe
+
+    // add twitter timeline to HTML
     twitter_channel = '<a class="twitter-timeline" href="https://twitter.com/' + twitter_handle + '?ref_src=twsrc%5Etfw">Tweets by ' + twitter_handle + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
     document.getElementById("twitter_channel").innerHTML = twitter_channel;
 
+    // refresh widget to get new coin data
     twttr.widgets.load(
         document.getElementById("twitter_channel")
     );
@@ -241,4 +257,45 @@ function total_coin_values() {
 
     });
 }
+
+function coin_chart(coin_name) {
+    // get chart data
+    fetch("https://api.coingecko.com/api/v3/coins/" + coin_name + "/market_chart?vs_currency=usd&days=30")
+        .then(response => response.json())
+        .then(chart_data => {
+            // create an empty array to store the paired data
+            price_data_array = [];
+
+            // create dictionaries with pairs and add to array
+            chart_data.prices.forEach(function (data) {
+                let price_data_dict = {};
+                price_data_dict["time"] = data[0];
+                price_data_dict["value"] = data[1];
+                price_data_array.push(price_data_dict);
+            });
+
+            // create coin graph
+            document.getElementById("coin_chart").innerHTML = "";
+            // Morris Chart source:
+            // https://morrisjs.github.io/morris.js/
+            new Morris.Area({
+            // ID of the element in which to draw the chart.
+            element: 'coin_chart',
+            // Chart data records -- each entry in this array corresponds to a point on
+            // the chart.
+            data: price_data_array,
+            // The name of the data record attribute that contains x-values.
+            xkey: 'time',
+            // A list of names of data record attributes that contain y-values.
+            ykeys: ['value'],
+            // Labels for the ykeys -- will be displayed when you hover over the
+            // chart.
+            labels: ['value']
+            });
+        
+        });   
+}
+
+   
+
 

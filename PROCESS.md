@@ -44,7 +44,8 @@ Project start
 - Added a more effiecient way for fetching of price data; 1 request instead of a request for each coin.
 - Found out API doesn't return values in the same order as asked for.
 - Added "total current portfolio" value.
-- Added Twitter timelines
+- Added Twitter timelines; took some to find out how because the page doesn't refresh when a new coin is clicked.
+- Added basic coin graph
 
 
 
