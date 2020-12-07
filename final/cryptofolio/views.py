@@ -9,6 +9,9 @@ from django.db import IntegrityError
 from django.db.models import Sum
 from django import forms
 
+from json import dumps
+import datetime
+
 from .models import User, Settings, Portfolio, Trade
 
 def index(request):
@@ -139,12 +142,12 @@ def index(request):
                 return render(request, "cryptofolio/index.html", {
                     "message_login": "Invalid email and/or password."})
     
-    # user's trade history, portfolio coins
+    # gets user's trade history, portfolio coins
     trade_history = Trade.objects.filter(user = user)
     user_portfolio = Portfolio.objects.filter(user = user)
 
 
-    # current holdings of user
+    # calculates current holdings of user
     # iterate over every coin in portfolio, calculate current balance and add to list
     user_holdings = []
     for coin in user_portfolio:
@@ -157,12 +160,39 @@ def index(request):
         trade_sell_history = Trade.objects.filter(user = user, coin_name = coin.coin_name, tradetype = "SELL").aggregate(Sum('amount'))
         if trade_sell_history["amount__sum"] != None:
             current_coin_holding = current_coin_holding - trade_sell_history["amount__sum"]
-          
         user_holdings.append(current_coin_holding)
+
+    # gets trade history data to send to Javascript
+    trade_history_list = []
+    for trade in trade_history:
+
+        # convert values to the right type
+        unixtime = trade.time.timestamp()
+        amount_float = float(trade.amount)
+
+        trade_dict = {
+            "time": unixtime,
+            "coin_name": trade.coin_name,
+            "amount": amount_float,
+            "tradetype": trade.tradetype
+        }
+        trade_history_list.append(trade_dict)
+    # create JSON variable to send data to Javascript
+    data_JSON = dumps(trade_history_list) 
     
     return render(request, "cryptofolio/index.html", {
         "trade_history": trade_history,
         "user_portfolio": user_portfolio,
         "coin_page_name": coin_page_name.strip(),
-        "user_holdings_amount": user_holdings
+        "user_holdings_amount": user_holdings,
+        "data_JSON": data_JSON
     })
+
+
+    # { year: '2008', value: 20 },
+    # { year: '2009', value: 10 },
+    # { year: '2010', value: 5 },
+    # { year: '2011', value: 5 },
+    # { year: '2012', value: 20 }
+
+    # https://www.geeksforgeeks.org/how-to-pass-data-to-javascript-in-django-framework/

@@ -40,6 +40,7 @@ Project start
 - Added portfolio holdings amount back-end and front-end
 - Added total coin value
 - Added total portfolio value
+
 ### Sunday 06-12-2020
 - Added a more effiecient way for fetching of price data; 1 request instead of a request for each coin.
 - Found out API doesn't return values in the same order as asked for.
@@ -47,7 +48,9 @@ Project start
 - Added Twitter timelines; took some to find out how because the page doesn't refresh when a new coin is clicked.
 - Added basic coin graph
 
-
+### Monday 07-12-2020
+- Fixed bug in twitter timeline
+- Added function to send trade_data from Django to Javascript
 
 
 

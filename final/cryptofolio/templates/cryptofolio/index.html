@@ -54,7 +54,7 @@
 <!-- PORTFOLIO DATA -->
         <div>
             <h2>Portfolio Info</h2> 
-           <p id="test33">non</p>   
+           <p id="total_portfolio_value">None</p>   
         </div>
 
 <!-- NOTE  -->
@@ -75,7 +75,7 @@
 
             
         </div>
-<!-- Trade History  -->
+<!-- TRADE HISTORY  -->
         <h2>Trade history</h2>
         <div class="row">
             <div class="col-3">
@@ -246,27 +246,41 @@
 </div>  
 
 <!-- HIDDEN DATA FOR JS -->
-
-
-    <p id="coin_page_name" style="visibility: hidden;">{{coin_page_name}}</p>
-
-    <div>
-        {% for coin in user_portfolio %}
-        <p id="{{coin.coin_name}}" style="visibility: hidden;">
-            {{ coin.note }}
-        </p>
-        {%  endfor %}
-    </div>
+<p id="coin_page_name" style="visibility: hidden;">{{coin_page_name}}</p>
 
 <div>
+    {% for coin in user_portfolio %}
+    <p id="{{coin.coin_name}}" style="visibility: hidden;">
+        {{ coin.note }}
+    </p>
+    {%  endfor %}
+</div>
+
+
+<!-- HIDDEN DATA FOR JS -->
+<div>
+
     <ul id="TEST"></ul>
     
    
-
    <!-- Test2: {{ TEST2 }}
    <p></p>
    Test3: {{ TEST3 }} -->
 </div>
+
+<div style="margin: 5%;"> 
+    <h1> 
+        <u>Dictionary Data</u> 
+    </h1> 
+    <h2> 
+        <u>All Data</u> 
+    </h2> 
+    <h4 id='alldata'></h4><br> 
+    <h2> 
+        <u>Neat Data</u> 
+    </h2> 
+    <h4 id='neatdata'></h4> 
+</div> 
 
 
 {% endblock %}
@@ -295,6 +309,11 @@
  
 </script> -->
 <!-- GRAPH CLOSE  -->
+
+<script> 
+    var trade_history_data = JSON.parse("{{data_JSON|escapejs}}"); 
+</script>
+
 
     <script src="{% static 'index.js' %}"></script>
 {% endblock %}

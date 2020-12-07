@@ -32,12 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const register_password_field = document.querySelector('#register_password_field');
     const register_field_button = document.querySelector('#register_field_button');
     
-    // Disable submit buttons
+    // disable submit buttons
     submit_search.disabled = true;
     login_field_button.disabled = true;
     register_field_button.disabled = true;
 
-    // Listen for input to be typed into coinsearch input field
+    // listen for input to be typed into coinsearch input field
     coin_name_search.onkeyup = () => {
         if (coin_name_search.value.length > 0) {
             submit_search.disabled = false;
@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
             submit_search.disabled = true;
         }
     }
-    // Listen for input to be typed into login input field
+    // listen for input to be typed into login input field
     login_password_field.onkeyup = () => {
         if (login_password_field.value.length > 0) {
             login_field_button.disabled = false;
@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
             login_field_button.disabled = true;
         }
     }
-     // Listen for input to be typed into register input field
+     // listen for input to be typed into register input field
      register_password_field.onkeyup = () => {
         if (register_password_field.value.length > 0) {
             register_field_button.disabled = false;
@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    // load all coin info
     coin_page_name = document.getElementById('coin_page_name').innerHTML;
     coin_info(coin_page_name);
     // location.reload();
@@ -77,9 +78,9 @@ function coin_info(coin) {
     if (coin_name_search.value !== ""){
         coin = coin_name_search.value;
     }
-    // Clear out input field:
+    // clear out input field:
     coin_name_search.value = "";
-    // Disable the submit button again:
+    // disable the submit button again:
     submit_search.disabled = true;
 
 
@@ -174,6 +175,10 @@ function coin_info(coin) {
     });
     // Draw coin chart
     coin_chart(coin.toLowerCase());
+
+
+    // create portfolio history chart
+    portfolio_history_chart();
 }
 
 function login() {
@@ -252,7 +257,7 @@ function total_coin_values() {
         // calculate total portfolio value
         total_portfolio_value = total_portfolio_value + total_value;
     }
-    document.getElementById("test33").innerHTML = total_portfolio_value
+    document.getElementById("total_portfolio_value").innerHTML = total_portfolio_value
 
     total_value_list.forEach(function (value) {
         let li_total_value  = document.createElement('li');
@@ -273,33 +278,37 @@ function coin_chart(coin_name) {
             price_data_array = [];
 
             // create dictionaries with pairs and add to array
-            chart_data.prices.forEach(function (data) {
+            chart_data.prices.forEach(function (price_data) {
                 let price_data_dict = {};
-                price_data_dict["time"] = data[0];
-                price_data_dict["value"] = data[1];
+                price_data_dict["time"] = price_data[0];
+                price_data_dict["value"] = price_data[1];
                 price_data_array.push(price_data_dict);
             });
 
             // create coin graph
             document.getElementById("coin_chart").innerHTML = "";
-            // Morris Chart source:
+            // Morris Chart explanation source:
             // https://morrisjs.github.io/morris.js/
             new Morris.Area({
-            // ID of the element in which to draw the chart.
-            element: 'coin_chart',
-            // Chart data records -- each entry in this array corresponds to a point on
-            // the chart.
+            // cariables of the chart
+            element: "coin_chart",
             data: price_data_array,
-            // The name of the data record attribute that contains x-values.
-            xkey: 'time',
-            // A list of names of data record attributes that contain y-values.
-            ykeys: ['value'],
-            // Labels for the ykeys -- will be displayed when you hover over the
-            // chart.
-            labels: ['value']
+            xkey: "time",
+            ykeys: ["value"],
+            labels: ["$"],
+            hideHover: "auto",
+            pointSize: "0",
+            lineWidth: "2"
             });
         
         });   
+}
+
+
+function portfolio_history_chart() {
+    
+    console.log(trade_history_data)
+    
 }
 
    
