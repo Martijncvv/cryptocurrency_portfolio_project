@@ -307,10 +307,158 @@ function coin_chart(coin_name) {
 
 function portfolio_history_chart() {
     
+
+    // get all unique coin names of trades
+    let unique_coins = [];
+    trade_history_data.forEach(function (trade) {
+        if (!unique_coins.includes(trade.coin_name)) {
+            unique_coins.push(trade.coin_name);
+        }
+    });
+    // get history charts of all unique coins (90 days)
+    let coins_chart_data_array = [];
+    unique_coins.forEach(function (coin) {
+        fetch("https://api.coingecko.com/api/v3/coins/" + coin + "/market_chart?vs_currency=usd&days=91")
+        .then(response => response.json())
+        .then(coin_chart_data => {
+            coin_chart_dict = {[coin]: coin_chart_data};
+            coins_chart_data_array.push(coin_chart_dict);
+        });
+    });
+    console.log("trade_history_data")
     console.log(trade_history_data)
+    console.log("coins_chart_data_array")
+    console.log(coins_chart_data_array)
+
+    // creates list with dicts: coins and holding amount (set to 0)
+    // let coin_holding_dict = [];
+    // unique_coins.forEach(function (coin) {
+    //     coin_amount = {[coin]: 0};
+    //     coin_holding_dict.push(coin_amount)
+    // });
+    // console.log(coin_holding_dict);
+
+    // create coins and holding amount (set to 0)
+    for (let i = 0; i < unique_coins.length; i += 1 ){
+        window[unique_coins[i]] = 0;
+      }
+      
+    // loop over every trade in trade_history_data, calculate total portfolio value add that moment and create dictionary with time/total value pair
+    trade_history_data.forEach(function (trade) {
+        let coin_total_value_time_dict = [];
+
+        unique_coins.forEach(function (coin) {
+            if (coin == trade.coin_name) {
+                // check if buy or sell order
+                if (trade.tradetype == "BUY") {
+                    window[coin] += trade.amount;
+                    console.log("BUY " + coin + " " + window[coin])
+                }
+                else {
+                    window[coin] -= trade.amount;
+                    console.log("SELL " + coin + " " + window[coin])
+                }
+            }
+        })
+        // get price of coin on trade.time
+        
+
+    });
+    console.log("TESTESTETs");
+    console.log(coins_chart_data_array);
+    console.log(chart_data);
+    // console.log(coins_chart_data_array);
+    // coins_chart_data_array.forEach(function (trade_history) {
+    //     console.log(trade_history.prices)
+    // });
+
+    // chart_data.prices.forEach(function (price_data) {
+    //     let price_data_dict = {};
+    //     price_data_dict["time"] = price_data[0];
+    //     price_data_dict["value"] = price_data[1];
+    //     price_data_array.push(price_data_dict);
+    // });
+
+
+        
+         // Create list with portfolio coins to use as API input
+        //  let portfolio_coins_list = []
+        //  portfolio_coins.forEach(function (coin_name) {
+        //      portfolio_coins_list.push(coin_name.innerHTML);
+        //  });
+        //  portfolio_coins_string = portfolio_coins_list.join('%2C')
+ 
+        //  fetch("https://api.coingecko.com/api/v3/simple/price?ids=" + portfolio_coins_string + "&vs_currencies=usd")
+        //  .then(response => response.json())
+        //  .then(data => {
+ 
+        //      // API doesn't return values in the same order as the given list; add the right coin value at the right line in portfolio overview
+        //      document.querySelector(".portfolio_price_list").innerHTML = "";
+        //      portfolio_coins.forEach(function (coin_name) {
+        //          for (const [key, value] of Object.entries(data)) {
+        //              if (coin_name.innerHTML == key) {
+        //                  let li_coin_price  = document.createElement('li');
+        //                  li_coin_price.innerHTML = value.usd;
+        //                  li_coin_price.setAttribute("class", "portfolio_coin_price");
+        //                  document.querySelector('.portfolio_price_list').append(li_coin_price);
+        //              }
+        //          }
+        //      });  
+
+          // creates list with dicts: coins and holding amount (set to 0)
+    // let coin_holding_dict = [];
+    // unique_coins.forEach(function (coin) {
+    //     coin_amount = {[coin]: 0};
+    //     coin_holding_dict.push(coin_amount)
+    // });
+    // console.log(coin_holding_dict);
+
+
+
+
     
-}
+    // console.log(coin_holding_dict)
+};
 
+//////// coins_chart_data_array
+// 0: {uniswap: {…}}
+// 1: {vechain: {…}}
+// 2: {bitcoin: {…}}
+// 3: {ethereum: {…}}
+
+// uniswap:
+// market_caps: (83) [Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2)]
+// prices: (83) [Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2)]
+// total_volumes: (83) [Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2)]
+
+// prices: Array(83)
+// 0: (2) [1600300800000, 3.443832391414463]
+// 1: (2) [1600387200000, 3.443832391414463]
+// 2: (2) [1600473600000, 7.097694014200204]
+// 3: (2) [1600560000000, 5.702060553834949]
+// 4: (2) [1600646400000, 5.2565793825170735]
+// 5: (2) [1600732800000, 4.294819485815088]
    
+//////// trade_history_data
+// 0: {time: 1607261047.87063, coin_name: "bitcoin", amount: 10, tradetype: "BUY"}
+// 1: {time: 1607261058.929534, coin_name: "uniswap", amount: 100, tradetype: "BUY"}
+// 2: {time: 1607261132.143845, coin_name: "uniswap", amount: 100, tradetype: "BUY"}
+// 3: {time: 1607261165.148184, coin_name: "uniswap", amount: 100, tradetype: "BUY"}
+// 4: {time: 1607261175.311559, coin_name: "ethereum", amount: 110, tradetype: "BUY"}
 
 
+
+
+
+
+    // var timestamp = trade_history_data[0].time; 
+    // var date = new Date(timestamp * 1000);
+    // var formattedDate = ('0' + date.getDate()).slice(-2) + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear();
+    
+    
+    // console.log(formattedDate);
+
+    
+    // for (i = 0; i < 5; i++) {
+
+    // 

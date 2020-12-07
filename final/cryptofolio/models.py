@@ -38,7 +38,7 @@ class Trade(models.Model):
     
 
     def __str__(self):
-        return f"OBJECT: User:{self.user} | Coin name:{self.coin_name}  | Trade type:{self.tradetype}"
+        return f"OBJECT: User:{self.user} | Coin name:{self.coin_name}  | Trade type:{self.tradetype} | Amount:{self.amount}"
 
 
     # @property boven function; geen () nodig
