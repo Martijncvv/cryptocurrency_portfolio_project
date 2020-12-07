@@ -129,14 +129,21 @@ function coin_info(coin) {
         document.getElementById("coin_info_ath").innerHTML = data.market_data.ath.usd + data.market_data.ath_date.usd;
         // document.getElementById("coin_info_description").innerHTML = data.description.en;
         
-        // Add note to note field
-        let coin_note = document.getElementById(data.id).innerHTML;
-        document.getElementById("coin_note_field").innerHTML = coin_note;
+        // Add note to note field if note exists
+        let check = document.getElementById("data.id")
+        if (check){ 
+            let coin_note = document.getElementById(data.id).innerHTML;
+            document.getElementById("coin_note_field").innerHTML = coin_note;
+        }
+      
 
         // Get current coin prices
         // Add prices to portfolio overview table
         document.querySelector(".portfolio_price_list").innerHTML = "";
         let portfolio_coins = document.querySelectorAll('.portfolio_coin');
+
+        // Add Twitter Timeline
+        twitter_feed(data.links.twitter_screen_name)
 
         // Create list with portfolio coins to use as API input
         let portfolio_coins_list = []
@@ -163,8 +170,7 @@ function coin_info(coin) {
             });  
             total_coin_values()  
         })
-        // Add Twitter Timeline
-        twitter_feed(data.links.twitter_screen_name)
+        
     });
     // Draw coin chart
     coin_chart(coin.toLowerCase());
