@@ -118,7 +118,7 @@ function coin_info(coin) {
         document.getElementById("coin_image").setAttribute("src", data.image.small );
 
 
-        console.log(data)  // KANN WEG
+       /// console.log(data)  // KANN WEG
 
         // Add data to General Info elements
         document.title = data.name;
@@ -128,7 +128,7 @@ function coin_info(coin) {
         document.getElementById("coin_info_marketcap").innerHTML = data.market_data.market_cap.usd;
         document.getElementById("coin_info_atl").innerHTML = data.market_data.atl.usd + data.market_data.atl_date.usd;
         document.getElementById("coin_info_ath").innerHTML = data.market_data.ath.usd + data.market_data.ath_date.usd;
-        // document.getElementById("coin_info_description").innerHTML = data.description.en;
+        document.getElementById("coin_info_description").innerHTML = data.description.en;
         
         // Add note to note field if note exists
         let check = document.getElementById("data.id")
@@ -276,7 +276,8 @@ function coin_chart(coin_name) {
         .then(chart_data => {
             // create an empty array to store the paired data
             price_data_array = [];
-
+            // console.log("chart_data")
+            // console.log(chart_data.prices)
             // create dictionaries with pairs and add to array
             chart_data.prices.forEach(function (price_data) {
                 let price_data_dict = {};
@@ -315,58 +316,182 @@ function portfolio_history_chart() {
             unique_coins.push(trade.coin_name);
         }
     });
-    // get history charts of all unique coins (90 days)
-    let coins_chart_data_array = [];
-    unique_coins.forEach(function (coin) {
-        fetch("https://api.coingecko.com/api/v3/coins/" + coin + "/market_chart?vs_currency=usd&days=91")
-        .then(response => response.json())
-        .then(coin_chart_data => {
-            coin_chart_dict = {[coin]: coin_chart_data};
-            coins_chart_data_array.push(coin_chart_dict);
+    
+    
+    let coins_chart_data_object = {};
+    // get history charts of all unique coins (91 days)
+    var get_chart_data = new Promise((resolve, reject) => {
+        unique_coins.forEach((coin) => {
+            fetch("https://api.coingecko.com/api/v3/coins/" + coin + "/market_chart?vs_currency=usd&days=91")
+            .then(response => response.json())
+            .then(coin_chart_data => { //object
+                // console.log(coin_chart_data.prices[0])
+                coins_chart_data_object[coin] = coin_chart_data;          
+                
+                
+                // console.log(coins_chart_data_object);
+                // console.log(coins_chart_data_object[Object.keys(coins_chart_data_object)[0]].prices[0]);
+
+                // console.log(unique_coins.length);
+                // console.log(Object.keys(coins_chart_data_object).length);
+                if (unique_coins.length == Object.keys(coins_chart_data_object).length) 
+                {
+                    resolve();
+                }
+            });
         });
-    });
-    console.log("trade_history_data")
-    console.log(trade_history_data)
-    console.log("coins_chart_data_array")
-    console.log(coins_chart_data_array)
+    }); 
+    
+    // https://stackoverflow.com/questions/38406920/best-way-to-wait-for-foreach-to-complete
+    // wait for the forEach loop to finish
+    get_chart_data.then(() => {
+        
+        // create coin variables with holding amounts set to 0
+        for (let i = 0; i < unique_coins.length; i += 1 ){
+            window[unique_coins[i]] = 0;
+            console.log(unique_coins[i])
+        }
+        
+        console.log(trade_history_data)
+        
 
-    // creates list with dicts: coins and holding amount (set to 0)
-    // let coin_holding_dict = [];
-    // unique_coins.forEach(function (coin) {
-    //     coin_amount = {[coin]: 0};
-    //     coin_holding_dict.push(coin_amount)
-    // });
-    // console.log(coin_holding_dict);
+        // // loop over every trade in trade_history_data, calculate total portfolio value at timestamp and create dictionary with time/portfolio total value pair
+        let portfolio_total_value_timestamp_array = [];
+        trade_history_data.forEach(function (trade) {
+            let total_portolio_value_timestamp = 0;   
+            unique_coins.forEach(function (coin) {
+                if (coin == trade.coin_name) {
+                    // check if buy or sell order
+                    if (trade.tradetype == "BUY") {
+                        window[coin] += trade.amount;
+                        // console.log("BUY " + coin + " " + window[coin])
+                    }
+                    else {
+                        window[coin] -= trade.amount;
+                        // console.log("SELL " + coin + " " + window[coin])
+                    }
+                }
+            })
 
-    // create coins and holding amount (set to 0)
-    for (let i = 0; i < unique_coins.length; i += 1 ){
-        window[unique_coins[i]] = 0;
-      }
+            // find coin price at timestamp of the trade: trade.time
+            
+            // create array with all timestamps of coin historic chart
+            trade_history_timestamps_array = [];
+            (coins_chart_data_object[Object.keys(coins_chart_data_object)[0]].prices).forEach((price) => {
+                trade_history_timestamps_array.push(price[0])
+            })
+
+            // find closest coin historic chart timestamp
+            // source: https://www.gavsblog.com/blog/find-closest-number-in-array-javascript#:~:text=Find%20the%20closest%20value%20in%20array%20using%20reduce()&text=The%20easiest%20way%20to%20do,()%2C%20so%20lets%20use%20that.&text=With%20this%20function%20we%20check,and%20then%20return%20the%20winner.
+            timestamp = trade.time;
+            const closest_timestamp = trade_history_timestamps_array.reduce((a, b) => {
+                return Math.abs(b - timestamp) < Math.abs(a - timestamp) ? b : a;
+            });
+            // console.log("Closest: " + closest_timestamp)
+
+            index_closest_timestamp = trade_history_timestamps_array.indexOf(closest_timestamp);
+            // console.log("Index of closest: " + index_closest_timestamp);
+
+            
+            // get price of every coin at closest timestamp and add to object
+            // get coinprice of coin at timestamp
+            unique_coins.forEach(function (coin) {
+                coin_price_at_timestamp = coins_chart_data_object[coin].prices[index_closest_timestamp][1]
+                
+                // multiple coin holdings by historic price and add to historic portfolio data
+                console.log(coin)
+                console.log(window[coin])
+                console.log("$ " + coin_price_at_timestamp)
+
+                total_portolio_value_timestamp += (coin_price_at_timestamp * window[coin])
+                console.log(total_portolio_value_timestamp)
+
+
+                // create dictionaries with time/value pairs and add to portfolio/timestamp array
+        
+                    let price_data_dict = {};
+                    price_data_dict["time"] = closest_timestamp;
+                    price_data_dict["value"] = total_portolio_value_timestamp;
+                    portfolio_total_value_timestamp_array.push(price_data_dict);
+
+           })
+          console.log(portfolio_total_value_timestamp_array);
+
+          document.getElementById("portfolio_chart").innerHTML = "";
+          // Morris Chart explanation source:
+          // https://morrisjs.github.io/morris.js/
+          new Morris.Area({
+          // cariables of the chart
+          element: "portfolio_chart",
+          data: portfolio_total_value_timestamp_array,
+          xkey: "time",
+          ykeys: ["value"],
+          labels: ["$"],
+          hideHover: "auto",
+          pointSize: "0",
+          lineWidth: "2"
+          });
       
-    // loop over every trade in trade_history_data, calculate total portfolio value add that moment and create dictionary with time/total value pair
-    trade_history_data.forEach(function (trade) {
-        let coin_total_value_time_dict = [];
-
-        unique_coins.forEach(function (coin) {
-            if (coin == trade.coin_name) {
-                // check if buy or sell order
-                if (trade.tradetype == "BUY") {
-                    window[coin] += trade.amount;
-                    console.log("BUY " + coin + " " + window[coin])
-                }
-                else {
-                    window[coin] -= trade.amount;
-                    console.log("SELL " + coin + " " + window[coin])
-                }
-            }
+           
+            
         })
+            // console.log(coins_chart_data_object[Object.keys(coins_chart_data_object)[0]].prices[0]);
+            // console.log(coins_chart_data_object.vechain);
+            //console.log(coins_chart_data_object[Object.keys(coins_chart_data_object)[0]].prices);
+           
+
+
+        // unique_coins.forEach((coin_name) => {
+        //     console.log(window[coin_name]);
+        // })
+          //  get price of coin on trade.time
+
+    });
+            
+
+    // coins_chart_data_array.forEach(function (coin_name) {
+    //     console.log(coin_name["bitcoin"])
+};
+    
+/////////////////////////////////////////////////////////////////////////
+
+  // // creates list with dicts: coins and holding amount (set to 0)
+        // let coin_holding_dict = [];
+        // unique_coins.forEach((coin) => {
+        //     coin_amount = {[coin]: 0};
+        //     coin_holding_dict.push(coin_amount)
+        // });
+        // console.log(coin_holding_dict);
+
+
+
+
+    // // loop over every trade in trade_history_data, calculate total portfolio value add that moment and create dictionary with time/total value pair
+    // trade_history_data.forEach(function (trade) {
+    //     let coin_total_value_time_dict = [];
+
+    //     unique_coins.forEach(function (coin) {
+    //         if (coin == trade.coin_name) {
+    //             // check if buy or sell order
+    //             if (trade.tradetype == "BUY") {
+    //                 window[coin] += trade.amount;
+    //                 console.log("BUY " + coin + " " + window[coin])
+    //             }
+    //             else {
+    //                 window[coin] -= trade.amount;
+    //                 console.log("SELL " + coin + " " + window[coin])
+    //             }
+    //         }
+    //     })
+    // })
         // get price of coin on trade.time
         
 
-    });
-    console.log("TESTESTETs");
-    console.log(coins_chart_data_array);
-    console.log(chart_data);
+    // });
+    // console.log("TESTESTETs");
+    // console.log(coins_chart_data_array);
+ 
+/////////////////////////////////////////////////////////////////////////////
     // console.log(coins_chart_data_array);
     // coins_chart_data_array.forEach(function (trade_history) {
     //     console.log(trade_history.prices)
@@ -418,7 +543,7 @@ function portfolio_history_chart() {
 
     
     // console.log(coin_holding_dict)
-};
+
 
 //////// coins_chart_data_array
 // 0: {uniswap: {…}}
