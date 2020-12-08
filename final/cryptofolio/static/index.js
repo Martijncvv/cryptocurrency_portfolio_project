@@ -171,6 +171,7 @@ function coin_info(coin) {
         
         ///// coin_chart(coin_name, time_frame)
         // create coin chart timeframe buttons
+        document.getElementById("coin_chart_timeframe_buttons").innerHTML = "";
         const timeframes = [1, 3, 7, 30];
         timeframes.forEach((tf) => {
             let coin_chart_timeframe_button = document.createElement('button');
