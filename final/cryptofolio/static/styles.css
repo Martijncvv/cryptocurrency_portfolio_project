@@ -26,9 +26,15 @@ span {
 }
 
 #portfolio_overview_button {
-    background-color: #4caf4f00; /* Green */
+    background-color: #4caf4f00; 
     border: none;
 }
+
+#trending_coin_button {
+  display: block;
+  background-color: #4caf4f00; 
+  border: none;
+} 
 
 #coin_image_div {
     position: absolute;
@@ -37,7 +43,7 @@ span {
 }
 
 #area-chart {
-  min-height: 400px;
+  min-height: 600px;
 }
 
 

@@ -19,7 +19,7 @@
 
         
         <h2>Trending</h2>
-        <ul></ul>
+        <div id="trending_coins"> </div>
 
 <!-- PORTFOLIO COINS -->
         <h2>portfolio</h2>
@@ -52,14 +52,17 @@
             </div>
         </div>
 
-<!-- PORTFOLIO DATA -->
+<!-- PORTFOLIO DATA / CHART -->
         
         <h2>Portfolio Info</h2> 
         <p id="total_portfolio_value">None</p> 
-
-        <div id="portfolio_chart" style="height: 250px;">
-            <p>Portfolio chart</p>
+        <h3 id="portfolio_chart_timeframe_header"></h3>
+        <div id="portfolio_chart" style="height: 400px;">
         </div>
+        <button class="btn btn-sm btn-primary portfolio_chart_timeframe_button" id="portfolio_chart_timeframe_1" onClick="portfolio_history_chart(1)">1 days</button>
+        <button class="btn btn-sm btn-primary portfolio_chart_timeframe_button" id="portfolio_chart_timeframe_3" onClick="portfolio_history_chart(3)">3 days</button>
+        <button class="btn btn-sm btn-primary portfolio_chart_timeframe_button" id="portfolio_chart_timeframe_7" onClick="portfolio_history_chart(7)">7 days</button>
+        <button class="btn btn-sm btn-primary portfolio_chart_timeframe_button" id="portfolio_chart_timeframe_30" onClick="portfolio_history_chart(30)">30 days</button>
         
 <!-- NOTE  -->
         <div>
@@ -170,7 +173,15 @@
     </div>
 </div>
 
+<!-- SETTINGS FIELD  -->
+<div id="settings_field" class="frontfield" style="display: none">
+    <h2>Settings</h2>
+    <div id="settings_download_data">
+        <button class="btn btn-sm btn-primary" onClick="download_trade_data()">Generate trade data CSV</button>
+    </div>
 
+    <input class="btn btn-primary close_field" type="submit" value="close">
+</div>
 
 
 <!-- LOGIN FIELD -->
@@ -253,21 +264,9 @@
     <input class="btn btn-primary close_field" type="submit" value="close">
 </div>  
 
-<!-- HIDDEN DATA FOR JS -->
-<!-- <p id="coin_page_name" style="visibility: hidden;">{{coin_page_name}}</p> -->
 
 
 
-<!-- HIDDEN DATA FOR JS -->
-<div>
-
-    <ul id="TEST"></ul>
-    
-   
-   <!-- Test2: {{ TEST2 }}
-   <p></p>
-   Test3: {{ TEST3 }} -->
-</div>
 
 <div style="margin: 5%;"> 
     <h1> 

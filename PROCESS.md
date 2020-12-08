@@ -61,9 +61,10 @@ Project start
 - Improved way to pass Django DB data to JS; used JSON data dump 
 
 - Seems I'm not able to embed Google Trends chart on website; keeps loading
-
-
-
+- Added 'trending coins' info
+- Added 'explore button'; go to random coin page
+- Added "settings view"
+- Added "download trade data" functionality
 
 In your process book, you chronicle your big decisions. When faced with a decision during the day, document it like this:
 

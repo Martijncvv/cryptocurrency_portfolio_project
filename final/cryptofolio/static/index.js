@@ -5,8 +5,10 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#register').addEventListener('click', register);
     // add coin button
     document.querySelector('#add_trade').addEventListener('click', add_trade);
-    // portfolio list
-    
+    // explore button
+    document.querySelector('#explore').addEventListener('click', random_coin);
+    // settings button
+    document.querySelector('#settings').addEventListener('click', settings);
     
      // Add eventListeners to login classes
     let login_button = document.querySelectorAll('.login');
@@ -64,11 +66,12 @@ document.addEventListener('DOMContentLoaded', function() {
             register_field_button.disabled = true;
         }
     }
+    // draw portfolio history chart
+    portfolio_history_chart(7);
 
     // load all coin info
     coin_page_name = document.getElementById('coin_page_name').innerHTML;
     coin_info(coin_page_name);
-    // location.reload();
 });
 
 
@@ -83,7 +86,6 @@ function coin_info(coin) {
     coin_name_search.value = "";
     // disable the submit button again:
     submit_search.disabled = true;
-
 
     fetch("https://api.coingecko.com/api/v3/coins/"+ coin.toLowerCase() +"?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
     .then(response => response.json())
@@ -137,7 +139,6 @@ function coin_info(coin) {
         document.querySelector(".portfolio_price_list").innerHTML = "";
         let portfolio_coins = document.querySelectorAll('.portfolio_coin');
 
-        
 
         // Create list with portfolio coins to use as API input
         let portfolio_coins_list = []
@@ -173,15 +174,13 @@ function coin_info(coin) {
     // draw coin chart
     coin_chart(coin.toLowerCase());
     
-    // draw portfolio history chart
-    portfolio_history_chart();
-
     // display trending coins
     trending_coins();
     
 }
 
 function login() {
+    console.log("LOGIN KNOP")
     document.querySelector("#register_field").style.display = "none";
     document.querySelector("#login_field").style.display = "block";
 }
@@ -190,10 +189,15 @@ function register() {
     document.querySelector("#register_field").style.display = "block";
 }
 
+function settings() {
+    document.querySelector("#settings_field").style.display = "block";
+}
+
 function close_field() {
     document.querySelector("#login_field").style.display = "none";
     document.querySelector("#register_field").style.display = "none";
     document.querySelector("#addtrade_field").style.display = "none";
+    document.querySelector("#settings_field").style.display = "none";
 }
 
 function add_trade() {
@@ -208,7 +212,6 @@ function add_trade() {
     // element.setAttribute(attributeName, attributeValue)
     document.querySelector("#addtrade_field").style.display = "block";
 }
-
 
 function twitter_feed(twitter_handle) {
     // Twitter widget script OPEN
@@ -239,7 +242,6 @@ function twitter_feed(twitter_handle) {
     );
 }
 
-
 function total_coin_values() {
     document.querySelector(".portfolio_total_value_list").innerHTML = "";
 
@@ -269,21 +271,31 @@ function total_coin_values() {
     });
 }
 
-// function trending_coins() {
-//     fetch("https://api.coingecko.com/api/v3/search/trending")
-//     .then(response => response.json())
-//     .then(trending_data => { 
-//         console.log(trending_data)
+function trending_coins() {
+    fetch("https://api.coingecko.com/api/v3/search/trending")
+    .then(response => response.json())
+    .then(trending_data => { 
+        document.getElementById("trending_coins").innerHTML = "";
+        trending_data.coins.forEach((coin) => {
+            let trending_coin_button = document.createElement('button');
+            trending_coin_button.innerHTML = coin.item.id;
+            trending_coin_button.setAttribute("id", "trending_coin_button");
+           
+            trending_coin_button.setAttribute("onClick", "coin_info('"+coin.item.id+"')");
+            document.getElementById("trending_coins").append(trending_coin_button);
+        })
+    });
 
-//         // trending_data.forEach((coin) => {
-//         //     console.log(coin)
-//         // })
-//     });
+}
 
-// }
-
-
-
+function random_coin() {
+    fetch("https://api.coingecko.com/api/v3/coins/list")
+    .then(response => response.json())
+    .then(coin_list => { 
+        let random_coin = coin_list[Math.floor(Math.random() * coin_list.length)];
+        coin_info(random_coin.id);
+    })
+}
 
 function coin_chart(coin_name) {
     // get chart data
@@ -314,13 +326,23 @@ function coin_chart(coin_name) {
             labels: ["$"],
             hideHover: "auto",
             pointSize: "0",
-            lineWidth: "2"
+            lineWidth: "2",
+            resize: "true"
             });
         
         });   
 }
 
-function portfolio_history_chart() {
+function portfolio_history_chart(time_frame) {
+    // set portfolio value chart header
+    if (time_frame == 1) {
+        document.getElementById("portfolio_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " day"
+    }
+    else {
+        document.getElementById("portfolio_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " days"
+    }
+    
+    
     // create array to store dictionaries with portfolio_value:timestamp data
     portfolio_total_value_timestamp_array = [];
 
@@ -339,7 +361,7 @@ function portfolio_history_chart() {
             // Minutely data will be used for duration within 1 day, 
             // Hourly data will be used for duration between 1 day and 90 days, 
             // Daily data will be used for duration above 90 days.
-            fetch("https://api.coingecko.com/api/v3/coins/" + coin + "/market_chart?vs_currency=usd&days=3")
+            fetch("https://api.coingecko.com/api/v3/coins/" + coin + "/market_chart?vs_currency=usd&days=" + time_frame)
             .then(response => response.json())
             .then(coin_chart_data => { //object
                 coins_chart_data_object[coin] = coin_chart_data;         
@@ -425,317 +447,40 @@ function portfolio_history_chart() {
     });
 }
 
-// function portfolio_history_chart() {
+
+///////////////////
+// https://www.codevoila.com/post/30/export-json-data-to-downloadable-file-using-javascript
+function download_trade_data() {
+
+    // get all keys of object
+    let keys = Object.keys(trade_history_data[0]);
     
-//     // get all unique coin names of trades
-//     let unique_coins = [];
-//     trade_history_data.forEach(function (trade) {
-//         if (!unique_coins.includes(trade.coin_name)) {
-//             unique_coins.push(trade.coin_name);
-//         }
-//     });
+    // create string to store csv data
+    let csv_headers = keys.join(",");
+    let trade_csv_file = csv_headers + "\n";
+
+    // loop over all items and values and add to trade_csv_file with a "," in between values.
+    // add "\n" between items
+    trade_history_data.forEach(item => {
+        keys.forEach((key, index) => {
+            if( (index > 0) && (index < keys.length-1) ) {
+                trade_csv_file += ",";
+            }
+            trade_csv_file += item[key];
+        });
+        trade_csv_file += "\n";
+    });
+
+    // transform string to URI data: utf-8 encoding
+    // time,coin_name,amount,tradetype -> time%2Ccoin_name%2Camount%2Ctradetype%0A
+    trade_csv_file = encodeURIComponent(trade_csv_file);
     
-//     let coins_chart_data_object = {};
-//     // get historic charts of all unique coins (91 days)
-//     var get_chart_data = new Promise((resolve, reject) => {
-//         unique_coins.forEach((coin) => {
-//             fetch("https://api.coingecko.com/api/v3/coins/" + coin + "/market_chart?vs_currency=usd&days=91")
-//             .then(response => response.json())
-//             .then(coin_chart_data => { //object
-//                 // console.log(coin_chart_data.prices[0])
-//                 coins_chart_data_object[coin] = coin_chart_data;          
-                
-                
-//                 // console.log(coins_chart_data_object);
-//                 // console.log(coins_chart_data_object[Object.keys(coins_chart_data_object)[0]].prices[0]);
+    // create element to download csv data
+    let download_link = document.createElement('a');
+    download_link.innerHTML = "Download trade data";
+    download_link.setAttribute('href', 'data:text/csv;charset=utf-8,'+ trade_csv_file);
+    download_link.setAttribute('download', 'trade_data.csv');
 
-//                 // console.log(unique_coins.length);
-//                 // console.log(Object.keys(coins_chart_data_object).length);
-//                 if (unique_coins.length == Object.keys(coins_chart_data_object).length) 
-//                 {
-//                     resolve();
-//                 }
-//             });
-//         });
-//     }); 
+    document.getElementById("settings_download_data").append(download_link);
     
-//     // https://stackoverflow.com/questions/38406920/best-way-to-wait-for-foreach-to-complete
-//     // wait for the forEach loop to finish
-//     get_chart_data.then(() => {
-        
-//         // create coin variables with holding amounts set to 0
-//         for (let i = 0; i < unique_coins.length; i += 1 ){
-//             window[unique_coins[i]] = 0;
-//             console.log(unique_coins[i])
-//         }
-        
-//         console.log(trade_history_data)
-        
-
-        // // loop over every trade in trade_history_data, calculate total portfolio value at timestamp and create dictionary with time/portfolio total value pair
-        // let portfolio_total_value_timestamp_array = [];
-        // trade_history_data.forEach(function (trade) {
-        //     let total_portolio_value_timestamp = 0;   
-        //     unique_coins.forEach(function (coin) {
-        //         if (coin == trade.coin_name) {
-        //             // check if buy or sell order
-        //             if (trade.tradetype == "BUY") {
-        //                 window[coin] += trade.amount;
-        //                 // console.log("BUY " + coin + " " + window[coin])
-        //             }
-        //             else {
-        //                 window[coin] -= trade.amount;
-        //                 // console.log("SELL " + coin + " " + window[coin])
-        //             }
-        //         }
-        //     })
-
-        //     // find coin price at timestamp of the trade: trade.time
-            
-        //     // create array with all timestamps of coin historic chart
-        //     trade_history_timestamps_array = [];
-        //     (coins_chart_data_object[Object.keys(coins_chart_data_object)[0]].prices).forEach((price) => {
-        //         trade_history_timestamps_array.push(price[0])
-        //     })
-
-            // find closest coin historic chart timestamp
-            // // source: https://www.gavsblog.com/blog/find-closest-number-in-array-javascript#:~:text=Find%20the%20closest%20value%20in%20array%20using%20reduce()&text=The%20easiest%20way%20to%20do,()%2C%20so%20lets%20use%20that.&text=With%20this%20function%20we%20check,and%20then%20return%20the%20winner.
-            // timestamp = trade.time;
-            // const closest_timestamp = trade_history_timestamps_array.reduce((a, b) => {
-            //     return Math.abs(b - timestamp) < Math.abs(a - timestamp) ? b : a;
-            // });
-            // // console.log("Closest: " + closest_timestamp)
-
-            // index_closest_timestamp = trade_history_timestamps_array.indexOf(closest_timestamp);
-            // // console.log("Index of closest: " + index_closest_timestamp);
-
-            
-            // // get price of every coin at closest timestamp and add to object
-            // // get coinprice of coin at timestamp
-            // unique_coins.forEach(function (coin) {
-            //     coin_price_at_timestamp = coins_chart_data_object[coin].prices[index_closest_timestamp][1]
-                
-            //     // multiple coin holdings by historic price and add to historic portfolio data
-            //     console.log(coin)
-            //     console.log(window[coin])
-            //     console.log("$ " + coin_price_at_timestamp)
-
-            //     total_portolio_value_timestamp += (coin_price_at_timestamp * window[coin])
-            //     console.log(total_portolio_value_timestamp)
-
-
-            //     // create dictionaries with time/value pairs and add to portfolio/timestamp array
-        
-            //         let price_data_dict = {};
-            //         price_data_dict["time"] = closest_timestamp;
-            //         price_data_dict["value"] = total_portolio_value_timestamp;
-            //         portfolio_total_value_timestamp_array.push(price_data_dict);
-
-        //    })
-        //   console.log(portfolio_total_value_timestamp_array);
-
-//           document.getElementById("portfolio_chart").innerHTML = "";
-//           // Morris Chart explanation source:
-//           // https://morrisjs.github.io/morris.js/
-//           new Morris.Area({
-//           // cariables of the chart
-//           element: "portfolio_chart",
-//           data: portfolio_total_value_timestamp_array,
-//           xkey: "time",
-//           ykeys: ["value"],
-//           labels: ["$"],
-//           hideHover: "auto",
-//           pointSize: "0",
-//           lineWidth: "2"
-//           });
-      
-           
-            
-//         })
-//             // console.log(coins_chart_data_object[Object.keys(coins_chart_data_object)[0]].prices[0]);
-//             // console.log(coins_chart_data_object.vechain);
-//             //console.log(coins_chart_data_object[Object.keys(coins_chart_data_object)[0]].prices);
-           
-
-
-//         // unique_coins.forEach((coin_name) => {
-//         //     console.log(window[coin_name]);
-//         // })
-//           //  get price of coin on trade.time
-
-//     });
-            
-
-//     // coins_chart_data_array.forEach(function (coin_name) {
-//     //     console.log(coin_name["bitcoin"])
-// };
-    
-
-
-
-
-
-
-
-
-//////// coins_chart_data_array
-// 0: {uniswap: {…}}
-// 1: {vechain: {…}}
-// 2: {bitcoin: {…}}
-// 3: {ethereum: {…}}
-
-// uniswap:
-// market_caps: (83) [Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2)]
-// prices: (83) [Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2)]
-// total_volumes: (83) [Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2), Array(2)]
-
-// prices: Array(83)
-// 0: (2) [1600300800000, 3.443832391414463]
-// 1: (2) [1600387200000, 3.443832391414463]
-// 2: (2) [1600473600000, 7.097694014200204]
-// 3: (2) [1600560000000, 5.702060553834949]
-// 4: (2) [1600646400000, 5.2565793825170735]
-// 5: (2) [1600732800000, 4.294819485815088]
-   
-//////// trade_history_data
-// 0: {time: 1607261047.87063, coin_name: "bitcoin", amount: 10, tradetype: "BUY"}
-// 1: {time: 1607261058.929534, coin_name: "uniswap", amount: 100, tradetype: "BUY"}
-// 2: {time: 1607261132.143845, coin_name: "uniswap", amount: 100, tradetype: "BUY"}
-// 3: {time: 1607261165.148184, coin_name: "uniswap", amount: 100, tradetype: "BUY"}
-// 4: {time: 1607261175.311559, coin_name: "ethereum", amount: 110, tradetype: "BUY"}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/////////////////////////////////////////////////////////////////////////
-
-  // // creates list with dicts: coins and holding amount (set to 0)
-        // let coin_holding_dict = [];
-        // unique_coins.forEach((coin) => {
-        //     coin_amount = {[coin]: 0};
-        //     coin_holding_dict.push(coin_amount)
-        // });
-        // console.log(coin_holding_dict);
-
-
-
-
-    // // loop over every trade in trade_history_data, calculate total portfolio value add that moment and create dictionary with time/total value pair
-    // trade_history_data.forEach(function (trade) {
-    //     let coin_total_value_time_dict = [];
-
-    //     unique_coins.forEach(function (coin) {
-    //         if (coin == trade.coin_name) {
-    //             // check if buy or sell order
-    //             if (trade.tradetype == "BUY") {
-    //                 window[coin] += trade.amount;
-    //                 console.log("BUY " + coin + " " + window[coin])
-    //             }
-    //             else {
-    //                 window[coin] -= trade.amount;
-    //                 console.log("SELL " + coin + " " + window[coin])
-    //             }
-    //         }
-    //     })
-    // })
-        // get price of coin on trade.time
-        
-
-    // });
-    // console.log("TESTESTETs");
-    // console.log(coins_chart_data_array);
- 
-/////////////////////////////////////////////////////////////////////////////
-    // console.log(coins_chart_data_array);
-    // coins_chart_data_array.forEach(function (trade_history) {
-    //     console.log(trade_history.prices)
-    // });
-
-    // chart_data.prices.forEach(function (price_data) {
-    //     let price_data_dict = {};
-    //     price_data_dict["time"] = price_data[0];
-    //     price_data_dict["value"] = price_data[1];
-    //     price_data_array.push(price_data_dict);
-    // });
-
-
-        
-         // Create list with portfolio coins to use as API input
-        //  let portfolio_coins_list = []
-        //  portfolio_coins.forEach(function (coin_name) {
-        //      portfolio_coins_list.push(coin_name.innerHTML);
-        //  });
-        //  portfolio_coins_string = portfolio_coins_list.join('%2C')
- 
-        //  fetch("https://api.coingecko.com/api/v3/simple/price?ids=" + portfolio_coins_string + "&vs_currencies=usd")
-        //  .then(response => response.json())
-        //  .then(data => {
- 
-        //      // API doesn't return values in the same order as the given list; add the right coin value at the right line in portfolio overview
-        //      document.querySelector(".portfolio_price_list").innerHTML = "";
-        //      portfolio_coins.forEach(function (coin_name) {
-        //          for (const [key, value] of Object.entries(data)) {
-        //              if (coin_name.innerHTML == key) {
-        //                  let li_coin_price  = document.createElement('li');
-        //                  li_coin_price.innerHTML = value.usd;
-        //                  li_coin_price.setAttribute("class", "portfolio_coin_price");
-        //                  document.querySelector('.portfolio_price_list').append(li_coin_price);
-        //              }
-        //          }
-        //      });  
-
-          // creates list with dicts: coins and holding amount (set to 0)
-    // let coin_holding_dict = [];
-    // unique_coins.forEach(function (coin) {
-    //     coin_amount = {[coin]: 0};
-    //     coin_holding_dict.push(coin_amount)
-    // });
-    // console.log(coin_holding_dict);
-
-
-
-
-    
-    // console.log(coin_holding_dict)
-
-
-
-
-
-
-
-
-    // var timestamp = trade_history_data[0].time; 
-    // var date = new Date(timestamp * 1000);
-    // var formattedDate = ('0' + date.getDate()).slice(-2) + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + date.getFullYear();
-    
-    
-    // console.log(formattedDate);
-
-    
-    // for (i = 0; i < 5; i++) {
-
-    
+}
