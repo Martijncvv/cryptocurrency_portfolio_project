@@ -19,6 +19,7 @@
 
         
         <h2>Trending</h2>
+        <ul></ul>
 
 <!-- PORTFOLIO COINS -->
         <h2>portfolio</h2>
@@ -110,7 +111,8 @@
         <div class="row">
             <!-- COIN CHART  -->
             <div class="col-sm-6 text-center">
-                <h2 id="coin_name_header"></h2>
+                <!-- <h2 id="coin_name_header"></h2> -->
+                <h2 id="coin_page_name">{{coin_page_name}}</h2>
                 <div id="coin_chart" style="height: 250px;">
                 <p>coin chart</p>
                 </div>
@@ -143,13 +145,14 @@
             <div class="col-6">
                 <h2>Social Media</h2>
                 <div class="row">
+                    <!-- TWITTER  -->
                     <div class="col-6">
                         <h3>Twitter</h3>
                         <div id="twitter_channel">
                             
                         </div>
                     </div>
-
+                    <!-- TELEGRAM  -->
                     <div class="col-6">
                         <h3>Telegram</h3>
                         <div id="telegram_channel" >
@@ -158,16 +161,15 @@
                     </div>
                 </div>
             </div>
-
+            <!-- GOOGLE TRENDS  -->
             <div class="col-6" >
                 <h2>Google trends</h2>
-                <div id="google_trends">
-                    
-                </div>
+               
             </div>
         </div>
     </div>
 </div>
+
 
 
 
@@ -252,15 +254,8 @@
 </div>  
 
 <!-- HIDDEN DATA FOR JS -->
-<p id="coin_page_name" style="visibility: hidden;">{{coin_page_name}}</p>
+<!-- <p id="coin_page_name" style="visibility: hidden;">{{coin_page_name}}</p> -->
 
-<div>
-    {% for coin in user_portfolio %}
-    <p id="{{coin.coin_name}}" style="visibility: hidden;">
-        {{ coin.note }}
-    </p>
-    {%  endfor %}
-</div>
 
 
 <!-- HIDDEN DATA FOR JS -->
@@ -317,7 +312,8 @@
 <!-- GRAPH CLOSE  -->
 
 <script> 
-    var trade_history_data = JSON.parse("{{data_JSON|escapejs}}"); 
+    var trade_history_data = JSON.parse("{{trade_data_JSON|escapejs}}"); 
+    var notes_data = JSON.parse("{{notes_data_JSON|escapejs}}"); 
 </script>
 
 

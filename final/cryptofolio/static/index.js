@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // location.reload();
 });
 
+
 function coin_info(coin) {
     // GENERAL INFO FIELD
     // get value from searchbar if the searchbar was used
@@ -119,7 +120,7 @@ function coin_info(coin) {
 
         // Add data to General Info elements
         document.title = data.name;
-        document.getElementById("coin_name_header").innerHTML = data.name;
+        document.getElementById("coin_page_name").innerHTML = data.id;
         document.getElementById("coin_info_name").innerHTML = data.id;
         document.getElementById("coin_info_ticker").innerHTML = data.symbol;
         document.getElementById("coin_info_price").innerHTML = data.market_data.current_price.usd;
@@ -129,12 +130,7 @@ function coin_info(coin) {
         document.getElementById("coin_info_description").innerHTML = data.description.en;
         
         // Add note to note field if note exists
-        let check = document.getElementById(data.id)
-        if (check){ 
-            let coin_note = document.getElementById(data.id).innerHTML;
-            document.getElementById("coin_note_field").innerHTML = coin_note;
-        }
-      
+        document.getElementById("coin_note_field").innerHTML = notes_data[data.id];
 
         // Get current coin prices
         // Add prices to portfolio overview table
@@ -174,13 +170,14 @@ function coin_info(coin) {
         // Add Twitter Timeline
         twitter_feed(data.links.twitter_screen_name)
     });
-    // Draw coin chart
+    // draw coin chart
     coin_chart(coin.toLowerCase());
     
-
-    // create portfolio history chart
+    // draw portfolio history chart
     portfolio_history_chart();
 
+    // display trending coins
+    trending_coins();
     
 }
 
@@ -272,6 +269,22 @@ function total_coin_values() {
     });
 }
 
+// function trending_coins() {
+//     fetch("https://api.coingecko.com/api/v3/search/trending")
+//     .then(response => response.json())
+//     .then(trending_data => { 
+//         console.log(trending_data)
+
+//         // trending_data.forEach((coin) => {
+//         //     console.log(coin)
+//         // })
+//     });
+
+// }
+
+
+
+
 function coin_chart(coin_name) {
     // get chart data
     fetch("https://api.coingecko.com/api/v3/coins/" + coin_name + "/market_chart?vs_currency=usd&days=30")
@@ -279,8 +292,7 @@ function coin_chart(coin_name) {
         .then(chart_data => {
             // create an empty array to store the paired data
             price_data_array = [];
-            // console.log("chart_data")
-            // console.log(chart_data.prices)
+         
             // create dictionaries with pairs and add to array
             chart_data.prices.forEach(function (price_data) {
                 let price_data_dict = {};

@@ -162,7 +162,7 @@ def index(request):
             current_coin_holding = current_coin_holding - trade_sell_history["amount__sum"]
         user_holdings.append(current_coin_holding)
 
-    # gets trade history data to send to Javascript
+    # converts trade history data to JSON to send to Javascript
     trade_history_list = []
     for trade in trade_history:
 
@@ -177,22 +177,25 @@ def index(request):
             "tradetype": trade.tradetype
         }
         trade_history_list.append(trade_dict)
-    # create JSON variable to send data to Javascript
-    data_JSON = dumps(trade_history_list) 
+    # create JSON variable to send trade data to Javascript
+    trade_data_JSON = dumps(trade_history_list) 
+
+
+    # converts notes data to JSON to send to Javascript
+    note_dict = {}
+    for coin in user_portfolio:
+        note_dict[coin.coin_name] = coin.note
+    # create JSON variable to send note data to Javascript
+    notes_data_JSON = dumps(note_dict) 
     
     return render(request, "cryptofolio/index.html", {
         "trade_history": trade_history,
         "user_portfolio": user_portfolio,
         "coin_page_name": coin_page_name.strip(),
         "user_holdings_amount": user_holdings,
-        "data_JSON": data_JSON
+        "trade_data_JSON": trade_data_JSON,
+        "notes_data_JSON": notes_data_JSON
     })
 
-
-    # { year: '2008', value: 20 },
-    # { year: '2009', value: 10 },
-    # { year: '2010', value: 5 },
-    # { year: '2011', value: 5 },
-    # { year: '2012', value: 20 }
 
     # https://www.geeksforgeeks.org/how-to-pass-data-to-javascript-in-django-framework/

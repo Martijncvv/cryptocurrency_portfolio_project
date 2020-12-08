@@ -57,7 +57,10 @@ Project start
 
 ### Tuesday 07-12-2020
 - The portfolio graph was based on trade timestamps. Decided to change it to base the x-axis on timestamps of the past 90 days to give better insights in the portfolio.
+- Fixed bug in portfolio history graph; API data was ms, DB data was s
+- Improved way to pass Django DB data to JS; used JSON data dump 
 
+- Seems I'm not able to embed Google Trends chart on website; keeps loading
 
 
 
