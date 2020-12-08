@@ -55,6 +55,12 @@ Project start
 - Had problems with calculating charting data due to problems with asynchronous functions and was trying to figure out a way how to display historical portfolio data in a graph.
 - Finished basic set-up of portfolio graph
 
+### Tuesday 07-12-2020
+- The portfolio graph was based on trade timestamps. Decided to change it to base the x-axis on timestamps of the past 90 days to give better insights in the portfolio.
+
+
+
+
 
 In your process book, you chronicle your big decisions. When faced with a decision during the day, document it like this:
 
