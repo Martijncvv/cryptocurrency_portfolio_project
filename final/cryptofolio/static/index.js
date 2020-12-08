@@ -168,14 +168,31 @@ function coin_info(coin) {
                 } 
             });  
         })
+        
+        ///// coin_chart(coin_name, time_frame)
+        // create coin chart timeframe buttons
+        const timeframes = [1, 3, 7, 30];
+        timeframes.forEach((tf) => {
+            let coin_chart_timeframe_button = document.createElement('button');
+            coin_chart_timeframe_button.innerHTML = tf;
+            coin_chart_timeframe_button.setAttribute("id", "coin_chart_timeframe_button");
+            coin_chart_timeframe_button.setAttribute("class", "btn btn-sm btn-primary");
+            
+            coin_chart_timeframe_button.setAttribute("onClick", "coin_chart('"+ data.id + "'" +","+"'"+ tf +"')");
+            document.getElementById("coin_chart_timeframe_buttons").append(coin_chart_timeframe_button);
+        });
         // Add Twitter Timeline
         twitter_feed(data.links.twitter_screen_name)
+
+        // trending_coin_button.setAttribute("onClick", "coin_info('"+coin.item.id+"')");
     });
     // draw coin chart
-    coin_chart(coin.toLowerCase());
+    coin_chart(coin.toLowerCase(), 30);
     
     // display trending coins
     trending_coins();
+
+    
     
 }
 
@@ -288,6 +305,7 @@ function trending_coins() {
 
 }
 
+
 function random_coin() {
     fetch("https://api.coingecko.com/api/v3/coins/list")
     .then(response => response.json())
@@ -297,9 +315,18 @@ function random_coin() {
     })
 }
 
-function coin_chart(coin_name) {
+
+function coin_chart(coin_name, time_frame) {
+    // set coin value chart timeframe header
+    if (time_frame == 1) {
+        document.getElementById("coin_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " day"
+    }
+    else {
+        document.getElementById("coin_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " days"
+    }
+
     // get chart data
-    fetch("https://api.coingecko.com/api/v3/coins/" + coin_name + "/market_chart?vs_currency=usd&days=30")
+    fetch("https://api.coingecko.com/api/v3/coins/" + coin_name + "/market_chart?vs_currency=usd&days=" + time_frame)
         .then(response => response.json())
         .then(chart_data => {
             // create an empty array to store the paired data
@@ -334,7 +361,7 @@ function coin_chart(coin_name) {
 }
 
 function portfolio_history_chart(time_frame) {
-    // set portfolio value chart header
+    // set portfolio value chart timeframe header
     if (time_frame == 1) {
         document.getElementById("portfolio_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " day"
     }
