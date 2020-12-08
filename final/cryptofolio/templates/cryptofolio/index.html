@@ -20,7 +20,7 @@
         
         <h2>Trending</h2>
 
-<!-- PORTFOLIO -->
+<!-- PORTFOLIO COINS -->
         <h2>portfolio</h2>
         <div class="row">
             <div class="col-3">
@@ -63,7 +63,7 @@
 <!-- NOTE  -->
         <div>
             <h2> Coin Note</h2> 
-           <p id="coin_note_field"> </p>   
+           <p id="coin_note_field"> None </p>   
 
             <form action="{% url 'index' %}" method="POST">
                 {% csrf_token %}
@@ -105,10 +105,12 @@
         </div>
     </div>
     
-<!-- CHART  -->
+
     <div class="col-9">
         <div class="row">
+            <!-- COIN CHART  -->
             <div class="col-sm-6 text-center">
+                <h2 id="coin_name_header"></h2>
                 <div id="coin_chart" style="height: 250px;">
                 <p>coin chart</p>
                 </div>
@@ -119,6 +121,7 @@
                 <div id="coin_image_div">
                     <img id="coin_image">
                 </div>
+                <!-- COIN DATA  -->
                 <h2>General info</h2> 
                 <button id="add_trade" class="btn btn-sm btn-outline-primary">Add trade</button>
 

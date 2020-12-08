@@ -117,11 +117,9 @@ function coin_info(coin) {
         // set coin logo to currently opened coin       
         document.getElementById("coin_image").setAttribute("src", data.image.small );
 
-
-       /// console.log(data)  // KANN WEG
-
         // Add data to General Info elements
         document.title = data.name;
+        document.getElementById("coin_name_header").innerHTML = data.name;
         document.getElementById("coin_info_name").innerHTML = data.id;
         document.getElementById("coin_info_ticker").innerHTML = data.symbol;
         document.getElementById("coin_info_price").innerHTML = data.market_data.current_price.usd;
@@ -131,7 +129,7 @@ function coin_info(coin) {
         document.getElementById("coin_info_description").innerHTML = data.description.en;
         
         // Add note to note field if note exists
-        let check = document.getElementById("data.id")
+        let check = document.getElementById(data.id)
         if (check){ 
             let coin_note = document.getElementById(data.id).innerHTML;
             document.getElementById("coin_note_field").innerHTML = coin_note;
@@ -143,8 +141,7 @@ function coin_info(coin) {
         document.querySelector(".portfolio_price_list").innerHTML = "";
         let portfolio_coins = document.querySelectorAll('.portfolio_coin');
 
-        // Add Twitter Timeline
-        twitter_feed(data.links.twitter_screen_name)
+        
 
         // Create list with portfolio coins to use as API input
         let portfolio_coins_list = []
@@ -156,7 +153,7 @@ function coin_info(coin) {
         fetch("https://api.coingecko.com/api/v3/simple/price?ids=" + portfolio_coins_string + "&vs_currencies=usd")
         .then(response => response.json())
         .then(data => {
-
+            let counter = 0;
             // API doesn't return values in the same order as the given list; add the right coin value at the right line in portfolio overview
             document.querySelector(".portfolio_price_list").innerHTML = "";
             portfolio_coins.forEach(function (coin_name) {
@@ -168,17 +165,23 @@ function coin_info(coin) {
                         document.querySelector('.portfolio_price_list').append(li_coin_price);
                     }
                 }
+                counter += 1;
+                if (portfolio_coins.length == counter) {
+                    total_coin_values()  
+                } 
             });  
-            total_coin_values()  
         })
-        
+        // Add Twitter Timeline
+        twitter_feed(data.links.twitter_screen_name)
     });
     // Draw coin chart
     coin_chart(coin.toLowerCase());
-
+    
 
     // create portfolio history chart
     portfolio_history_chart();
+
+    
 }
 
 function login() {
@@ -327,8 +330,7 @@ function portfolio_history_chart() {
             fetch("https://api.coingecko.com/api/v3/coins/" + coin + "/market_chart?vs_currency=usd&days=3")
             .then(response => response.json())
             .then(coin_chart_data => { //object
-                coins_chart_data_object[coin] = coin_chart_data;   
-                console.log(coin_chart_data)       
+                coins_chart_data_object[coin] = coin_chart_data;         
                 
                 if (unique_coins.length == Object.keys(coins_chart_data_object).length) 
                 {
@@ -345,12 +347,11 @@ function portfolio_history_chart() {
         (coins_chart_data_object[Object.keys(coins_chart_data_object)[0]].prices).forEach((timestamp) => {
             chart_timestamp_array.push(timestamp[0]);
         })
-        // console.log(chart_timestamp_array);
 
         // loop over timestamps
         timestamp_index = 0;
         chart_timestamp_array.forEach((timestamp) => { 
-            timestamp_index += 1;
+            
             
             // create dictionary; key/value = coin/amount
             coin_holdings_dict = {};
@@ -371,9 +372,6 @@ function portfolio_history_chart() {
                     }
                 }
             });
-            console.log(timestamp_index)
-
-            console.log(coin_holdings_dict)
             // loop over every unique coin, get price at timestamp and add to portfolio
             portolio_value_at_timestamp = 0;
             for (let i = 0; i < unique_coins.length; i += 1 ) {
@@ -385,15 +383,16 @@ function portfolio_history_chart() {
                     coin_price_at_timestamp = coins_chart_data_object[unique_coins[i]].prices[timestamp_index][1];
                 
                     // add 'coin price at timestamp * the amount in portfolio at timestamp' to 'total portfolio value'
-                    portolio_value_at_timestamp += (coin_price_at_timestamp * coin_holdings_dict[unique_coins[i]])
-                   
-                    // create dictionaries with time/value pairs and add to portfolio/timestamp array
-                    let price_data_dict = {};
-                    price_data_dict["time"] = timestamp;
-                    price_data_dict["value"] = portolio_value_at_timestamp;
-                    portfolio_total_value_timestamp_array.push(price_data_dict);
+                    portolio_value_at_timestamp += (coin_price_at_timestamp * coin_holdings_dict[unique_coins[i]])  
                 }
             }
+             // create dictionaries with time/portfolio_value pairs and add to portfolio_timestamp array
+            let price_data_dict = {};
+            
+            price_data_dict["time"] = timestamp;
+            price_data_dict["value"] = portolio_value_at_timestamp;
+            portfolio_total_value_timestamp_array.push(price_data_dict);
+            timestamp_index += 1;
         });
 
         // draw graph on website
