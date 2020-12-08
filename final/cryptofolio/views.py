@@ -167,7 +167,7 @@ def index(request):
     for trade in trade_history:
 
         # convert values to the right type
-        unixtime = trade.time.timestamp()
+        unixtime = trade.time.timestamp() * 1000
         amount_float = float(trade.amount)
 
         trade_dict = {

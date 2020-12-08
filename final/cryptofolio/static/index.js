@@ -321,10 +321,14 @@ function portfolio_history_chart() {
     let coins_chart_data_object = {};
     var get_chart_data = new Promise((resolve, reject) => {
         unique_coins.forEach((coin) => {
-            fetch("https://api.coingecko.com/api/v3/coins/" + coin + "/market_chart?vs_currency=usd&days=91")
+            // Minutely data will be used for duration within 1 day, 
+            // Hourly data will be used for duration between 1 day and 90 days, 
+            // Daily data will be used for duration above 90 days.
+            fetch("https://api.coingecko.com/api/v3/coins/" + coin + "/market_chart?vs_currency=usd&days=3")
             .then(response => response.json())
             .then(coin_chart_data => { //object
-                coins_chart_data_object[coin] = coin_chart_data;          
+                coins_chart_data_object[coin] = coin_chart_data;   
+                console.log(coin_chart_data)       
                 
                 if (unique_coins.length == Object.keys(coins_chart_data_object).length) 
                 {
@@ -367,7 +371,9 @@ function portfolio_history_chart() {
                     }
                 }
             });
+            console.log(timestamp_index)
 
+            console.log(coin_holdings_dict)
             // loop over every unique coin, get price at timestamp and add to portfolio
             portolio_value_at_timestamp = 0;
             for (let i = 0; i < unique_coins.length; i += 1 ) {
