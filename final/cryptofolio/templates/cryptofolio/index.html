@@ -12,7 +12,7 @@
         <div>
             <form>
                 <input id="search_value" placeholder = "Coin name" type="text">
-                <input id="submit_search" type="submit" value="Search">
+                <input id="submit_search" type="submit" value="Search" class="btn btn-sm btn-primary">
             </form>
         </div>
 
@@ -110,61 +110,85 @@
     </div>
     
 
-    <div class="col-9">
+    <div class="col-9" style="border: 2px solid yellow ;">
         <div class="row">
             <!-- COIN CHART  -->
-            <div class="col-sm-6 text-center">
-                <h2 id="coin_page_name">{{coin_page_name}}</h2>
-                <h3 id="coin_chart_timeframe_header"></h3>
+            <div class="col-7 text-center" style="border: 2px solid rgb(4, 128, 10);">
+                <div id="coin_image_div">
+                    <img id="coin_image">
+                </div>
 
-                <div id="coin_chart" style="height: 250px;">
+                <h2 id="coin_page_name">{{coin_page_name}}</h2>
+                <h4 id="coin_chart_timeframe_header"></h4>
+
+                <div id="coin_chart">
                     <p>coin chart</p>
                 </div>
                 <div id="coin_chart_timeframe_buttons"></div>
             </div>
             
 
-            <div class="col-6">
-                <div id="coin_image_div">
-                    <img id="coin_image">
-                </div>
+            <div class="col-5" style="border: 2px solid hotpink;">
+                
                 <!-- COIN DATA  -->
-                <h2>General info</h2> 
-                <button id="add_trade" class="btn btn-sm btn-outline-primary">Add trade</button>
+                <span style="display: inline-block;">
+                    <h2>General info</h2> 
+                </span>
+                <span style="display: inline-block;">
+                    <button id="add_trade" class="btn btn-sm btn-primary">Add trade</button>
+                </span>
+                    <!-- Delete / Add coin to portfolio  -->
+                    <span style="display: inline-block;">
+                    <form action="{% url 'index' %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-sm btn-primary" value="" id="portfolio_button" name="addportfolio">Add to portfolio</button>
+                    </form>
+                </span>
 
-                <form action="{% url 'index' %}" method="POST">
-                    {% csrf_token %}
-                    <button class="btn btn-sm btn-outline-primary" value="" id="portfolio_button" name="addportfolio">Add to portfolio</button>
-                </form>
-                <ul>
-                    <li id="coin_info_name"></li>
-                    <li id="coin_info_ticker"></li>
-                    <li id="coin_info_price"></li>
-                    <li id="coin_info_marketcap"></li>
-                    <li id="coin_info_atl"></li>
-                    <li id="coin_info_ath"></li>
-                    <li id="coin_info_description"></li>
-                </ul>
+
+                <div class="row">
+                    <div class="col-3">
+                        <ul id="coin_info_heads">
+                            <li>Name:</li>
+                            <li>Ticker:</li>
+                            <li>Price:</li>
+                            <li>Market cap:</li>
+                            <li>All-time high:</li>
+                            <li>All-time low:</li>
+                        </ul>
+                    </div>
+                    <div class="col-3">
+                        <ul>
+                            <li id="coin_info_name"></li>
+                            <li id="coin_info_ticker"></li>
+                            <li id="coin_info_price"></li>
+                            <li id="coin_info_marketcap"></li>
+                            <li id="coin_info_atl"></li>
+                            <li id="coin_info_ath"></li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <ul>
+                            <br> <br> <br> <br>
+                            <li id="coin_info_atl_date"></li>
+                            <li id="coin_info_ath_date"></li>
+                        </ul>
+                    </div>
+                    <div id="coin_description_box">
+                        <h4>Description</h4>
+                        <div id="coin_info_description" class="scrollbar scrollbar-primary"> 
+                        </div>
+                    </div>
+                    
+                    
+                </div>
             </div>
 <!-- SOCIALS  -->
             <div class="col-6">
                 <h2>Social Media</h2>
-                <div class="row">
-                    <!-- TWITTER  -->
-                    <div class="col-6">
-                        <h3>Twitter</h3>
-                        <div id="twitter_channel">
-                            
-                        </div>
-                    </div>
-                    <!-- TELEGRAM  -->
-                    <div class="col-6">
-                        <h3>Telegram</h3>
-                        <div id="telegram_channel" >
-                            
-                        </div>
-                    </div>
-                </div>
+                <!-- TWITTER  -->
+                <h3>Twitter</h3>
+                <div id="twitter_channel"> </div>
             </div>
             <!-- GOOGLE TRENDS  -->
             <div class="col-6" >

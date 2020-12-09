@@ -103,7 +103,7 @@ function coin_info(coin) {
         // if coin found in list, change "add to portfolio button"  
         if (coin_in_portfolio) {
             document.getElementById("portfolio_button").innerHTML = "Delete from portfolio";
-
+            document.getElementById("portfolio_button").setAttribute("class", "btn btn-sm btn-outline-primary");
         }
         else {
             document.getElementById("portfolio_button").innerHTML = "Add to portfolio";
@@ -125,10 +125,12 @@ function coin_info(coin) {
         document.getElementById("coin_page_name").innerHTML = data.id;
         document.getElementById("coin_info_name").innerHTML = data.id;
         document.getElementById("coin_info_ticker").innerHTML = data.symbol;
-        document.getElementById("coin_info_price").innerHTML = data.market_data.current_price.usd;
-        document.getElementById("coin_info_marketcap").innerHTML = data.market_data.market_cap.usd;
-        document.getElementById("coin_info_atl").innerHTML = data.market_data.atl.usd + data.market_data.atl_date.usd;
-        document.getElementById("coin_info_ath").innerHTML = data.market_data.ath.usd + data.market_data.ath_date.usd;
+        document.getElementById("coin_info_price").innerHTML = "$" + data.market_data.current_price.usd;
+        document.getElementById("coin_info_marketcap").innerHTML = "$" + data.market_data.market_cap.usd;
+        document.getElementById("coin_info_atl").innerHTML = "$" + data.market_data.atl.usd;  
+        document.getElementById("coin_info_ath").innerHTML = "$" + data.market_data.ath.usd;
+        document.getElementById("coin_info_atl_date").innerHTML = data.market_data.atl_date.usd.split('T')[0];
+        document.getElementById("coin_info_ath_date").innerHTML = data.market_data.ath_date.usd.split('T')[0];
         document.getElementById("coin_info_description").innerHTML = data.description.en;
         
         // Add note to note field if note exists
@@ -169,23 +171,11 @@ function coin_info(coin) {
             });  
         })
         
-        ///// coin_chart(coin_name, time_frame)
-        // create coin chart timeframe buttons
-        document.getElementById("coin_chart_timeframe_buttons").innerHTML = "";
-        const timeframes = [1, 3, 7, 30];
-        timeframes.forEach((tf) => {
-            let coin_chart_timeframe_button = document.createElement('button');
-            coin_chart_timeframe_button.innerHTML = tf;
-            coin_chart_timeframe_button.setAttribute("id", "coin_chart_timeframe_button");
-            coin_chart_timeframe_button.setAttribute("class", "btn btn-sm btn-primary");
-            
-            coin_chart_timeframe_button.setAttribute("onClick", "coin_chart('"+ data.id + "'" +","+"'"+ tf +"')");
-            document.getElementById("coin_chart_timeframe_buttons").append(coin_chart_timeframe_button);
-        });
+       
+
         // Add Twitter Timeline
         twitter_feed(data.links.twitter_screen_name)
 
-        // trending_coin_button.setAttribute("onClick", "coin_info('"+coin.item.id+"')");
     });
     // draw coin chart
     coin_chart(coin.toLowerCase(), 30);
@@ -193,8 +183,6 @@ function coin_info(coin) {
     // display trending coins
     trending_coins();
 
-    
-    
 }
 
 function login() {
@@ -231,34 +219,7 @@ function add_trade() {
     document.querySelector("#addtrade_field").style.display = "block";
 }
 
-function twitter_feed(twitter_handle) {
-    // Twitter widget script OPEN
-    window.twttr = (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0],
-          t = window.twttr || {};
-        if (d.getElementById(id)) return t;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://platform.twitter.com/widgets.js";
-        fjs.parentNode.insertBefore(js, fjs);
-      
-        t._e = [];
-        t.ready = function(f) {
-          t._e.push(f);
-        };
-        return t;
-    }(document, "script", "twitter-wjs"));
-    // Twitter script CLOSe
 
-    // add twitter timeline to HTML
-    twitter_channel = '<a class="twitter-timeline" href="https://twitter.com/' + twitter_handle + '?ref_src=twsrc%5Etfw">Tweets by ' + twitter_handle + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
-    document.getElementById("twitter_channel").innerHTML = twitter_channel;
-
-    // refresh widget to get new coin data
-    twttr.widgets.load(
-        document.getElementById("twitter_channel")
-    );
-}
 
 function total_coin_values() {
     document.querySelector(".portfolio_total_value_list").innerHTML = "";
@@ -354,11 +315,24 @@ function coin_chart(coin_name, time_frame) {
             labels: ["$"],
             hideHover: "auto",
             pointSize: "0",
-            lineWidth: "2",
-            resize: "true"
+            lineWidth: "0",
+            resize: "true",
+            redraw: "true"
             });
+        }); 
         
-        });   
+         // create coin chart timeframe buttons
+        document.getElementById("coin_chart_timeframe_buttons").innerHTML = "";
+        const timeframes = [1, 3, 7, 30, 365, "max"];
+        timeframes.forEach((tf) => {
+            let coin_chart_timeframe_button = document.createElement('button');
+            coin_chart_timeframe_button.innerHTML = tf;
+            coin_chart_timeframe_button.setAttribute("id", "coin_chart_timeframe_button");
+            coin_chart_timeframe_button.setAttribute("class", "btn btn-sm btn-primary");
+            
+            coin_chart_timeframe_button.setAttribute("onClick", "coin_chart('"+ coin_name + "'" +","+"'"+ tf +"')");
+            document.getElementById("coin_chart_timeframe_buttons").append(coin_chart_timeframe_button);
+        });
 }
 
 function portfolio_history_chart(time_frame) {
@@ -470,7 +444,7 @@ function portfolio_history_chart(time_frame) {
         labels: ["$"],
         hideHover: "always",
         pointSize: "0",
-        lineWidth: "2"
+        lineWidth: "0"
         });
     });
 }
@@ -512,3 +486,45 @@ function download_trade_data() {
     document.getElementById("settings_download_data").append(download_link);
     
 }
+
+
+function twitter_feed(twitter_handle) {
+    // TWITTER WIDGET SCRIPT OPEN
+    window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+          t = window.twttr || {};
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      
+        t._e = [];
+        t.ready = function(f) {
+          t._e.push(f);
+        };
+        return t;
+    }(document, "script", "twitter-wjs"));
+   
+
+    // add twitter timeline to HTML
+    twitter_channel = '<a class="twitter-timeline" href="https://twitter.com/' + twitter_handle + '?ref_src=twsrc%5Etfw">Tweets by ' + twitter_handle + '</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>'
+    document.getElementById("twitter_channel").innerHTML = twitter_channel;
+
+    // refresh widget to get new coin data
+    twttr.ready(
+        function (twttr) {
+            twttr.events.bind(
+                'loaded',
+                function (event) {
+                  event.widgets.forEach(function () {
+                  });
+                    twttr.widgets.load(
+                        document.getElementById("twitter_channel")
+                    );
+                }
+              );
+        }
+      );
+}
+ // TWITTER WIDGET SCRIPT CLOSE
