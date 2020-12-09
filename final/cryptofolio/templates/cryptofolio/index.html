@@ -22,12 +22,13 @@
         <div id="trending_coins"> </div>
 
 <!-- PORTFOLIO COINS -->
-        <h2>portfolio</h2>
+        <h2>Portfolio</h2>
         <div class="row">
             <div class="col-3">
+                <p id="portfolio_overview_table_header">Name</p>
                 {% for coin in user_portfolio %}
                 <div>
-                    <button class="portfolio_coin" id="portfolio_overview_button" onClick="coin_info('{{coin.coin_name}}')" >{{ coin.coin_name }}</button>
+                    <button class="portfolio_coin" id="portfolio_overview_coin_button" onClick="coin_info('{{coin.coin_name}}')" >{{ coin.coin_name }}</button>
                 </div>
                     
                 {%  endfor %}
@@ -35,6 +36,7 @@
 
             <div class="col-3">
                 <ul>
+                    <li id="portfolio_overview_table_header">Amount</li>
                     {% for coin in user_holdings_amount %}
                     <li class="portfolio_coin_amount">
                         {{ coin }}
@@ -44,10 +46,12 @@
             </div>
             
             <div class="col-3">
+                <p id="portfolio_overview_table_header">Value</p>
                 <ul class="portfolio_price_list"> </ul>
             </div>
 
             <div class="col-3">
+                <p id="portfolio_overview_table_header">Total value</p>
                 <ul class="portfolio_total_value_list"> </ul>
             </div>
         </div>
@@ -112,7 +116,7 @@
 
     <div class="col-9" style="border: 2px solid yellow ;">
         <div class="row">
-            <!-- COIN CHART  -->
+<!-- COIN CHART  -->
             <div class="col-7 text-center" style="border: 2px solid rgb(4, 128, 10);">
                 <div id="coin_image_div">
                     <img id="coin_image">
@@ -130,7 +134,7 @@
 
             <div class="col-5" style="border: 2px solid hotpink;">
                 
-                <!-- COIN DATA  -->
+<!-- COIN DATA  -->
                 <span style="display: inline-block;">
                     <h2>General info</h2> 
                 </span>
@@ -145,9 +149,9 @@
                     </form>
                 </span>
 
-
+ <!-- GENERAL INFO  -->
                 <div class="row">
-                    <div class="col-3">
+                    <div class="col-4">
                         <ul id="coin_info_heads">
                             <li>Name:</li>
                             <li>Ticker:</li>
@@ -174,27 +178,25 @@
                             <li id="coin_info_ath_date"></li>
                         </ul>
                     </div>
-                    <div id="coin_description_box">
-                        <h4>Description</h4>
-                        <div id="coin_info_description" class="scrollbar scrollbar-primary"> 
-                        </div>
+                </div>
+                <div class="row" id="coin_description_box">
+                    <h4>Description</h4>
+                    <div id="coin_info_description" class="scrollbar scrollbar-primary"> 
                     </div>
-                    
-                    
                 </div>
             </div>
 <!-- SOCIALS  -->
-            <div class="col-6">
+            <div class="col-6 socials_block" style="border: 2px solid red;" >
                 <h2>Social Media</h2>
-                <!-- TWITTER  -->
                 <h3>Twitter</h3>
                 <div id="twitter_channel"> </div>
             </div>
             <!-- GOOGLE TRENDS  -->
-            <div class="col-6" >
+            <div class="col socials_block">
                 <h2>Google trends</h2>
                
             </div>
+            
         </div>
     </div>
 </div>

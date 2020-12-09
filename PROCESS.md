@@ -69,6 +69,8 @@ Project start
 - Added portfolio value chart timeframe options
 - Added coin value chart timeframe options
 
+### Wednesday 07-12-2020
+- Added timeframes; 365 days and max timeframe
 
 In your process book, you chronicle your big decisions. When faced with a decision during the day, document it like this:
 

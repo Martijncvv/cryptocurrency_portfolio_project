@@ -69,6 +69,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // draw portfolio history chart
     portfolio_history_chart(7);
 
+    // display trending coins
+    trending_coins();
+
     // load all coin info
     coin_page_name = document.getElementById('coin_page_name').innerHTML;
     coin_info(coin_page_name);
@@ -76,7 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function coin_info(coin) {
-    // GENERAL INFO FIELD
     // get value from searchbar if the searchbar was used
     let coin_name_search = document.querySelector('#search_value');
     if (coin_name_search.value !== ""){
@@ -102,12 +104,13 @@ function coin_info(coin) {
         });
         // if coin found in list, change "add to portfolio button"  
         if (coin_in_portfolio) {
-            document.getElementById("portfolio_button").innerHTML = "Delete from portfolio";
+            document.getElementById("portfolio_button").innerHTML = "Remove";
             document.getElementById("portfolio_button").setAttribute("class", "btn btn-sm btn-outline-primary");
         }
         else {
             document.getElementById("portfolio_button").innerHTML = "Add to portfolio";
         }
+
         // set 'add portfolio' button value to currently opened coin
         document.getElementById("portfolio_button").setAttribute("value", data.id);
         // set 'add_note_button' value attribute to currently opened coin
@@ -120,17 +123,19 @@ function coin_info(coin) {
         // set coin logo to currently opened coin       
         document.getElementById("coin_image").setAttribute("src", data.image.small );
 
+      
+
         // Add data to General Info elements
         document.title = data.name;
         document.getElementById("coin_page_name").innerHTML = data.id;
         document.getElementById("coin_info_name").innerHTML = data.id;
         document.getElementById("coin_info_ticker").innerHTML = data.symbol;
-        document.getElementById("coin_info_price").innerHTML = "$" + data.market_data.current_price.usd;
-        document.getElementById("coin_info_marketcap").innerHTML = "$" + data.market_data.market_cap.usd;
-        document.getElementById("coin_info_atl").innerHTML = "$" + data.market_data.atl.usd;  
-        document.getElementById("coin_info_ath").innerHTML = "$" + data.market_data.ath.usd;
-        document.getElementById("coin_info_atl_date").innerHTML = data.market_data.atl_date.usd.split('T')[0];
-        document.getElementById("coin_info_ath_date").innerHTML = data.market_data.ath_date.usd.split('T')[0];
+        document.getElementById("coin_info_price").innerHTML = "$" + data.market_data.current_price.usd.toLocaleString();
+        document.getElementById("coin_info_marketcap").innerHTML = "$" + data.market_data.market_cap.usd.toLocaleString();
+        document.getElementById("coin_info_atl").innerHTML = "$" + data.market_data.atl.usd.toLocaleString();  
+        document.getElementById("coin_info_ath").innerHTML = "$" + data.market_data.ath.usd.toLocaleString();
+        document.getElementById("coin_info_atl_date").innerHTML = "(" + data.market_data.atl_date.usd.split('T')[0] + ")";
+        document.getElementById("coin_info_ath_date").innerHTML = "(" + data.market_data.ath_date.usd.split('T')[0] + ")";
         document.getElementById("coin_info_description").innerHTML = data.description.en;
         
         // Add note to note field if note exists
@@ -171,17 +176,12 @@ function coin_info(coin) {
             });  
         })
         
-       
-
         // Add Twitter Timeline
         twitter_feed(data.links.twitter_screen_name)
 
     });
     // draw coin chart
     coin_chart(coin.toLowerCase(), 30);
-    
-    // display trending coins
-    trending_coins();
 
 }
 
@@ -258,13 +258,12 @@ function trending_coins() {
         trending_data.coins.forEach((coin) => {
             let trending_coin_button = document.createElement('button');
             trending_coin_button.innerHTML = coin.item.id;
-            trending_coin_button.setAttribute("id", "trending_coin_button");
+            trending_coin_button.setAttribute("class", "btn btn-sm btn-primary trending_coin_button");
            
             trending_coin_button.setAttribute("onClick", "coin_info('"+coin.item.id+"')");
             document.getElementById("trending_coins").append(trending_coin_button);
         })
     });
-
 }
 
 
@@ -282,6 +281,12 @@ function coin_chart(coin_name, time_frame) {
     // set coin value chart timeframe header
     if (time_frame == 1) {
         document.getElementById("coin_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " day"
+    }
+    else if (time_frame == 365) {
+        document.getElementById("coin_chart_timeframe_header").innerHTML = "Timeframe: 1 year";
+    }
+    else if (time_frame == "max") {
+        document.getElementById("coin_chart_timeframe_header").innerHTML = "Timeframe: max available days";
     }
     else {
         document.getElementById("coin_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " days"
@@ -327,21 +332,24 @@ function coin_chart(coin_name, time_frame) {
         timeframes.forEach((tf) => {
             let coin_chart_timeframe_button = document.createElement('button');
             coin_chart_timeframe_button.innerHTML = tf;
-            coin_chart_timeframe_button.setAttribute("id", "coin_chart_timeframe_button");
-            coin_chart_timeframe_button.setAttribute("class", "btn btn-sm btn-primary");
+            coin_chart_timeframe_button.setAttribute("id", "coin_chart_timeframe_button_" + tf);
+            coin_chart_timeframe_button.setAttribute("class", "btn btn-primary coin_chart_timeframe_button");
             
             coin_chart_timeframe_button.setAttribute("onClick", "coin_chart('"+ coin_name + "'" +","+"'"+ tf +"')");
             document.getElementById("coin_chart_timeframe_buttons").append(coin_chart_timeframe_button);
         });
+        // change active button design
+        document.getElementById("coin_chart_timeframe_button_" + time_frame).setAttribute("class", "btn btn-primary coin_chart_timeframe_button active");
+
 }
 
 function portfolio_history_chart(time_frame) {
     // set portfolio value chart timeframe header
     if (time_frame == 1) {
-        document.getElementById("portfolio_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " day"
+        document.getElementById("portfolio_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " day";
     }
     else {
-        document.getElementById("portfolio_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " days"
+        document.getElementById("portfolio_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " days";
     }
     
     
@@ -360,9 +368,6 @@ function portfolio_history_chart(time_frame) {
     let coins_chart_data_object = {};
     var get_chart_data = new Promise((resolve, reject) => {
         unique_coins.forEach((coin) => {
-            // Minutely data will be used for duration within 1 day, 
-            // Hourly data will be used for duration between 1 day and 90 days, 
-            // Daily data will be used for duration above 90 days.
             fetch("https://api.coingecko.com/api/v3/coins/" + coin + "/market_chart?vs_currency=usd&days=" + time_frame)
             .then(response => response.json())
             .then(coin_chart_data => { //object
@@ -451,6 +456,7 @@ function portfolio_history_chart(time_frame) {
 
 
 ///////////////////
+// Code based on:
 // https://www.codevoila.com/post/30/export-json-data-to-downloadable-file-using-javascript
 function download_trade_data() {
 
@@ -484,9 +490,8 @@ function download_trade_data() {
     download_link.setAttribute('download', 'trade_data.csv');
 
     document.getElementById("settings_download_data").append(download_link);
-    
 }
-
+//////////////////
 
 function twitter_feed(twitter_handle) {
     // TWITTER WIDGET SCRIPT OPEN
