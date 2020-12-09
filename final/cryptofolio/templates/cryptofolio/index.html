@@ -7,8 +7,11 @@
 
 {% block body %}
 
+<!-- SEARCH  -->
+
 <div class="row">
-    <div class="col-3">
+    <div class="col-3" style="border: 1px solid red;">
+        <h2>Search</h2>
         <div>
             <form>
                 <input id="search_value" placeholder = "Coin name" type="text">
@@ -16,27 +19,25 @@
             </form>
         </div>
 
-
 <!-- TRENDING  -->
         <h2>Trending</h2>
         <div id="trending_coins"> </div>
 
 <!-- PORTFOLIO COINS -->
         <h2>Portfolio</h2>
-        <div class="row">
+        <div class="row portfolio_table" style="border: 2px solid blue;">
             <div class="col-3">
-                <p id="portfolio_overview_table_header">Name</p>
+                <p id="portfolio_overview_table_header"> Name</p>
                 {% for coin in user_portfolio %}
                 <div>
                     <button class="portfolio_coin" id="portfolio_overview_coin_button" onClick="coin_info('{{coin.coin_name}}')" >{{ coin.coin_name }}</button>
                 </div>
-                    
                 {%  endfor %}
             </div>
 
             <div class="col-3">
-                <ul>
-                    <li id="portfolio_overview_table_header">Amount</li>
+                <ul class="portfolio_coin_amount_list">
+                    <p id="portfolio_overview_table_header">Amount</p>
                     {% for coin in user_holdings_amount %}
                     <li class="portfolio_coin_amount">
                         {{ coin }}
@@ -46,45 +47,48 @@
             </div>
             
             <div class="col-3">
-                <p id="portfolio_overview_table_header">Value</p>
+                <p id="portfolio_overview_table_header">Value $</p>
                 <ul class="portfolio_price_list"> </ul>
             </div>
 
             <div class="col-3">
-                <p id="portfolio_overview_table_header">Total value</p>
+                <p id="portfolio_overview_table_header">Total $</p>
                 <ul class="portfolio_total_value_list"> </ul>
             </div>
         </div>
 
 <!-- PORTFOLIO DATA / CHART -->
+            <h2>Portfolio Info</h2> 
+            <p id="total_portfolio_value">None</p> 
+            <p id="total_number_of_coins">None</p> 
+            <h3 id="portfolio_chart_timeframe_header"></h3>
+
+            <div id="portfolio_chart" style="height: 350px;"> </div>
+            
+            <div id="portfolio_chart_timeframe_buttons">
         
-        <h2>Portfolio Info</h2> 
-        <p id="total_portfolio_value">None</p> 
-        <h3 id="portfolio_chart_timeframe_header"></h3>
-        <div id="portfolio_chart" style="height: 400px;">
-        </div>
-        <button class="btn btn-sm btn-primary portfolio_chart_timeframe_button" id="portfolio_chart_timeframe_1" onClick="portfolio_history_chart(1)">1 days</button>
-        <button class="btn btn-sm btn-primary portfolio_chart_timeframe_button" id="portfolio_chart_timeframe_3" onClick="portfolio_history_chart(3)">3 days</button>
-        <button class="btn btn-sm btn-primary portfolio_chart_timeframe_button" id="portfolio_chart_timeframe_7" onClick="portfolio_history_chart(7)">7 days</button>
-        <button class="btn btn-sm btn-primary portfolio_chart_timeframe_button" id="portfolio_chart_timeframe_30" onClick="portfolio_history_chart(30)">30 days</button>
-        
+            </div>
+
+           
 <!-- NOTE  -->
         <div>
             <h2> Coin Note</h2> 
-           <p id="coin_note_field"> None </p>   
-
-            <form action="{% url 'index' %}" method="POST">
-                {% csrf_token %}
-                <input class="form-control" type="text" name="coin_note" placeholder="Write a note">
-                <button class="btn btn-sm btn-primary" value="" id="add_note_button" name="add_note_button">Add Note</button>
-                
-            </form>
-            <form action="{% url 'index' %}" method="POST">
-                {% csrf_token %}
-                <button class="btn btn-sm btn-primary" value="" id="delete_note_button" name="delete_note_button">Delete Note</button>
-            </form>
-
+            <p id="coin_note_field"> None </p>   
             
+            <span style="display: inline-block;">
+                <form action="{% url 'index' %}" method="POST">
+                    {% csrf_token %}
+                    <input class="form-control" type="text" name="coin_note" placeholder="Write a note">
+                    <br>
+                    <button class="btn btn-sm btn-primary" value="" id="add_note_button" name="add_note_button">Add Note</button>
+                </form>
+            </span>
+            <span style="display: inline-block;">
+                <form action="{% url 'index' %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-sm btn-primary" value="" id="delete_note_button" name="delete_note_button">Delete Note</button>
+                </form>
+            </span>
         </div>
 <!-- TRADE HISTORY  -->
         <h2>Trade history</h2>
@@ -186,7 +190,7 @@
                 </div>
             </div>
 <!-- SOCIALS  -->
-            <div class="col-6 socials_block" style="border: 2px solid red;" >
+            <div class="col-7 socials_block" style="border: 2px solid red;" >
                 <h2>Social Media</h2>
                 <h3>Twitter</h3>
                 <div id="twitter_channel"> </div>
@@ -292,7 +296,7 @@
     <input class="btn btn-primary close_field" type="submit" value="close">
 </div>  
 
-
+<div id="TESTTEST"></div>
 
 
 

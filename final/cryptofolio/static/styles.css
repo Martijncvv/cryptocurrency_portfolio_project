@@ -1,16 +1,22 @@
 body {
-  margin: 0 4%;
+  margin: 5px 3%;
   background-color: #e9e9e9fa; 
 }
 
-ul { 
+ul, li { 
   margin: 0;
   padding: 0; 
   list-style-type: none
 }
 
-.col-3{
-  padding: 0px;
+.col-3 {
+  margin: 0;
+  padding: 0;
+}
+
+.row {
+  margin: 0;
+  padding: 0;
 }
 
 
@@ -32,10 +38,9 @@ ul {
 
 
 /* LEFT SIDEBAR  */
-
-  /* trending  */
+   /* trending  */
   #trending_coins {
-    margin: auto
+    margin-bottom: 20px;
   }
   .trending_coin_button {
     margin: 2px;
@@ -53,33 +58,50 @@ ul {
 
   /* portfolio  */
   #portfolio_overview_table_header {
-    margin-bottom: 0;
+    margin: 0;
+
     text-transform: uppercase;
+    font-size: 12px;
     font-weight: 600;
+
+    background-color: #ffffff; 
+    color: rgb(26, 26, 26); 
   }
 
   .portfolio_coin {
+    width: 100%;
     height: 30px;
-    width: 100px;
     border: none;
 
     background-color: #ffffff; 
     color: rgb(26, 26, 26); 
 
     text-transform: capitalize;
+    font-size: 14px;
     font-weight: 600;
     text-align: left;
   }
 
    .portfolio_coin_amount, .portfolio_coin_price, .portfolio_coin_total_value {
+    padding-top: 4px;
     height: 30px;
-
-    border: none;
+    background-color: #ff1616f6; 
+    
     background-color: #ffffff; 
-    color: rgb(26, 26, 26);
+    font-size: 14px;
   }
 
+  /* Portfolio chart  */
+  #portfolio_chart_timeframe_buttons {
+    margin: 5px 0 0 30px;
+  }
+  .portfolio_chart_timeframe_button {
+    margin: 0px 4px;
+    width: 50px;
+  }
 
+  /* Note block */
+  
 
 /* MIDDLE BAR  */
   #coin_page_name{
@@ -97,7 +119,7 @@ ul {
   }
   #coin_chart_timeframe_buttons {
     margin: 10px 0;
-    /* margin-left: 40px; */
+  
   }
   .coin_chart_timeframe_button {
     margin: 0px 7px;
@@ -106,7 +128,7 @@ ul {
 
   /* socials  */
   .socials_block {
-    margin: 10px 0 0 1%;
+    margin: 5px 0 0 0;
     padding: 3%;
 
     max-height: 650px;
@@ -127,7 +149,8 @@ ul {
     margin: 3%;
   }
   #coin_info_description {
-    max-height: 250px;
+    margin: 0 5px;
+    max-height: 300px;
     overflow-y: scroll;
   }
 

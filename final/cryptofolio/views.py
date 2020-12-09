@@ -160,7 +160,8 @@ def index(request):
         trade_sell_history = Trade.objects.filter(user = user, coin_name = coin.coin_name, tradetype = "SELL").aggregate(Sum('amount'))
         if trade_sell_history["amount__sum"] != None:
             current_coin_holding = current_coin_holding - trade_sell_history["amount__sum"]
-        user_holdings.append(current_coin_holding)
+        # removing trailing zeroes and add to list
+        user_holdings.append(float(current_coin_holding))
 
     # converts trade history data to JSON to send to Javascript
     trade_history_list = []
@@ -187,6 +188,7 @@ def index(request):
         note_dict[coin.coin_name] = coin.note
     # create JSON variable to send note data to Javascript
     notes_data_JSON = dumps(note_dict) 
+
     
     return render(request, "cryptofolio/index.html", {
         "trade_history": trade_history,
@@ -194,7 +196,7 @@ def index(request):
         "coin_page_name": coin_page_name.strip(),
         "user_holdings_amount": user_holdings,
         "trade_data_JSON": trade_data_JSON,
-        "notes_data_JSON": notes_data_JSON
+        "notes_data_JSON": notes_data_JSON,
     })
 
 

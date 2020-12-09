@@ -66,6 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
             register_field_button.disabled = true;
         }
     }
+
     // draw portfolio history chart
     portfolio_history_chart(7);
 
@@ -75,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // load all coin info
     coin_page_name = document.getElementById('coin_page_name').innerHTML;
     coin_info(coin_page_name);
+
 });
 
 
@@ -238,16 +240,18 @@ function total_coin_values() {
         // calculate total portfolio value
         total_portfolio_value = total_portfolio_value + total_value;
     }
-    document.getElementById("total_portfolio_value").innerHTML = total_portfolio_value
+    
 
+    // add total coin values to html
     total_value_list.forEach(function (value) {
         let li_total_value  = document.createElement('li');
-        li_total_value.innerHTML = value;
+        li_total_value.innerHTML = "$" + value.toLocaleString();
         
         li_total_value.setAttribute("class", "portfolio_coin_total_value");
         document.querySelector('.portfolio_total_value_list').append(li_total_value);
-
     });
+    // add total portfolio value to html
+    document.getElementById("total_portfolio_value").innerHTML = "Total value: $" + total_portfolio_value + ".";
 }
 
 function trending_coins() {
@@ -345,13 +349,16 @@ function coin_chart(coin_name, time_frame) {
 
 function portfolio_history_chart(time_frame) {
     // set portfolio value chart timeframe header
-    if (time_frame == 1) {
-        document.getElementById("portfolio_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " day";
+      // set coin value chart timeframe header
+      if (time_frame == 1) {
+        document.getElementById("portfolio_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " day"
+    }
+    else if (time_frame == 365) {
+        document.getElementById("portfolio_chart_timeframe_header").innerHTML = "Timeframe: 1 year";
     }
     else {
-        document.getElementById("portfolio_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " days";
+        document.getElementById("portfolio_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " days"
     }
-    
     
     // create array to store dictionaries with portfolio_value:timestamp data
     portfolio_total_value_timestamp_array = [];
@@ -452,6 +459,25 @@ function portfolio_history_chart(time_frame) {
         lineWidth: "0"
         });
     });
+      // create portfolio chart timeframe buttons
+    document.getElementById("portfolio_chart_timeframe_buttons").innerHTML = "";
+    const timeframes = [1, 3, 7, 30, 365];
+    timeframes.forEach((tf) => {
+        let coin_chart_timeframe_button = document.createElement('button');
+        coin_chart_timeframe_button.innerHTML = tf;
+        coin_chart_timeframe_button.setAttribute("id", "portfolio_chart_timeframe_button_" + tf);
+        coin_chart_timeframe_button.setAttribute("class", "btn btn-primary portfolio_chart_timeframe_button");
+        
+        // coin_chart_timeframe_button.setAttribute("onClick", "coin_chart('"+ coin_name + "'" +","+"'"+ tf +"')");
+        coin_chart_timeframe_button.setAttribute("onClick", "portfolio_history_chart('" + tf +"')");
+        document.getElementById("portfolio_chart_timeframe_buttons").append(coin_chart_timeframe_button);
+    });
+    // change active button design
+    document.getElementById("portfolio_chart_timeframe_button_" + time_frame).setAttribute("class", "btn btn-primary portfolio_chart_timeframe_button active");
+
+
+
+
 }
 
 
