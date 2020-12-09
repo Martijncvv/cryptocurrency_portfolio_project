@@ -27,7 +27,7 @@
         <h2>Portfolio</h2>
         <div class="row portfolio_table" style="border: 2px solid blue;">
             <div class="col-3">
-                <p id="portfolio_overview_table_header"> Name</p>
+                <p id="portfolio_overview_table_header">Coin</p>
                 {% for coin in user_portfolio %}
                 <div>
                     <button class="portfolio_coin" id="portfolio_overview_coin_button" onClick="coin_info('{{coin.coin_name}}')" >{{ coin.coin_name }}</button>
@@ -60,7 +60,6 @@
 <!-- PORTFOLIO DATA / CHART -->
             <h2>Portfolio Info</h2> 
             <p id="total_portfolio_value">None</p> 
-            <p id="total_number_of_coins">None</p> 
             <h3 id="portfolio_chart_timeframe_header"></h3>
 
             <div id="portfolio_chart" style="height: 350px;"> </div>
@@ -70,57 +69,29 @@
             </div>
 
            
-<!-- NOTE  -->
-        <div>
-            <h2> Coin Note</h2> 
-            <p id="coin_note_field"> None </p>   
-            
-            <span style="display: inline-block;">
-                <form action="{% url 'index' %}" method="POST">
-                    {% csrf_token %}
-                    <input class="form-control" type="text" name="coin_note" placeholder="Write a note">
-                    <br>
-                    <button class="btn btn-sm btn-primary" value="" id="add_note_button" name="add_note_button">Add Note</button>
-                </form>
-            </span>
-            <span style="display: inline-block;">
-                <form action="{% url 'index' %}" method="POST">
-                    {% csrf_token %}
-                    <button class="btn btn-sm btn-primary" value="" id="delete_note_button" name="delete_note_button">Delete Note</button>
-                </form>
-            </span>
-        </div>
 <!-- TRADE HISTORY  -->
         <h2>Trade history</h2>
-        <div class="row">
-            <div class="col-3">
-                <ul>
-                    {% for trade in trade_history reversed %}
-                    <li> {{ trade.coin_name }} </li>
-                    {%  endfor %}
-                </ul>
+        <div id="trade_history_block">
+            <div class="row">
+                <div class="col-4">
+                    <p id="trade_history_header">Coin</p>
+                    <ul id="trade_history_coin_name"> </ul>
+                </div>
+                <div class="col-4">
+                    <p id="trade_history_header">Price</p>
+                    <ul id="trade_history_price"> </ul>
+                </div> 
+                <div class="col-4">
+                    <p id="trade_history_header">Amount</p>
+                    <ul id="trade_history_amount"> </ul>
+                </div> 
             </div>
-            <div class="col-3">
-                <ul>
-                    {% for trade in trade_history reversed %}
-                    <li> {{ trade.tradetype }} </li>
-                    {%  endfor %}
-                </ul>
-            </div>
-            <div class="col-3">
-                <ul>
-                    {% for trade in trade_history reversed %}
-                    <li> {{ trade.amount }} </li>
-                    {%  endfor %}
-                </ul>
-            </div> 
         </div>
     </div>
     
-
+<!-- COIN CHART  -->
     <div class="col-9" style="border: 2px solid yellow ;">
         <div class="row">
-<!-- COIN CHART  -->
             <div class="col-7 text-center" style="border: 2px solid rgb(4, 128, 10);">
                 <div id="coin_image_div">
                     <img id="coin_image">
@@ -195,12 +166,27 @@
                 <h3>Twitter</h3>
                 <div id="twitter_channel"> </div>
             </div>
-            <!-- GOOGLE TRENDS  -->
-            <div class="col socials_block">
-                <h2>Google trends</h2>
-               
+
+<!-- NOTE  -->
+            <div class="col" id="coin_note_block" style="border: 2px solid cyan;">
+                <h2> Coin Note</h2> 
+                <p id="coin_note_field"> None </p>   
+                
+                <span style="display: inline-block;">
+                    <form action="{% url 'index' %}" method="POST">
+                        {% csrf_token %}
+                        <input class="form-control" type="text" name="coin_note" placeholder="Write a note">
+                        <br>
+                        <button class="btn btn-sm btn-primary" value="" id="add_note_button" name="add_note_button">Add Note</button>
+                    </form>
+                </span>
+                <span style="display: inline-block;">
+                    <form action="{% url 'index' %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-sm btn-primary" value="" id="delete_note_button" name="delete_note_button">Delete Note</button>
+                    </form>
+                </span>
             </div>
-            
         </div>
     </div>
 </div>
@@ -298,49 +284,9 @@
 
 <div id="TESTTEST"></div>
 
-
-
-<div style="margin: 5%;"> 
-    <h1> 
-        <u></u> 
-    </h1> 
-    <h2> 
-        <u></u> 
-    </h2> 
-    <h4 id='alldata'></h4><br> 
-    <h2> 
-        <u></u> 
-    </h2> 
-    <h4 id='neatdata'></h4> 
-</div> 
-
-
 {% endblock %}
 
 {% block script %}
-<!-- TWITTER open-->
-<!-- <script>window.twttr = (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0],
-      t = window.twttr || {};
-    if (d.getElementById(id)) return t;
-    js = d.createElement(s);
-    js.id = id;
-    js.src = "https://platform.twitter.com/widgets.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  
-    t._e = [];
-    t.ready = function(f) {
-      t._e.push(f);
-    };
-    return t;
-  }(document, "script", "twitter-wjs"));</script> -->
-<!-- TWITTER close-->
-
-<!-- GRAPH OPEN  -->
-<!-- <script>
- 
-</script> -->
-<!-- GRAPH CLOSE  -->
 
 <script> 
     var trade_history_data = JSON.parse("{{trade_data_JSON|escapejs}}"); 

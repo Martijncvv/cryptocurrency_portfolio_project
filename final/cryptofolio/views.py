@@ -173,6 +173,7 @@ def index(request):
 
         trade_dict = {
             "time": unixtime,
+            "price": float(trade.price),
             "coin_name": trade.coin_name,
             "amount": amount_float,
             "tradetype": trade.tradetype

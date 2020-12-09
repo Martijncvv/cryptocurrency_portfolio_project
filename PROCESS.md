@@ -57,7 +57,7 @@ Project start
 
 ### Tuesday 07-12-2020
 - The portfolio graph was based on trade timestamps. Decided to change it to base the x-axis on timestamps of the past 90 days to give better insights in the portfolio.
-- Fixed bug in portfolio history graph; API data was ms, DB data was s
+- Fixed bug in portfolio history graph; API data was ms, DB data was sec
 - Improved way to pass Django DB data to JS; used JSON data dump 
 
 - Seems I'm not able to embed Google Trends chart on website; keeps loading
@@ -71,9 +71,8 @@ Project start
 
 ### Wednesday 07-12-2020
 - Added timeframes; 365 days and max timeframe
+- Added timeframes to portfolio graph
+- Added basic CSS
+- Changed layout; removed Google Trends and added 'Coin notes' at its place.
 
-In your process book, you chronicle your big decisions. When faced with a decision during the day, document it like this:
 
-The choice you’ve made
-What you expect to happen as a result of that choice (at this moment in time)
-Why you expect things to pan out that way

@@ -19,9 +19,7 @@ ul, li {
   padding: 0;
 }
 
-
 .frontfield {
-
   width: 40%;
   height: 70%;
   padding: 40px;
@@ -35,7 +33,6 @@ ul, li {
   
   z-index: 999;
 }
-
 
 /* LEFT SIDEBAR  */
    /* trending  */
@@ -62,7 +59,7 @@ ul, li {
 
     text-transform: uppercase;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
 
     background-color: #ffffff; 
     color: rgb(26, 26, 26); 
@@ -93,16 +90,26 @@ ul, li {
 
   /* Portfolio chart  */
   #portfolio_chart_timeframe_buttons {
-    margin: 5px 0 0 30px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
   }
   .portfolio_chart_timeframe_button {
     margin: 0px 4px;
-    width: 50px;
+  }
+  /* Trade history  */
+  #trade_history_block {
+    max-height: 150px;
+    overflow-y: scroll;
+  }
+  #trade_history_header {
+    font-weight: 500;
   }
 
-  /* Note block */
-  
-
+  #trade_history_coin_name {
+    text-transform: capitalize;
+  }
+ 
 /* MIDDLE BAR  */
   #coin_page_name{
     text-transform: uppercase;
@@ -118,7 +125,9 @@ ul, li {
     height: 430px ;
   }
   #coin_chart_timeframe_buttons {
-    margin: 10px 0;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
   
   }
   .coin_chart_timeframe_button {
@@ -166,8 +175,18 @@ ul, li {
     font-style: italic;
   }
 
+/* Note block */
+#coin_note_block {
+  margin: 5px 0 0 0;
+  padding: 3%;
+
+  max-height: 650px
+}
 
 
+
+
+/* GENERAL  */
   /* scrollbar  */
   ::-webkit-scrollbar {
     width: 15px;

@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function() {
         i.addEventListener('click',  close_field) 
       });
 
-
     // Select the submit buttons and inputs to be used later
     // search field
     const submit_search = document.querySelector('#submit_search');
@@ -72,6 +71,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // display trending coins
     trending_coins();
+
+    // load trade history
+    trade_history()
 
     // load all coin info
     coin_page_name = document.getElementById('coin_page_name').innerHTML;
@@ -143,6 +145,13 @@ function coin_info(coin) {
         // Add note to note field if note exists
         document.getElementById("coin_note_field").innerHTML = notes_data[data.id];
 
+        // if (notes_data[data.id] == true) {
+        //     document.getElementById("coin_note_field").innerHTML = notes_data[data.id];
+        // }
+        // else {
+        //     document.getElementById("coin_note_field").innerHTML = "Write a note about " + data.name + ".";
+        // }
+
         // Get current coin prices
         // Add prices to portfolio overview table
         document.querySelector(".portfolio_price_list").innerHTML = "";
@@ -171,24 +180,21 @@ function coin_info(coin) {
                         document.querySelector('.portfolio_price_list').append(li_coin_price);
                     }
                 }
+                // if forEach loop finished, run total_coin_values function
                 counter += 1;
                 if (portfolio_coins.length == counter) {
                     total_coin_values()  
                 } 
             });  
         })
-        
         // Add Twitter Timeline
         twitter_feed(data.links.twitter_screen_name)
-
     });
     // draw coin chart
     coin_chart(coin.toLowerCase(), 30);
-
 }
 
 function login() {
-    console.log("LOGIN KNOP")
     document.querySelector("#register_field").style.display = "none";
     document.querySelector("#login_field").style.display = "block";
 }
@@ -211,7 +217,9 @@ function close_field() {
 function add_trade() {
     // get coin name and set name in "add trade field"
     coin_name = document.getElementById('coin_info_name').innerHTML;
-    coin_price = document.getElementById('coin_info_price').innerHTML;
+    coin_price_LocaleString = document.getElementById('coin_info_price').innerHTML;
+    // convert LocaleString price to decimal price
+    coin_price = coin_price_LocaleString.replace(".","").replace(",", '.').replace("$", '');
 
     document.getElementById("addtrade_header").innerHTML = coin_name;
     document.getElementById("addtrade_input_name").value = coin_name;
@@ -221,7 +229,36 @@ function add_trade() {
     document.querySelector("#addtrade_field").style.display = "block";
 }
 
+function trade_history() {
+    // loop over the trade history array in reversed order
+    trade_history_data.slice().reverse().forEach(function (trade) {
+        // add trade history coin name
+        let li_coin_name  = document.createElement('li');
+        li_coin_name.innerHTML = trade.coin_name;
+        li_coin_name.setAttribute("class", "trade_history_coin_name");
 
+        // check if 'buy' or 'sell' trade and change styling
+        if (trade.tradetype == "BUY") {
+            li_coin_name.setAttribute("style", "color: green;");
+        }
+        else {
+            li_coin_name.setAttribute("style", "color: red;");
+        }
+        document.getElementById("trade_history_coin_name").append(li_coin_name);
+     
+        // add trade history price
+         let li_price  = document.createElement('li');
+         li_price.innerHTML = trade.price;
+         li_price.setAttribute("class", "trade_history_price");
+         document.getElementById("trade_history_price").append(li_price);
+
+        // add trade history amount
+        let li_amount  = document.createElement('li');
+        li_amount.innerHTML = trade.amount;
+        li_amount.setAttribute("class", "trade_history_amount");
+        document.getElementById("trade_history_amount").append(li_amount);
+    })
+}
 
 function total_coin_values() {
     document.querySelector(".portfolio_total_value_list").innerHTML = "";
@@ -241,7 +278,6 @@ function total_coin_values() {
         total_portfolio_value = total_portfolio_value + total_value;
     }
     
-
     // add total coin values to html
     total_value_list.forEach(function (value) {
         let li_total_value  = document.createElement('li');
@@ -270,7 +306,6 @@ function trending_coins() {
     });
 }
 
-
 function random_coin() {
     fetch("https://api.coingecko.com/api/v3/coins/list")
     .then(response => response.json())
@@ -279,7 +314,6 @@ function random_coin() {
         coin_info(random_coin.id);
     })
 }
-
 
 function coin_chart(coin_name, time_frame) {
     // set coin value chart timeframe header
@@ -344,7 +378,6 @@ function coin_chart(coin_name, time_frame) {
         });
         // change active button design
         document.getElementById("coin_chart_timeframe_button_" + time_frame).setAttribute("class", "btn btn-primary coin_chart_timeframe_button active");
-
 }
 
 function portfolio_history_chart(time_frame) {
@@ -466,7 +499,7 @@ function portfolio_history_chart(time_frame) {
         let coin_chart_timeframe_button = document.createElement('button');
         coin_chart_timeframe_button.innerHTML = tf;
         coin_chart_timeframe_button.setAttribute("id", "portfolio_chart_timeframe_button_" + tf);
-        coin_chart_timeframe_button.setAttribute("class", "btn btn-primary portfolio_chart_timeframe_button");
+        coin_chart_timeframe_button.setAttribute("class", "btn btn-sm btn-primary portfolio_chart_timeframe_button");
         
         // coin_chart_timeframe_button.setAttribute("onClick", "coin_chart('"+ coin_name + "'" +","+"'"+ tf +"')");
         coin_chart_timeframe_button.setAttribute("onClick", "portfolio_history_chart('" + tf +"')");
@@ -474,10 +507,6 @@ function portfolio_history_chart(time_frame) {
     });
     // change active button design
     document.getElementById("portfolio_chart_timeframe_button_" + time_frame).setAttribute("class", "btn btn-primary portfolio_chart_timeframe_button active");
-
-
-
-
 }
 
 
