@@ -75,4 +75,5 @@ Project start
 - Added basic CSS
 - Changed layout; removed Google Trends and added 'Coin notes' at its place.
 
+- Had a bug with login in/ loging out. Pulled latest commit version.
 

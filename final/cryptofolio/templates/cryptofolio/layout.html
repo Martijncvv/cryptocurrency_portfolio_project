@@ -28,17 +28,17 @@
                         <li class="nav-item">
                             <button class="btn btn-sm btn-primary" id="settings">Settings</button>
                         </li>
-                    {% if user.is_authenticated %}
+                    <!-- {% if user.is_authenticated %} -->
                         <form action="{% url 'index' %}" method="POST">
                             {% csrf_token %}
                             <button class="btn btn-sm btn-primary" id="logout" name="logout">Log-Out</button>
                         </form>
 
-                    {% else %}
+                    <!-- {% else %} -->
                         <li class="nav-item">
                             <button class="btn btn-sm btn-primary  login">Log-in</button>
                         </li>
-                    {% endif %}                       
+                    <!-- {% endif %}                        -->
                 </ul>
             </div>
         </div>
