@@ -55,7 +55,7 @@ Project start
 - Had problems with calculating charting data due to problems with asynchronous functions and was trying to figure out a way how to display historical portfolio data in a graph.
 - Finished basic set-up of portfolio graph
 
-### Tuesday 07-12-2020
+### Tuesday 08-12-2020
 - The portfolio graph was based on trade timestamps. Decided to change it to base the x-axis on timestamps of the past 90 days to give better insights in the portfolio.
 - Fixed bug in portfolio history graph; API data was ms, DB data was sec
 - Improved way to pass Django DB data to JS; used JSON data dump 
@@ -69,11 +69,14 @@ Project start
 - Added portfolio value chart timeframe options
 - Added coin value chart timeframe options
 
-### Wednesday 07-12-2020
+### Wednesday 09-12-2020
 - Added timeframes; 365 days and max timeframe
 - Added timeframes to portfolio graph
 - Added basic CSS
 - Changed layout; removed Google Trends and added 'Coin notes' at its place.
 
 - Had a bug with login in/ loging out. Pulled latest commit version.
+
+### Thursday 10-12-2020
+- Finished CSS left, middle and right column
 

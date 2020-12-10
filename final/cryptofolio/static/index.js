@@ -101,18 +101,20 @@ function coin_info(coin) {
         let coin_in_portfolio = false;
         let portfolio_coin = document.querySelectorAll('.portfolio_coin');
         // loop over portfolio list
-        portfolio_coin.forEach(function (coin_name_i) {
-            if (coin_name_i.innerHTML == data.id) {
+        portfolio_coin.forEach(function (coin_name) {
+            if (coin_name.innerHTML == data.id) {
                 coin_in_portfolio = true;
+                console.log("TESTETS")
             }
         });
         // if coin found in list, change "add to portfolio button"  
         if (coin_in_portfolio) {
             document.getElementById("portfolio_button").innerHTML = "Remove";
-            document.getElementById("portfolio_button").setAttribute("class", "btn btn-sm btn-outline-primary");
+            document.getElementById("portfolio_button").setAttribute("class", "btn btn-sm btn-outline-info");
         }
         else {
             document.getElementById("portfolio_button").innerHTML = "Add to portfolio";
+            document.getElementById("portfolio_button").setAttribute("class", "btn btn-sm btn-info");
         }
 
         // set 'add portfolio' button value to currently opened coin
@@ -125,7 +127,7 @@ function coin_info(coin) {
         // set favicon image to currently opened coin
         document.getElementById("favicon").setAttribute("href", data.image.thumb);
         // set coin logo to currently opened coin       
-        document.getElementById("coin_image").setAttribute("src", data.image.small );
+        document.getElementById("coin_image").setAttribute("src", data.image.large );
 
       
 
@@ -360,11 +362,13 @@ function coin_chart(coin_name, time_frame) {
             xkey: "time",
             ykeys: ["value"],
             labels: ["$"],
+            preUnits: "$",
             hideHover: "auto",
             pointSize: "0",
             lineWidth: "0",
             resize: "true",
-            redraw: "true"
+            redraw: "true",
+            lineColors: ["#35a9b4"],
             });
         }); 
         
@@ -375,13 +379,13 @@ function coin_chart(coin_name, time_frame) {
             let coin_chart_timeframe_button = document.createElement('button');
             coin_chart_timeframe_button.innerHTML = tf;
             coin_chart_timeframe_button.setAttribute("id", "coin_chart_timeframe_button_" + tf);
-            coin_chart_timeframe_button.setAttribute("class", "btn btn-primary coin_chart_timeframe_button");
+            coin_chart_timeframe_button.setAttribute("class", "btn btn-info coin_chart_timeframe_button");
             
             coin_chart_timeframe_button.setAttribute("onClick", "coin_chart('"+ coin_name + "'" +","+"'"+ tf +"')");
             document.getElementById("coin_chart_timeframe_buttons").append(coin_chart_timeframe_button);
         });
         // change active button design
-        document.getElementById("coin_chart_timeframe_button_" + time_frame).setAttribute("class", "btn btn-primary coin_chart_timeframe_button active");
+        document.getElementById("coin_chart_timeframe_button_" + time_frame).setAttribute("class", "btn btn-info coin_chart_timeframe_button active");
 }
 
 function portfolio_history_chart(time_frame) {   
@@ -483,7 +487,6 @@ function portfolio_history_chart(time_frame) {
         hideHover: "always",
         pointSize: "0",
         lineWidth: "0",
-        // fillOpacity: "1",
         lineColors: ["#35a9b4"],
         });
     });

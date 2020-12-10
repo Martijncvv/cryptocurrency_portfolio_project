@@ -12,11 +12,9 @@
 <div class="row">
     <div class="col-3" id="left_sidebar">
         <h2>Search</h2>
-        <div>
-            <form>
-                <input id="search_value" placeholder = "Coin name" type="text">
-                <input id="submit_search" type="submit" value="Search" class="btn btn-sm btn-primary">
-            </form>
+        <div id="search_block">
+            <input id="search_value" placeholder = "Coin name" type="text">
+            <input id="submit_search" type="submit" value="Search" class="btn btn-sm btn-info">
         </div>
           
 
@@ -95,14 +93,10 @@
     </div>
     
 <!-- COIN CHART  -->
-    <div class="col-9" style="border: 2px solid yellow ;">
+    <div class="col-9" id="right_sidebar">
         <div class="row">
-            <div class="col-7 text-center" style="border: 2px solid rgb(4, 128, 10);">
-                <div id="coin_image_div">
-                    <img id="coin_image">
-                </div>
+            <div class="col text-center" id="coin_chart_block">
 
-                <h2 id="coin_page_name">{{coin_page_name}}</h2>
                 <h4 id="coin_chart_timeframe_header"></h4>
 
                 <div id="coin_chart">
@@ -111,25 +105,24 @@
                 <div id="coin_chart_timeframe_buttons"></div>
             </div>
             
-
-            <div class="col-5" style="border: 2px solid hotpink;">
+ <!-- GENERAL INFO  -->
+            <div class="col-5" id="coin_data_block">
+                <div class="d-flex justify-content-start">
+                    <h3>General info</h3> 
+                    <button id="add_trade" class="btn btn-sm btn-info ">Add trade</button>
                 
-<!-- COIN DATA  -->
-                <span style="display: inline-block;">
-                    <h2>General info</h2> 
-                </span>
-                <span style="display: inline-block;">
-                    <button id="add_trade" class="btn btn-sm btn-primary">Add trade</button>
-                </span>
                     <!-- Delete / Add coin to portfolio  -->
-                    <span style="display: inline-block;">
                     <form action="{% url 'index' %}" method="POST">
                         {% csrf_token %}
-                        <button class="btn btn-sm btn-primary" value="" id="portfolio_button" name="addportfolio">Add to portfolio</button>
+                        <button class="btn btn-sm btn-info" value="" id="portfolio_button" name="addportfolio">Add to portfolio</button>
                     </form>
-                </span>
+                </div>
+                <!-- image  -->
+                <div id="coin_image_div">
+                    <img id="coin_image">
+                </div>
 
- <!-- GENERAL INFO  -->
+
                 <div class="row">
                     <div class="col-4">
                         <ul id="coin_info_heads">
@@ -161,20 +154,18 @@
                 </div>
                 <div class="row" id="coin_description_box">
                     <h4>Description</h4>
-                    <div id="coin_info_description" class="scrollbar scrollbar-primary"> 
-                    </div>
+                    <div id="coin_info_description" class="scrollbar scrollbar-primary"> </div>
                 </div>
             </div>
 <!-- SOCIALS  -->
-            <div class="col-7 socials_block" style="border: 2px solid red;" >
-                <h2>Social Media</h2>
+            <div class="col" id="twitter_block">
                 <h3>Twitter</h3>
                 <div id="twitter_channel"> </div>
             </div>
 
 <!-- NOTE  -->
-            <div class="col" id="coin_note_block" style="border: 2px solid cyan;">
-                <h2> Coin Note</h2> 
+            <div class="col-5" id="coin_note_block">
+                <h3> Coin Note</h3> 
                 <p id="coin_note_field"> None </p>   
                 
                 <span style="display: inline-block;">
@@ -182,13 +173,13 @@
                         {% csrf_token %}
                         <input class="form-control" type="text" name="coin_note" placeholder="Write a note">
                         <br>
-                        <button class="btn btn-sm btn-primary" value="" id="add_note_button" name="add_note_button">Add Note</button>
+                        <button class="btn btn-sm btn-info" value="" id="add_note_button" name="add_note_button">Add Note</button>
                     </form>
                 </span>
                 <span style="display: inline-block;">
                     <form action="{% url 'index' %}" method="POST">
                         {% csrf_token %}
-                        <button class="btn btn-sm btn-primary" value="" id="delete_note_button" name="delete_note_button">Delete Note</button>
+                        <button class="btn btn-sm btn-info" value="" id="delete_note_button" name="delete_note_button">Delete Note</button>
                     </form>
                 </span>
             </div>
@@ -297,10 +288,5 @@
     var trade_history_data = JSON.parse("{{trade_data_JSON|escapejs}}"); 
     var notes_data = JSON.parse("{{notes_data_JSON|escapejs}}"); 
 </script>
-
-<script>
-    autocomplete(document.getElementById("myInput"), countries);
-    </script>
-
-    <script src="{% static 'index.js' %}"></script>
+<script src="{% static 'index.js' %}"></script>
 {% endblock %}
