@@ -36,8 +36,13 @@ ul, li {
     box-shadow: 0 4px 8px 0 rgba(53, 169, 180, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281); 
     z-index: 999;
   }
-
-
+  #register {
+    color: blue;
+  }
+  #login_link {
+    color: blue;
+  }
+  
 /* NAVBAR */
 #navbar_left {
   height: 60px;
@@ -75,7 +80,11 @@ h1 {
   width: 80px;
 }
 
-
+/* FOOTER */
+  #footer {
+    height: 30px;
+    background-color: rgb(53, 169, 180);
+  }
 
 /* LEFT SIDEBAR  */
 #left_sidebar {
@@ -191,11 +200,9 @@ h1 {
     font-size: 12px;
   }
 
-
- 
- 
 /* MIDDLE BAR  */
   #right_sidebar {
+    margin-bottom: 10px;
     padding-top: 10px;
     background-color: rgb(237, 242, 246);
   }
