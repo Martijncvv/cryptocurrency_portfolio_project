@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-3" id="left_sidebar">
         <h2>Search</h2>
-        <div id="search_block">
+        <div id="search_block" class="d-flex align-items-center">
             <input id="search_value" placeholder = "Coin name" type="text">
             <input id="submit_search" type="submit" value="Search" class="btn btn-sm btn-info">
         </div>
@@ -21,75 +21,76 @@
 <!-- TRENDING  -->
         <h2>Trending</h2>
         <div id="trending_coins"> </div>
-
-<!-- PORTFOLIO COINS -->
-        <h2>Portfolio</h2>
-        <div class="row" id="portfolio_overview_table">
-            <div class="col-3">
-                <p id="portfolio_overview_table_header">Coin</p>
-                {% for coin in user_portfolio %}
-                <div>
-                    <button class="btn btn-sm btn-info portfolio_coin" onClick="coin_info('{{coin.coin_name}}')" >{{ coin.coin_name }}</button>
-                </div>
-                {%  endfor %}
-            </div>
-
-            <div class="col-3">
-                <ul class="portfolio_coin_amount_list">
-                    <p id="portfolio_overview_table_header">Amount</p>
-                    {% for coin in user_holdings_amount %}
-                    <li class="portfolio_coin_amount">
-                        {{ coin }}
-                    </li>
-                    {%  endfor %}
-                </ul>
-            </div>
-            
-            <div class="col-3">
-                <p id="portfolio_overview_table_header">Value $</p>
-                <ul class="portfolio_price_list"> </ul>
-            </div>
-
-            <div class="col-3">
-                <p id="portfolio_overview_table_header">Total $</p>
-                <ul class="portfolio_total_value_list"> </ul>
-            </div>
-        </div>
-
-<!-- PORTFOLIO DATA / CHART -->
-        <div id="portfolio_chart_data">
-            <h2>Portfolio Info</h2> 
-            <p id="total_portfolio_value">None</p> 
-
-            <h2>Portfolio history chart</h2>
-            
-            <div id="portfolio_chart" style="height: 350px;"> </div>
-            <div id="portfolio_chart_timeframe_buttons"> </div>
-        </div>
-            
-<!-- TRADE HISTORY  -->
-        <h2>Trade history</h2>
-        <div id="trade_history_block">
-            <div class="row">
-                <div class="col-3 trade_history_collumn">
-                    <p id="trade_history_header">Coin</p>
-                    <ul id="trade_history_coin_name"> </ul>
-                </div>
-                <div class="col-3 trade_history_collumn">
-                    <p id="trade_history_header">Price</p>
-                    <ul id="trade_history_price"> </ul>
-                </div> 
-                <div class="col-3 trade_history_collumn">
-                    <p id="trade_history_header">Amount</p>
-                    <ul id="trade_history_amount"> </ul>
-                </div> 
-                <div class="col-3 trade_history_collumn">
-                    <p id="trade_history_header">Date</p>
-                    <ul id="trade_history_time"> </ul>
-                </div> 
-            </div>
-        </div>
         
+        <div id="user_portfolio_overview">
+<!-- PORTFOLIO COINS -->
+            <h2>Portfolio</h2>
+            <div class="row" id="portfolio_overview_table">
+                <div class="col-3">
+                    <p id="portfolio_overview_table_header">Coin</p>
+                    {% for coin in user_portfolio %}
+                    <div>
+                        <button class="btn btn-sm btn-info portfolio_coin" onClick="coin_info('{{coin.coin_name}}')" >{{ coin.coin_name }}</button>
+                    </div>
+                    {%  endfor %}
+                </div>
+    
+                <div class="col-3">
+                    <ul class="portfolio_coin_amount_list">
+                        <p id="portfolio_overview_table_header">Amount</p>
+                        {% for coin in user_holdings_amount %}
+                        <li class="portfolio_coin_amount">
+                            {{ coin }}
+                        </li>
+                        {%  endfor %}
+                    </ul>
+                </div>
+                
+                <div class="col-3">
+                    <p id="portfolio_overview_table_header">Value $</p>
+                    <ul class="portfolio_price_list"> </ul>
+                </div>
+    
+                <div class="col-3">
+                    <p id="portfolio_overview_table_header">Total $</p>
+                    <ul class="portfolio_total_value_list"> </ul>
+                </div>
+            </div>
+    
+<!-- PORTFOLIO DATA / CHART -->
+            <div id="portfolio_chart_data">
+                <h2>Portfolio Info</h2> 
+                <p id="total_portfolio_value">None</p> 
+    
+                <h2>Portfolio history chart</h2>
+                
+                <div id="portfolio_chart" style="height: 350px;"> </div>
+                <div id="portfolio_chart_timeframe_buttons"> </div>
+            </div>
+                
+<!-- TRADE HISTORY  -->
+            <h2>Trade history</h2>
+            <div id="trade_history_block">
+                <div class="row">
+                    <div class="col-3 trade_history_collumn">
+                        <p id="trade_history_header">Coin</p>
+                        <ul id="trade_history_coin_name"> </ul>
+                    </div>
+                    <div class="col-3 trade_history_collumn">
+                        <p id="trade_history_header">Price</p>
+                        <ul id="trade_history_price"> </ul>
+                    </div> 
+                    <div class="col-3 trade_history_collumn">
+                        <p id="trade_history_header">Amount</p>
+                        <ul id="trade_history_amount"> </ul>
+                    </div> 
+                    <div class="col-3 trade_history_collumn">
+                        <p id="trade_history_header">Date</p>
+                        <ul id="trade_history_time"> </ul>
+                    </div> 
+                </div>
+            </div>
+        </div>
     </div>
     
 <!-- COIN CHART  -->
@@ -102,10 +103,10 @@
                 <div id="coin_chart">
                     <p>coin chart</p>
                 </div>
-                <div id="coin_chart_timeframe_buttons"></div>
+                <div id="coin_chart_timeframe_buttons"> </div>
             </div>
-            
- <!-- GENERAL INFO  -->
+        
+<!-- GENERAL INFO  -->
             <div class="col-5" id="coin_data_block">
                 <div class="d-flex justify-content-start">
                     <h3>General info</h3> 
@@ -121,7 +122,6 @@
                 <div id="coin_image_div">
                     <img id="coin_image">
                 </div>
-
 
                 <div class="row">
                     <div class="col-4">
@@ -157,7 +157,9 @@
                     <div id="coin_info_description" class="scrollbar scrollbar-primary"> </div>
                 </div>
             </div>
+        </div>
 <!-- SOCIALS  -->
+        <div class="row">
             <div class="col" id="twitter_block">
                 <h3>Twitter</h3>
                 <div id="twitter_channel"> </div>
@@ -190,11 +192,12 @@
 <!-- SETTINGS FIELD  -->
 <div id="settings_field" class="frontfield" style="display: none">
     <h2>Settings</h2>
+    
     <div id="settings_download_data">
-        <button class="btn btn-sm btn-primary" onClick="download_trade_data()">Generate trade data CSV</button>
+        <button class="btn btn-sm btn-info" onClick="download_trade_data()">Generate trade data CSV</button>
     </div>
-
-    <input class="btn btn-primary close_field" type="submit" value="close">
+    <br>
+    <input class="btn btn-info close_field" type="submit" value="close">
 </div>
 
 
@@ -213,11 +216,11 @@
             <div class="form-group">
                 <input id="login_password_field" class="form-control" type="password" name="password" placeholder="Password">
             </div>
-            <input id="login_field_button" class="btn btn-primary" type="submit" value="Login">
+            <input id="login_field_button" class="btn btn-info" type="submit" value="Login">
         </form>
         <p> Don't have an account? Register <span id="register">here</span>. </p>
         
-        <input class="btn btn-primary close_field" type="submit" value="close">
+        <input class="btn btn-info close_field" type="submit" value="close">
     </div>
 
 <!-- REGISTER FIELD-->
@@ -241,11 +244,11 @@
             <div class="form-group">
                 <input id="register_password_field" class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
             </div>
-            <input id="register_field_button" class="btn btn-primary" type="submit" value="Register">
+            <input id="register_field_button" class="btn btn-info" type="submit" value="Register">
         </form>
         <p> Already have an account? Log In <span class="login">here</span>. </p>
         
-        <input class="btn btn-primary close_field" type="submit" value="close">
+        <input class="btn btn-info close_field" type="submit" value="close">
     </div>
 
 <!-- ADD-TRADE FIELD-->
@@ -270,19 +273,27 @@
               </label>
             BUY
         </div>
-      
-        <input class="btn btn-primary" type="submit" value="Add trade" name="add_trade">
+        <div class="d-flex justify-content-around">
+            <input class="btn btn-info" type="submit" value="Add trade" name="add_trade">
+            <input class="btn btn-info close_field" type="submit" value="close">
+        </div>
     </form>
-    <p> Don't have an account? Register <span id="register">here</span>. </p>
-    
-    <input class="btn btn-primary close_field" type="submit" value="close">
 </div>  
-
-<div id="TESTTEST"></div>
 
 {% endblock %}
 
 {% block script %}
+
+<!-- check if user logged in  -->
+{% if user.is_authenticated %}
+    <script>
+        var user_signed_in = true;
+    </script>
+{% else %} 
+    <script>
+        var user_signed_in = false;
+    </script>
+{% endif %}
 
 <script> 
     var trade_history_data = JSON.parse("{{trade_data_JSON|escapejs}}"); 

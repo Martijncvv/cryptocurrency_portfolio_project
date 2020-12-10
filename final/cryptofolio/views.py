@@ -70,7 +70,6 @@ def index(request):
             trade.save()
             coin_page_name = coin_name
 
-
         # ADD PORTFOLIO
         if "addportfolio" in request.POST:
             coin_name = request.POST["addportfolio"]
@@ -94,6 +93,7 @@ def index(request):
             confirmation = request.POST["confirmation"]
             if password != confirmation:
                 return render(request, "cryptofolio/index.html", {
+                    "coin_page_name": coin_page_name.strip(),
                     "message_register": "Passwords must match."
                 })
 
@@ -104,13 +104,13 @@ def index(request):
 
             except ValueError:
                 return render(request, "cryptofolio/index.html", {
-                    "message_register": "Wrong input.",
-                     "HELPMESSAGE": "REGISTER ValueError"
+                    "coin_page_name": coin_page_name.strip(),
+                    "message_register": "Wrong input."
                 })
             except IntegrityError:
                 return render(request, "cryptofolio/index.html", {
-                    "message_register": "Username already taken.",
-                    "HELPMESSAGE": "REGISTER IntegrityError"
+                    "coin_page_name": coin_page_name.strip(),
+                    "message_register": "Username already taken."
                 })
             login(request, user)
 
@@ -132,7 +132,8 @@ def index(request):
                 username = User.objects.get(email = email).username
             except:
                 return render(request, "cryptofolio/index.html", {
-                    "message_login": "User does not exist"
+                    "coin_page_name": coin_page_name.strip(),
+                    "message_login": "User does not exist."
                 })
 
             user = authenticate(request, username = username, password = password)
@@ -142,12 +143,12 @@ def index(request):
                 login(request, user)
             else:
                 return render(request, "cryptofolio/index.html", {
+                    "coin_page_name": coin_page_name.strip(),
                     "message_login": "Invalid email and/or password."})
     
     # gets user's trade history, portfolio coins
     trade_history = Trade.objects.filter(user = user)
     user_portfolio = Portfolio.objects.filter(user = user)
-
 
     # calculates current holdings of user
     # iterate over every coin in portfolio, calculate current balance and add to list
@@ -184,7 +185,6 @@ def index(request):
     # create JSON variable to send trade data to Javascript
     trade_data_JSON = dumps(trade_history_list) 
 
-
     # converts notes data to JSON to send to Javascript
     note_dict = {}
     for coin in user_portfolio:
@@ -192,7 +192,6 @@ def index(request):
     # create JSON variable to send note data to Javascript
     notes_data_JSON = dumps(note_dict) 
 
-    
     return render(request, "cryptofolio/index.html", {
         "trade_history": trade_history,
         "user_portfolio": user_portfolio,
@@ -201,6 +200,3 @@ def index(request):
         "trade_data_JSON": trade_data_JSON,
         "notes_data_JSON": notes_data_JSON,
     })
-
-
-    # https://www.geeksforgeeks.org/how-to-pass-data-to-javascript-in-django-framework/

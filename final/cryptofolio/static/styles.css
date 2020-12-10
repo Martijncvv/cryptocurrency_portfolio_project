@@ -19,20 +19,24 @@ ul, li {
   padding: 0;
 }
 
-.frontfield {
-  width: 600px;
-  height: 600px;
-  padding: 40px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+/* POP-UP SCREENS */
+/* Add trade  */
+  .frontfield {
+    width: 600px;
+    height: 400px;
+    padding: 30px 40px 10px 40px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
-  border: 1px solid rgb(48, 110, 245);
-  background-color: rgb(172, 233, 235);
-  
-  z-index: 999;
-}
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(53, 169, 180, 0.562);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(53, 169, 180, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281); 
+    z-index: 999;
+  }
+
 
 /* NAVBAR */
 #navbar_left {
@@ -292,23 +296,21 @@ h1 {
   }
 
 /* Note block */
-#coin_note_block {
-  margin: 10px 0 0 5px;
-  padding: 20px 30px;
-  height: 800px;
+  #coin_note_block {
+    margin: 10px 0 0 5px;
+    padding: 20px 30px;
+    height: 800px;
 
-  background-color: rgb(255, 255, 255);
-  border-radius: 3px;
-  box-shadow: 0 4px 8px 0 rgba(53, 169, 180, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281); 
-}
+    background-color: rgb(255, 255, 255);
+    border-radius: 3px;
+    box-shadow: 0 4px 8px 0 rgba(53, 169, 180, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281); 
+  }
 
-#coin_note_field {
-  padding: 5px;
-  border: 1px solid rgba(53, 169, 180, 0.562);
-  border-radius: 3px;
-}
-
-
+  #coin_note_field {
+    padding: 5px;
+    border: 1px solid rgba(53, 169, 180, 0.562);
+    border-radius: 3px;
+  }
 
 
 /* GENERAL  */
@@ -325,10 +327,6 @@ h1 {
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(53, 169, 180, 0.8)
   }
-
-
-
-
 
 /* ////////////////////////////////// */
 /* SLIDER

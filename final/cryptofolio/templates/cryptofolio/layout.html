@@ -40,66 +40,27 @@
                     </li>
                     
                     <li class="nav-item">
-                        <button class="btn btn-sm btn-info nav_button" id="explore">Explore</button>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <button class="btn btn-sm btn-info nav_button" id="settings">Settings</button>
+                        <button class="btn btn-sm btn-info nav_button align-items-center" id="explore">Explore</button>
                     </li>
                     
-                    <li class="nav-item">
+                    <li class="nav-item" id="display_settings">
+                        <button class="btn btn-sm btn-info nav_button align-items-center" id="settings">Settings</button>
+                    </li>
+                
+                    <li class="nav-item" id="display_logout">
                         <form action="{% url 'index' %}" method="POST">
                             {% csrf_token %}
-                            <button class="btn btn-sm btn-info nav_button" id="logout" name="logout">Log-Out</button>
+                            <button class="btn btn-sm btn-info nav_button align-items-center" id="logout" name="logout">Log-Out</button>
                         </form>
                     </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <li class="nav-item">
-                            <button class="btn btn-sm btn-info login nav_button">Log-in</button>
-                        </li>
+
+                    <li class="nav-item" id="display_login">
+                        <button class="btn btn-sm btn-info login nav_button align-items-center">Log-in</button>
                     </li>
-                    {% endif %} 
+                    
                 </ul>
             </div>
         </div>
-
-      
-
-        
-        <!-- <div class="row " id="navbar">
-            <div class="col">
-                <ul class="nav justify-content-end">
-                    <li class="nav-item">
-                        <button class="btn btn-sm btn-primary" id="explore">Explore</button>
-                    </li>
-                   
-                        <li class="nav-item">
-                            <button class="btn btn-sm btn-primary" id="settings">Settings</button>
-                        </li>
-                 
-                        <form action="{% url 'index' %}" method="POST">
-                            {% csrf_token %}
-                            <button class="btn btn-sm btn-primary" id="logout" name="logout">Log-Out</button>
-                        </form>
-
-                 
-                        <li class="nav-item">
-                            <button class="btn btn-sm btn-primary  login">Log-in</button>
-                        </li>
-                                     
-                </ul>
-            </div>
-        </div> -->
-        
-        <!-- {% if user.is_authenticated %}
-            Signed in as <strong>{{ user.username }}</strong>.
-        {% else %}
-            Not signed in.
-        {% endif %} -->
-
-
-
     
         {% block body %}
         {% endblock %}
