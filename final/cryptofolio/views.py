@@ -117,7 +117,9 @@ def index(request):
         # LOGOUT
         if "logout" in request.POST:
             logout(request)
-            return render(request, "cryptofolio/index.html")
+            return render(request, "cryptofolio/index.html", {
+                "coin_page_name": coin_page_name.strip(),
+            })
 
 
         #LOGIN

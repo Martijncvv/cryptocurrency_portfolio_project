@@ -143,14 +143,12 @@ function coin_info(coin) {
         document.getElementById("coin_info_description").innerHTML = data.description.en;
         
         // Add note to note field if note exists
-        document.getElementById("coin_note_field").innerHTML = notes_data[data.id];
-
-        // if (notes_data[data.id] == true) {
-        //     document.getElementById("coin_note_field").innerHTML = notes_data[data.id];
-        // }
-        // else {
-        //     document.getElementById("coin_note_field").innerHTML = "Write a note about " + data.name + ".";
-        // }
+        document.getElementById("coin_note_field").innerHTML = "Write a note about " + data.name + ".";
+        
+        if (notes_data[data.id] != undefined) {
+            document.getElementById("coin_note_field").innerHTML = notes_data[data.id];
+        }
+        
 
         // Get current coin prices
         // Add prices to portfolio overview table
@@ -235,7 +233,7 @@ function trade_history() {
         // add trade history coin name
         let li_coin_name  = document.createElement('li');
         li_coin_name.innerHTML = trade.coin_name;
-        li_coin_name.setAttribute("class", "trade_history_coin_name");
+        li_coin_name.setAttribute("class", "trade_history_overview_data");
 
         // check if 'buy' or 'sell' trade and change styling
         if (trade.tradetype == "BUY") {
@@ -249,14 +247,20 @@ function trade_history() {
         // add trade history price
          let li_price  = document.createElement('li');
          li_price.innerHTML = trade.price;
-         li_price.setAttribute("class", "trade_history_price");
+         li_price.setAttribute("class", "trade_history_overview_data");
          document.getElementById("trade_history_price").append(li_price);
 
         // add trade history amount
         let li_amount  = document.createElement('li');
         li_amount.innerHTML = trade.amount;
-        li_amount.setAttribute("class", "trade_history_amount");
+        li_amount.setAttribute("class", "trade_history_overview_data");
         document.getElementById("trade_history_amount").append(li_amount);
+
+        // add trade history time
+        let li_time  = document.createElement('li');
+        li_time.innerHTML = new Date(trade.time).toLocaleDateString("en-US")
+        li_time.setAttribute("class", "trade_history_overview_data");
+        document.getElementById("trade_history_time").append(li_time);
     })
 }
 
@@ -298,7 +302,7 @@ function trending_coins() {
         trending_data.coins.forEach((coin) => {
             let trending_coin_button = document.createElement('button');
             trending_coin_button.innerHTML = coin.item.id;
-            trending_coin_button.setAttribute("class", "btn btn-sm btn-primary trending_coin_button");
+            trending_coin_button.setAttribute("class", "btn btn-sm btn-info trending_coin_button");
            
             trending_coin_button.setAttribute("onClick", "coin_info('"+coin.item.id+"')");
             document.getElementById("trending_coins").append(trending_coin_button);
@@ -380,19 +384,7 @@ function coin_chart(coin_name, time_frame) {
         document.getElementById("coin_chart_timeframe_button_" + time_frame).setAttribute("class", "btn btn-primary coin_chart_timeframe_button active");
 }
 
-function portfolio_history_chart(time_frame) {
-    // set portfolio value chart timeframe header
-      // set coin value chart timeframe header
-      if (time_frame == 1) {
-        document.getElementById("portfolio_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " day"
-    }
-    else if (time_frame == 365) {
-        document.getElementById("portfolio_chart_timeframe_header").innerHTML = "Timeframe: 1 year";
-    }
-    else {
-        document.getElementById("portfolio_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " days"
-    }
-    
+function portfolio_history_chart(time_frame) {   
     // create array to store dictionaries with portfolio_value:timestamp data
     portfolio_total_value_timestamp_array = [];
 
@@ -487,9 +479,12 @@ function portfolio_history_chart(time_frame) {
         xkey: "time",
         ykeys: ["value"],
         labels: ["$"],
+        preUnits: "$",
         hideHover: "always",
         pointSize: "0",
-        lineWidth: "0"
+        lineWidth: "0",
+        // fillOpacity: "1",
+        lineColors: ["#35a9b4"],
         });
     });
       // create portfolio chart timeframe buttons
@@ -499,14 +494,14 @@ function portfolio_history_chart(time_frame) {
         let coin_chart_timeframe_button = document.createElement('button');
         coin_chart_timeframe_button.innerHTML = tf;
         coin_chart_timeframe_button.setAttribute("id", "portfolio_chart_timeframe_button_" + tf);
-        coin_chart_timeframe_button.setAttribute("class", "btn btn-sm btn-primary portfolio_chart_timeframe_button");
+        coin_chart_timeframe_button.setAttribute("class", "btn btn-sm btn-info portfolio_chart_timeframe_button");
         
         // coin_chart_timeframe_button.setAttribute("onClick", "coin_chart('"+ coin_name + "'" +","+"'"+ tf +"')");
         coin_chart_timeframe_button.setAttribute("onClick", "portfolio_history_chart('" + tf +"')");
         document.getElementById("portfolio_chart_timeframe_buttons").append(coin_chart_timeframe_button);
     });
     // change active button design
-    document.getElementById("portfolio_chart_timeframe_button_" + time_frame).setAttribute("class", "btn btn-primary portfolio_chart_timeframe_button active");
+    document.getElementById("portfolio_chart_timeframe_button_" + time_frame).setAttribute("class", "btn btn-info portfolio_chart_timeframe_button active");
 }
 
 
@@ -588,3 +583,7 @@ function twitter_feed(twitter_handle) {
       );
 }
  // TWITTER WIDGET SCRIPT CLOSE
+
+
+
+ 

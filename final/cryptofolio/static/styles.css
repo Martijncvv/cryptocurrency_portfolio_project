@@ -1,6 +1,9 @@
 body {
-  margin: 5px 3%;
-  background-color: #e9e9e9fa; 
+ 
+}
+h2 {
+  font-size: large;
+  color: rgb(236, 236, 236);
 }
 
 ul, li { 
@@ -19,9 +22,14 @@ ul, li {
   padding: 0;
 }
 
+#navbar {
+  height: 60px;
+  background-color: rgb(53, 64, 82);
+}
+
 .frontfield {
-  width: 40%;
-  height: 70%;
+  width: 600px;
+  height: 600px;
   padding: 40px;
   position: fixed;
   top: 50%;
@@ -35,6 +43,12 @@ ul, li {
 }
 
 /* LEFT SIDEBAR  */
+#left_sidebar {
+  /* margin-bottom: 5px; */
+  padding: 0 1% 30px 1%;
+  background-color: rgb(53, 64, 82);
+}
+
    /* trending  */
   #trending_coins {
     margin-bottom: 20px;
@@ -42,27 +56,34 @@ ul, li {
   .trending_coin_button {
     margin: 2px;
     height: 30px;
-    width: 200px; 
     display: block;
 
     text-transform: capitalize;
+    font-size: medium;
     font-weight: 600;
     text-align: center;
     
-    background-color: #ffffff; 
-    color: rgb(26, 26, 26);
+    background-color: rgba(102, 205, 171, 0);; 
+    border: rgba(102, 205, 171, 0);
+    color: rgb(165, 174, 189);
   } 
 
   /* portfolio  */
+  #portfolio_overview_table {
+    margin-bottom: 20px;
+    padding: 5px;
+    background-color: rgb(236, 236, 236);
+    border-radius: 3px;
+    box-shadow: 0 4px 8px 0 rgba(131, 131, 160, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281);
+    
+  }
+
   #portfolio_overview_table_header {
     margin: 0;
 
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 700;
-
-    background-color: #ffffff; 
-    color: rgb(26, 26, 26); 
   }
 
   .portfolio_coin {
@@ -70,9 +91,9 @@ ul, li {
     height: 30px;
     border: none;
 
-    background-color: #ffffff; 
+    background-color: rgba(236, 236, 236, 0);
+    
     color: rgb(26, 26, 26); 
-
     text-transform: capitalize;
     font-size: 14px;
     font-weight: 600;
@@ -82,15 +103,27 @@ ul, li {
    .portfolio_coin_amount, .portfolio_coin_price, .portfolio_coin_total_value {
     padding-top: 4px;
     height: 30px;
-    background-color: #ff1616f6; 
-    
-    background-color: #ffffff; 
     font-size: 14px;
   }
 
-  /* Portfolio chart  */
+  /* portfolio chart  */
+  #portfolio_chart_data {
+    margin: 20px 0 20px 0;
+    }
+
+  #portfolio_chart_data p {
+    color: rgb(165, 174, 189);
+  }
+
+  #portfolio_chart {
+    margin-top: 10px;
+    background-color: rgb(236, 236, 236);
+    border-radius: 3px;
+    box-shadow: 0 4px 8px 0 rgba(131, 131, 160, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281);
+  }
+
   #portfolio_chart_timeframe_buttons {
-    margin-bottom: 20px;
+    margin: 10px 0 20px 0;
     display: flex;
     justify-content: center;
   }
@@ -99,15 +132,24 @@ ul, li {
   }
   /* Trade history  */
   #trade_history_block {
+    padding: 2px 0 10px 10px;
     max-height: 150px;
     overflow-y: scroll;
+
+    background-color: rgb(236, 236, 236);
+    border-radius: 3px;
+    box-shadow: 0 4px 8px 0 rgba(131, 131, 160, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281);
+  }
+  .trade_history_collumn{
+    margin-bottom: 10px;
   }
   #trade_history_header {
+    margin-bottom: 1px;
     font-weight: 500;
   }
-
-  #trade_history_coin_name {
+  .trade_history_overview_data {
     text-transform: capitalize;
+    font-size: 12px;
   }
  
 /* MIDDLE BAR  */
@@ -195,16 +237,11 @@ ul, li {
     background: #f1f1f1;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(27, 100, 236, 0.425);
+    background: rgba(53, 169, 180, 0.4);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: rgba(53, 169, 180, 0.8)
   }
-
-
-
-
-
 
 
 
