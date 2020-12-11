@@ -81,11 +81,12 @@ def index(request):
                 Portfolio.objects.filter(user = user, coin_name = coin_name).delete()
             coin_page_name = coin_name
 
+
         # # DELETE TRADE
-        # if "delete_trade_id" in request.POST:
-        #     trade_id = request.POST["delete_trade_id"]
-        #     Trade.objects.filter(user = user, id = trade_id).delete()
-        #     coin_page_name = coin_name
+        if "delete_trade_id" in request.POST:
+            trade_id = request.POST["delete_trade_id"]
+            Trade.objects.filter(user = user, id = trade_id).delete()
+
 
         # CHANGE LANGUAGE PREFERENCE
         if "language_settings" in request.POST:
@@ -135,10 +136,6 @@ def index(request):
         # LOGOUT
         if "logout" in request.POST:
             logout(request)
-            return render(request, "cryptofolio/index.html", {
-                "coin_page_name": coin_page_name.strip(),
-            })
-
 
         #LOGIN
         # Attempt to sign user in

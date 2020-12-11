@@ -86,11 +86,12 @@ Project start
 ### Friday 11-12-2020
 - Added language settings functionality
 - Fixed general info overview; long coin name
+- Added 'delete trade' button
+
 
 delete trade; get trade ID, send with form to django, delete
 fix portfolio overview, long name
 
-fix download trade data design
 delete from portfolio warning
 delete from note warning
 delete from rade warning

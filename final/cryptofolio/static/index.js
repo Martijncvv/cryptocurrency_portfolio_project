@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     // get portfolio info and show fields if user is signed in
     if (user_signed_in) {
-        console.log("User logged_IN");
         logged_in()
         // draw portfolio history chart
         portfolio_history_chart(7);
@@ -75,12 +74,14 @@ document.addEventListener('DOMContentLoaded', function() {
         trade_history()
     }
     else {
-        console.log("User logged_OUT");
         logged_out()
     }
     
     // display trending coins
     trending_coins();
+
+    // set prefered language
+    document.getElementById("current_language").innerHTML = "Current language: " + language_preference_data;
 
     // load all coin info
     coin_page_name = document.getElementById('coin_page_name').innerHTML;
@@ -99,9 +100,16 @@ function coin_info(coin) {
     // disable the submit button again:
     submit_search.disabled = true;
 
+    // fetch coin data
     fetch("https://api.coingecko.com/api/v3/coins/"+ coin.toLowerCase() +"?localization=true&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
     .then(response => response.json())
     .then(data => {
+        // check if coin exists
+        if ("error" in data) {
+            document.getElementById('search_error').innerHTML = data.error;
+            return;
+        }
+        document.getElementById('search_error').innerHTML = "";
     // PORTFOLIO
         // change "add portfolio" button if coin is in portfolio      
         let coin_in_portfolio = false;
@@ -147,9 +155,7 @@ function coin_info(coin) {
         document.getElementById("coin_info_ath_date").innerHTML = "(" + data.market_data.ath_date.usd.split('T')[0] + ")";
         
         
-        // get prefered language from DB
-        document.getElementById("current_language").innerHTML = "Current language: " + language_preference_data;
-        // check if description is available
+        // get prefered language from DB and check if description is available
         if (data.description[language_preference_data] != "") {
             document.getElementById("coin_info_description").innerHTML = data.description[language_preference_data];
         }
@@ -164,7 +170,6 @@ function coin_info(coin) {
         if (notes_data[data.id] == null) {
             document.getElementById("coin_note_field").innerHTML = "Write a note about " + data.name + ".";
             document.getElementById("delete_note_button").style.display = "none"; 
-            console.log("empty")
             
         }
         else {
@@ -273,6 +278,12 @@ function add_trade() {
 }
 
 function trade_history() {
+    // display number of trades in 'portfolio info'
+    document.getElementById("total_nr_trades").innerHTML = "Number of trades: " + trade_history_data.length;
+
+    document.getElementById("trade_history_delete_buttons").innerHTML = "";
+
+
     // loop over the trade history array in reversed order
     trade_history_data.slice().reverse().forEach(function (trade) {
         // add trade history coin name
@@ -308,18 +319,29 @@ function trade_history() {
         document.getElementById("trade_history_time").append(li_time);
 
 
-    //    // add delete_trade button
-    //    trade_delete_button =
-    //    `<form action="{% url "index" %}" method="POST">
-           
-    //        <button class="btn btn-sm btn-info" value="` + trade.id + `" id="delete_trade_button" name="delete_trade_id"></button>
-    //    </form>`;
-
-    //    let li_delete_trade  = document.createElement('div');
-    //    li_delete_trade.innerHTML = trade_delete_button;
-    //    li_delete_trade.setAttribute("class", "trade_delete_button");
-    //    document.getElementById("trade_history_delete_buttons").append(li_delete_trade);
-
+        // add delete_trade button
+        // get csrf token
+        csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        // create form 
+        let delete_trade_form = document.createElement('form');
+        delete_trade_form.setAttribute("action", "/");
+        delete_trade_form.setAttribute("method", "POST");
+        delete_trade_form.setAttribute("class", "d-flex flex-column justify-content-center align-items-center delete_trade_form");
+        delete_trade_form.setAttribute("id", "delete_trade_form_" + trade.id);
+        document.getElementById("trade_history_delete_buttons").append(delete_trade_form);
+        // add csrf token to form
+        let csrf_token = document.createElement('input');
+        csrf_token.type = 'hidden';
+        csrf_token.name = 'csrfmiddlewaretoken';
+        csrf_token.value = csrftoken;
+        document.getElementById("delete_trade_form_" + trade.id).append(csrf_token);
+        // add button to form
+        let delete_trade_button = document.createElement('button');
+        delete_trade_button.setAttribute("class", "btn btn-sm btn-outline-danger");
+        delete_trade_button.setAttribute("id", "delete_trade_button_" + trade.id);
+        delete_trade_button.setAttribute("name", "delete_trade_id");
+        delete_trade_button.setAttribute("value", trade.id);
+        document.getElementById("delete_trade_form_" + trade.id).append(delete_trade_button);
     })
 }
 
@@ -331,6 +353,9 @@ function total_coin_values() {
     portfolio_coin_amounts = document.querySelectorAll('.portfolio_coin_amount');
     total_value_list = []
     total_portfolio_value = 0;
+
+    // add 'number of coins in portfolio' to portfolio info
+    document.getElementById("portfolio_nr_coins").innerHTML = "Number of coins: " + portfolio_coin_prices.length;
 
     // calculate total values of specific coin
     for (i = 0; i < portfolio_coin_prices.length; i++) {
@@ -350,7 +375,7 @@ function total_coin_values() {
         document.querySelector('.portfolio_total_value_list').append(li_total_value);
     });
     // add total portfolio value to html
-    document.getElementById("total_portfolio_value").innerHTML = "Total value: " + total_portfolio_value.toLocaleString();
+    document.getElementById("total_portfolio_value").innerHTML = "Total value: $" + total_portfolio_value.toLocaleString();
 }
 
 function trending_coins() {

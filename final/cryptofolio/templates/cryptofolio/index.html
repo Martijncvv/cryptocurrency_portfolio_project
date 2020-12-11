@@ -16,6 +16,7 @@
             <input id="search_value" placeholder = "Coin name" type="text">
             <input id="submit_search" type="submit" value="Search" class="btn btn-sm btn-info">
         </div>
+        <p id="search_error" ></p>
 
 <!-- TRENDING  -->
         <h2>Trending</h2>
@@ -60,9 +61,10 @@
             <div id="portfolio_chart_data">
                 <h2>Portfolio Info</h2> 
                 <p id="total_portfolio_value">None</p> 
+                <p id="portfolio_nr_coins">None</p> 
+                <p id="total_nr_trades">None</p> 
     
                 <h2>Portfolio history chart</h2>
-                
                 <div id="portfolio_chart" style="height: 350px;"> </div>
                 <div id="portfolio_chart_timeframe_buttons"> </div>
             </div>
@@ -70,45 +72,28 @@
 <!-- TRADE HISTORY  -->
             <h2>Trade history</h2>
             <div id="trade_history_block">
-                <div class="row">
-                    <div class="col-3 trade_history_collumn">
-                        <p id="trade_history_header">Coin</p>
-                        <ul id="trade_history_coin_name"> </ul>
-                    </div>
-                    <div class="col-3 trade_history_collumn">
-                        <p id="trade_history_header">Price</p>
-                        <ul id="trade_history_price"> </ul>
-                    </div> 
-                    <div class="col-3 trade_history_collumn">
-                        <p id="trade_history_header">Amount</p>
-                        <ul id="trade_history_amount"> </ul>
-                    </div> 
-                    <div class="col-3 trade_history_collumn">
-                        <p id="trade_history_header">Date</p>
-                        <ul id="trade_history_time"> </ul>
-                    </div> 
-                
-                 <!-- <div class="d-flex justify-content-between">
-                    <div class="">
-                        <p id="trade_history_header">Coin</p>
-                        <ul id="trade_history_coin_name"> </ul>
-                    </div>
-                    <div class="">
-                        <p id="trade_history_header">Price</p>
-                        <ul id="trade_history_price"> </ul>
-                    </div> 
-                    <div class="">
-                        <p id="trade_history_header">Amount</p>
-                        <ul id="trade_history_amount"> </ul>
-                    </div> 
-                    <div class="">
-                        <p id="trade_history_header">Date</p>
-                        <ul id="trade_history_time"> </ul>
-                    </div> 
-                    <div class="">
-                        <p id="trade_history_header">TEST</p>
-                        <div id="trade_history_delete_buttons"> </div>
-                    </div>  -->
+                <div class="row d-flex justify-content-around">
+                        <div>
+                            <p class="trade_history_header">Coin</p>
+                            <ul id="trade_history_coin_name"> </ul>
+                        </div>
+                        <div>
+                            <p class="trade_history_header">Price</p>
+                            <ul id="trade_history_price"> </ul>
+                        </div> 
+                        <div>
+                            <p class="trade_history_header">Amount</p>
+                            <ul id="trade_history_amount"> </ul>
+                        </div> 
+                        <div>
+                            <p class="trade_history_header">Date</p>
+                            <ul id="trade_history_time"> </ul>
+                        </div> 
+                        <div id="delete_trade_column">
+                            <br>
+                            <div class="d-flex flex-column justify-content-center align-items-center" id="trade_history_delete_buttons"> </div>
+                        </div> 
+                    <!-- </div> -->
                 </div>
             </div>
         </div>
@@ -116,7 +101,7 @@
     
 <!-- COIN CHART  -->
     <div class="col-9" id="right_sidebar">
-        <div class="row">
+        <div class="row" id="coin_info_row">
             <div class="col text-center" id="coin_chart_block">
 
                 <h4 id="coin_chart_timeframe_header"></h4>
@@ -157,7 +142,7 @@
                     </div>
                     <div class="col-3">
                         <ul>
-                            <li id="coin_info_name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></li>
+                            <li id="coin_info_name" ></li>
                             <li id="coin_info_ticker"></li>
                             <li id="coin_info_price"></li>
                             <li id="coin_info_marketcap"></li>
@@ -341,6 +326,8 @@
         var user_signed_in = false;
     </script>
 {% endif %}
+
+{% csrf_token %}
 
 <script> 
     var trade_history_data = JSON.parse("{{trade_data_JSON|escapejs}}"); 

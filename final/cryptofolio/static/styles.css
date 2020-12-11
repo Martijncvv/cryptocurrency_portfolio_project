@@ -105,6 +105,9 @@ h1 {
   #search_block {
     margin-bottom: 20px;
   }
+  #search_error {
+    color: white;
+  }
 
    /* trending  */
   #trending_coins {
@@ -129,6 +132,10 @@ h1 {
   #portfolio_overview_table {
     margin-bottom: 20px;
     padding: 5px;
+
+    max-height: 280px;
+    overflow-y: scroll;
+
     background-color: rgb(255, 255, 255);
     border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(131, 131, 160, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281);
@@ -201,7 +208,7 @@ h1 {
   .trade_history_collumn{
     margin-bottom: 10px;
   }
-  #trade_history_header {
+  .trade_history_header {
     margin-bottom: 1px;
     font-weight: 500;
   }
@@ -209,6 +216,16 @@ h1 {
     text-transform: capitalize;
     font-size: 12px;
   }
+
+  #delete_trade_column {
+    width: 10px;
+  }
+  
+  .delete_trade_form {
+    padding-right: 20%;
+    height: 18px;
+  }
+
 
 /* MIDDLE BAR  */
   #right_sidebar {
@@ -243,7 +260,7 @@ h1 {
   #twitter_block {
     margin: 10px 5px 0 0;
     padding: 20px 50px;
-    height: 800px;
+    height: 930px;
 
     background-color: rgb(255, 255, 255);
     border-radius: 3px;
@@ -251,7 +268,7 @@ h1 {
   }
 
   #twitter_channel {
-    height: 700px;
+    height: 800px;
     overflow-y: scroll;
     border: 1px solid rgba(53, 169, 180, 0.562);
     border-radius: 3px;
@@ -289,7 +306,11 @@ h1 {
     
   #coin_info_name {
     text-transform: capitalize;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
+
   #coin_info_ticker {
     text-transform: uppercase;
   }
@@ -316,7 +337,7 @@ h1 {
   #coin_note_block {
     margin: 10px 0 0 5px;
     padding: 20px 30px;
-    height: 800px;
+    max-height: 400px;
 
     background-color: rgb(255, 255, 255);
     border-radius: 3px;
@@ -325,6 +346,8 @@ h1 {
 
   #coin_note_field {
     padding: 5px;
+    max-height: 200px;
+    overflow-y: scroll;
     border: 1px solid rgba(53, 169, 180, 0.562);
     border-radius: 3px;
   }
