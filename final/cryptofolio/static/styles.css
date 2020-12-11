@@ -163,6 +163,9 @@ h1 {
     font-size: 14px;
     font-weight: 600;
     text-align: left;
+
+    white-space: nowrap;
+    overflow: hidden;
   }
 
    .portfolio_coin_amount, .portfolio_coin_price, .portfolio_coin_total_value {
@@ -356,7 +359,7 @@ h1 {
 /* GENERAL  */
   /* scrollbar  */
   ::-webkit-scrollbar {
-    width: 15px;
+    width: 12px;
   }
   ::-webkit-scrollbar-track {
     background: #f1f1f1;

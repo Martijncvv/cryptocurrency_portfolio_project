@@ -283,7 +283,6 @@ function trade_history() {
 
     document.getElementById("trade_history_delete_buttons").innerHTML = "";
 
-
     // loop over the trade history array in reversed order
     trade_history_data.slice().reverse().forEach(function (trade) {
         // add trade history coin name
@@ -382,8 +381,11 @@ function trending_coins() {
     fetch("https://api.coingecko.com/api/v3/search/trending")
     .then(response => response.json())
     .then(trending_data => { 
+        console.log(trending_data);
         document.getElementById("trending_coins").innerHTML = "";
         trending_data.coins.forEach((coin) => {
+
+            // add trending coin link
             let trending_coin_button = document.createElement('button');
             trending_coin_button.innerHTML = coin.item.id;
             trending_coin_button.setAttribute("class", "btn btn-sm btn-info trending_coin_button");
