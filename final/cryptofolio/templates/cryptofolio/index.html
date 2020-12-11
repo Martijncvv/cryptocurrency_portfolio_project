@@ -16,7 +16,6 @@
             <input id="search_value" placeholder = "Coin name" type="text">
             <input id="submit_search" type="submit" value="Search" class="btn btn-sm btn-info">
         </div>
-          
 
 <!-- TRENDING  -->
         <h2>Trending</h2>
@@ -30,7 +29,7 @@
                     <p id="portfolio_overview_table_header">Coin</p>
                     {% for coin in user_portfolio %}
                     <div>
-                        <button class="btn btn-sm btn-info portfolio_coin" onClick="coin_info('{{coin.coin_name}}')" >{{ coin.coin_name }}</button>
+                        <button class="btn btn-sm btn-info portfolio_coin" onClick="coin_info('{{coin.coin_name}}')">{{ coin.coin_name }}</button>
                     </div>
                     {%  endfor %}
                 </div>
@@ -88,6 +87,28 @@
                         <p id="trade_history_header">Date</p>
                         <ul id="trade_history_time"> </ul>
                     </div> 
+                
+                 <!-- <div class="d-flex justify-content-between">
+                    <div class="">
+                        <p id="trade_history_header">Coin</p>
+                        <ul id="trade_history_coin_name"> </ul>
+                    </div>
+                    <div class="">
+                        <p id="trade_history_header">Price</p>
+                        <ul id="trade_history_price"> </ul>
+                    </div> 
+                    <div class="">
+                        <p id="trade_history_header">Amount</p>
+                        <ul id="trade_history_amount"> </ul>
+                    </div> 
+                    <div class="">
+                        <p id="trade_history_header">Date</p>
+                        <ul id="trade_history_time"> </ul>
+                    </div> 
+                    <div class="">
+                        <p id="trade_history_header">TEST</p>
+                        <div id="trade_history_delete_buttons"> </div>
+                    </div>  -->
                 </div>
             </div>
         </div>
@@ -136,7 +157,7 @@
                     </div>
                     <div class="col-3">
                         <ul>
-                            <li id="coin_info_name"></li>
+                            <li id="coin_info_name" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"></li>
                             <li id="coin_info_ticker"></li>
                             <li id="coin_info_price"></li>
                             <li id="coin_info_marketcap"></li>
@@ -191,8 +212,21 @@
 
 <!-- SETTINGS FIELD  -->
 <div id="settings_field" class="frontfield" style="display: none">
-    <h2>Settings</h2>
+    <h3>Settings</h3>
+    <h4>Language</h4>
+    <form action="{% url 'index' %}" method="POST">
+        {% csrf_token %}
+        <select id="selected_language" name="selected_language">
+            <option value="en">English</option>
+            <option value="ko">Korean</option>
+            <option value="ja">Japanese</option>
+        </select>
+        <button class="btn btn-sm btn-info" value="" id="language_settings_button" name="language_settings">Save language preference</button>
+    </form>
+    <p id="current_language">Current language: </p>
     
+    <br> <br>
+    <h4>Trading Data</h4>
     <div id="settings_download_data">
         <button class="btn btn-sm btn-info" onClick="download_trade_data()">Generate trade data CSV</button>
     </div>
@@ -283,8 +317,11 @@
     <div class="col-3" id="footer_left"> </div>
     <div class="col-6 d-flex justify-content-center align-items-end" id="footer_right"> 
         <div class="d-flex justify-content-center align-items-center">
-            <p id="cg_branding" >Powered by CoinGecko API  </p> 
-            <img width="14px" src="{% static 'images/CoinGecko_Logo.png' %}" alt="CoinGecko Logo">
+            <p id="cg_branding">Powered by CoinGecko's API</p> 
+            <a href="https://www.coingecko.com/en/api#explore-api"></a>
+                <img width="14px" src="{% static 'images/CoinGecko_Logo.png' %}" alt="CoinGecko Logo">
+            </a>
+            
         </div>
     </div>
     <div class="col-3"> </div>
@@ -308,6 +345,7 @@
 <script> 
     var trade_history_data = JSON.parse("{{trade_data_JSON|escapejs}}"); 
     var notes_data = JSON.parse("{{notes_data_JSON|escapejs}}"); 
+    var language_preference_data = JSON.parse("{{language_preference_JSON|escapejs}}"); 
 </script>
 <script src="{% static 'index.js' %}"></script>
 {% endblock %}

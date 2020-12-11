@@ -152,6 +152,7 @@ h1 {
     
     color: rgb(26, 26, 26); 
     text-transform: capitalize;
+
     font-size: 14px;
     font-weight: 600;
     text-align: left;
@@ -228,7 +229,7 @@ h1 {
     height: 430px ;
   }
   #coin_chart_timeframe_buttons {
-    margin-bottom: 10px;
+    margin-bottom: 3%;
     display: flex;
     justify-content: center;
   

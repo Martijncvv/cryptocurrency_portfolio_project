@@ -9,8 +9,8 @@ class Settings(models.Model):
     User settings data
     """
     user = models.ForeignKey("User", on_delete=models.CASCADE)
-    Language = models.CharField(max_length=6)
-    Currency = models.CharField(max_length=10)
+    language = models.CharField(max_length=6)
+    currency = models.CharField(max_length=10)
 
 
 class Portfolio(models.Model):

@@ -81,6 +81,24 @@ def index(request):
                 Portfolio.objects.filter(user = user, coin_name = coin_name).delete()
             coin_page_name = coin_name
 
+        # # DELETE TRADE
+        # if "delete_trade_id" in request.POST:
+        #     trade_id = request.POST["delete_trade_id"]
+        #     Trade.objects.filter(user = user, id = trade_id).delete()
+        #     coin_page_name = coin_name
+
+        # CHANGE LANGUAGE PREFERENCE
+        if "language_settings" in request.POST:
+            language_preference = request.POST["selected_language"]
+
+            if not (Settings.objects.filter(user = user).exists()):
+                setting = Settings( user = user,
+                                language = request.POST["selected_language"])
+                setting.save()              
+            else: 
+                Settings.objects.filter(user = user).update(language = request.POST["selected_language"])
+            
+
 
         # REGISTER 
         # username = request.POST.get("username", False)
@@ -150,6 +168,12 @@ def index(request):
     trade_history = Trade.objects.filter(user = user)
     user_portfolio = Portfolio.objects.filter(user = user)
 
+    # get user's prefered language
+    if (Settings.objects.filter(user = user).exists()):
+        prefered_language = Settings.objects.get(user = user).language
+    else:
+        prefered_language = "en"
+
     # calculates current holdings of user
     # iterate over every coin in portfolio, calculate current balance and add to list
     user_holdings = []
@@ -175,6 +199,7 @@ def index(request):
         amount_float = float(trade.amount)
 
         trade_dict = {
+            "id": trade.id,
             "time": unixtime,
             "price": float(trade.price),
             "coin_name": trade.coin_name,
@@ -199,4 +224,5 @@ def index(request):
         "user_holdings_amount": user_holdings,
         "trade_data_JSON": trade_data_JSON,
         "notes_data_JSON": notes_data_JSON,
+        "language_preference_JSON": dumps(prefered_language)
     })

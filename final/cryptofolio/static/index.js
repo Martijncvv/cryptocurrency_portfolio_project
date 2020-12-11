@@ -99,7 +99,7 @@ function coin_info(coin) {
     // disable the submit button again:
     submit_search.disabled = true;
 
-    fetch("https://api.coingecko.com/api/v3/coins/"+ coin.toLowerCase() +"?localization=false&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
+    fetch("https://api.coingecko.com/api/v3/coins/"+ coin.toLowerCase() +"?localization=true&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
     .then(response => response.json())
     .then(data => {
     // PORTFOLIO
@@ -146,12 +146,18 @@ function coin_info(coin) {
         document.getElementById("coin_info_atl_date").innerHTML = "(" + data.market_data.atl_date.usd.split('T')[0] + ")";
         document.getElementById("coin_info_ath_date").innerHTML = "(" + data.market_data.ath_date.usd.split('T')[0] + ")";
         
+        
+        // get prefered language from DB
+        document.getElementById("current_language").innerHTML = "Current language: " + language_preference_data;
         // check if description is available
-        if (data.description.en == "") {
-            document.getElementById("coin_info_description").innerHTML = "No description available.";
+        if (data.description[language_preference_data] != "") {
+            document.getElementById("coin_info_description").innerHTML = data.description[language_preference_data];
+        }
+        else if (data.description.en != "") {
+            document.getElementById("coin_info_description").innerHTML = data.description.en;
         }
         else {
-            document.getElementById("coin_info_description").innerHTML = data.description.en;
+            document.getElementById("coin_info_description").innerHTML = "No description available.";
         }
 
         // Add note to note field if note exists, else remove 'delete button'
@@ -165,7 +171,7 @@ function coin_info(coin) {
             document.getElementById("coin_note_field").innerHTML = notes_data[data.id];
             document.getElementById("delete_note_button").style.display = "block"; 
         }
-        console.log(notes_data[data.id])
+
         // Get current coin prices
         // Add prices to portfolio overview table
         document.querySelector(".portfolio_price_list").innerHTML = "";
@@ -206,6 +212,7 @@ function coin_info(coin) {
     // draw coin chart
     coin_chart(coin.toLowerCase(), 30);
 }
+
 function logged_in() {
     document.getElementById("display_settings").style.display = "block";
     document.getElementById("display_logout").style.display = "block";
@@ -299,6 +306,20 @@ function trade_history() {
         li_time.innerHTML = new Date(trade.time).toLocaleDateString("en-US")
         li_time.setAttribute("class", "trade_history_overview_data");
         document.getElementById("trade_history_time").append(li_time);
+
+
+    //    // add delete_trade button
+    //    trade_delete_button =
+    //    `<form action="{% url "index" %}" method="POST">
+           
+    //        <button class="btn btn-sm btn-info" value="` + trade.id + `" id="delete_trade_button" name="delete_trade_id"></button>
+    //    </form>`;
+
+    //    let li_delete_trade  = document.createElement('div');
+    //    li_delete_trade.innerHTML = trade_delete_button;
+    //    li_delete_trade.setAttribute("class", "trade_delete_button");
+    //    document.getElementById("trade_history_delete_buttons").append(li_delete_trade);
+
     })
 }
 
