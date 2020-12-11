@@ -154,12 +154,18 @@ function coin_info(coin) {
             document.getElementById("coin_info_description").innerHTML = data.description.en;
         }
 
-        // Add note to note field if note exists
-        document.getElementById("coin_note_field").innerHTML = "Write a note about " + data.name + ".";
-        if (notes_data[data.id] != undefined) {
-            document.getElementById("coin_note_field").innerHTML = notes_data[data.id];
+        // Add note to note field if note exists, else remove 'delete button'
+        if (notes_data[data.id] == null) {
+            document.getElementById("coin_note_field").innerHTML = "Write a note about " + data.name + ".";
+            document.getElementById("delete_note_button").style.display = "none"; 
+            console.log("empty")
+            
         }
-
+        else {
+            document.getElementById("coin_note_field").innerHTML = notes_data[data.id];
+            document.getElementById("delete_note_button").style.display = "block"; 
+        }
+        console.log(notes_data[data.id])
         // Get current coin prices
         // Add prices to portfolio overview table
         document.querySelector(".portfolio_price_list").innerHTML = "";

@@ -80,3 +80,9 @@ Project start
 ### Thursday 10-12-2020
 - Finished CSS left, middle and right column
 - Fixed multiple errors if user is not logged in; JS data load errors.
+- Removes 'delete note' button if no note available 
+- Added Coingecko API referral
+
+
+delete trade; get trade ID, send with form to django, delete
+

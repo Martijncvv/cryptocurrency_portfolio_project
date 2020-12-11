@@ -81,9 +81,18 @@ h1 {
 }
 
 /* FOOTER */
-  #footer {
+  #footer_left {
     height: 30px;
     background-color: rgb(53, 169, 180);
+  }
+  #footer_right {
+    height: 30px;
+    background-color: rgb(255, 255, 255);
+  }
+  #cg_branding {
+    margin: 0 10px 0 0;
+    color: rgba(53, 64, 82, 0.733);
+    font-size: 12px;
   }
 
 /* LEFT SIDEBAR  */

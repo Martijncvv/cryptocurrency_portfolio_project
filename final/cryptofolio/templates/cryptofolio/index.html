@@ -279,8 +279,15 @@
         </div>
     </form>
 </div>  
-<div id="footer">
-    
+<div class="row">
+    <div class="col-3" id="footer_left"> </div>
+    <div class="col-6 d-flex justify-content-center align-items-end" id="footer_right"> 
+        <div class="d-flex justify-content-center align-items-center">
+            <p id="cg_branding" >Powered by CoinGecko API  </p> 
+            <img width="14px" src="{% static 'images/CoinGecko_Logo.png' %}" alt="CoinGecko Logo">
+        </div>
+    </div>
+    <div class="col-3"> </div>
 </div>
 
 {% endblock %}
