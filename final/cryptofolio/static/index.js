@@ -450,7 +450,8 @@ function trending_tweet_thread_generator() {
             `<img class="trending_coins_image" src="/static/images/CoinGecko_Logo.png" >
             <p>#CG_24h_Trending X Top 5 Trending at @CoinGecko</p>
             <p>Date: `+ new Date().toLocaleDateString() + `</p>
-            <p id="overview_coin_names"> </p>`
+            <p id="overview_coin_names"> </p>
+            <p id="overview_coin_tickers"> </p>`
             
             document.getElementById('trending_tweets').prepend(overview_tweet_div);
     
@@ -459,10 +460,11 @@ function trending_tweet_thread_generator() {
                 overview_coins_info.innerHTML += 
                 `- @` + trending_coins_twitter[i] + `<br>`
             };
-            overview_coins_info.innerHTML += `1/8 <br>`;
+            overview_coins_info.innerHTML += `1/6 <br>`;
             
+            let overview_coin_tickers = document.getElementById('overview_coin_tickers')
             for (i = 0; i < 7; i++){
-                overview_coins_info.innerHTML += `$` + trending_coins_ticker[i] + ` `
+                overview_coin_tickers.innerHTML += `$` + trending_coins_ticker[i] + ` `
             };
         });
     });
@@ -470,20 +472,6 @@ function trending_tweet_thread_generator() {
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function random_coin() {

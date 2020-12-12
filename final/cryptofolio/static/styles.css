@@ -71,6 +71,12 @@ ul, li {
   width: 50px;
   float: right;
 }
+#overview_coin_names {
+  text-transform: capitalize;
+}
+#overview_coin_tickers {
+  text-transform: uppercase;
+}
 
 /* NAVBAR */
 #navbar_left {
