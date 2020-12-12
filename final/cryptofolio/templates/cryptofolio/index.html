@@ -12,6 +12,7 @@
 <div class="row">
     <div class="col-3" id="left_sidebar">
         <h2>Search</h2>
+        
         <div id="search_block" class="d-flex align-items-center">
             <input id="search_value" placeholder = "Coin name" type="text">
             <input id="submit_search" type="submit" value="Search" class="btn btn-sm btn-info">
@@ -19,7 +20,8 @@
         <p id="search_error" ></p>
 
 <!-- TRENDING  -->
-        <h2>Trending (24h)</h2>
+        <h2> Trending (24h) </h2> 
+
         <div id="trending_coins"> </div>
         
 <!-- PORTFOLIO COINS -->
@@ -160,7 +162,7 @@
                 </div>
                 <div class="row" id="coin_description_box">
                     <h4>Description</h4>
-                    <div id="coin_info_description" class="scrollbar scrollbar-primary"> </div>
+                    <div id="coin_info_description"> </div>
                 </div>
             </div>
         </div>
@@ -169,7 +171,7 @@
             <div class="col" id="twitter_block">
                 <h3>Twitter</h3>
                 <div id="twitter_channel"> </div>
-            </div>
+            </div>     
 
 <!-- NOTE  -->
             <div class="col-5" id="coin_note_block">
@@ -209,8 +211,12 @@
         <button class="btn btn-sm btn-info" value="" id="language_settings_button" name="language_settings">Save language preference</button>
     </form>
     <p id="current_language">Current language: </p>
+
+    <h4>Trending tweet thread generator</h4>
+    <div id="trend_tweet_generator">
+        <button class="btn btn-sm btn-info" onClick="trending_tweet_thread_generator()">Create trending tweet thread</button>
+    </div>
     
-    <br> <br>
     <h4>Trading Data</h4>
     <div id="settings_download_data">
         <button class="btn btn-sm btn-info" onClick="download_trade_data()">Generate trade data CSV</button>
@@ -219,6 +225,13 @@
     <input class="btn btn-info close_field" type="submit" value="close">
 </div>
 
+ <!-- TRENDING TWEETS THREADS  -->
+<div id="trending_tweets_thread_display" class="frontfield" style="display: none">
+    <div id="trending_tweets">
+
+    </div>
+    <input class="btn btn-info close_field" type="submit" value="close">
+</div>
 
 <!-- LOGIN FIELD -->
 {% if message_login %}

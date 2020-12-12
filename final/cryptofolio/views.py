@@ -205,9 +205,6 @@ def index(request):
         }
         trade_history_list.append(trade_dict)
 
-     # create JSON variable to send user portfolio to Javascript
-    user_portfolio_JSON = dumps(user_portfolio) 
-
     # create JSON variable to send trade data to Javascript
     trade_data_JSON = dumps(trade_history_list) 
 

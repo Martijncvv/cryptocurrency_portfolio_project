@@ -65,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
             register_field_button.disabled = true;
         }
     }
+    
     // get portfolio info and show fields if user is signed in
     if (user_signed_in) {
         logged_in()
@@ -255,10 +256,11 @@ function settings() {
 }
 
 function close_field() {
-    document.querySelector("#login_field").style.display = "none";
-    document.querySelector("#register_field").style.display = "none";
-    document.querySelector("#addtrade_field").style.display = "none";
-    document.querySelector("#settings_field").style.display = "none";
+    document.getElementById("login_field").style.display = "none";
+    document.getElementById("register_field").style.display = "none";
+    document.getElementById("addtrade_field").style.display = "none";
+    document.getElementById("settings_field").style.display = "none";
+    document.getElementById("trending_tweets_thread_display").style.display = "none";
 }
 
 function add_trade() {
@@ -381,7 +383,7 @@ function trending_coins() {
     fetch("https://api.coingecko.com/api/v3/search/trending")
     .then(response => response.json())
     .then(trending_data => { 
-        console.log(trending_data);
+
         document.getElementById("trending_coins").innerHTML = "";
         trending_data.coins.forEach((coin) => {
 
@@ -395,6 +397,94 @@ function trending_coins() {
         })
     });
 }
+
+
+
+
+function trending_tweet_thread_generator() {
+    document.getElementById("trending_tweets_thread_display").style.display = "block";
+    // get trending tweets
+    fetch("https://api.coingecko.com/api/v3/search/trending")
+    .then(response => response.json())
+    .then(trending_data => { 
+        
+        let trending_coins_ticker = [];
+        let trending_coins_twitter = [];
+        document.getElementById('trending_tweets').innerHTML = "";
+
+        // loop over each trending coin, get data and create element
+        var create_trending_coin_items = new Promise((resolve, reject) => {
+            trending_data.coins.forEach((coin) => {
+                fetch("https://api.coingecko.com/api/v3/coins/"+ coin.item.id +"?localization=true&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
+                .then(response => response.json())
+                .then(coin_data => {
+                    trending_coins_ticker.push(coin_data.symbol);
+                    trending_coins_twitter.push(coin_data.links.twitter_screen_name);
+
+                    let coin_data_div  = document.createElement('div');
+                    coin_data_div.setAttribute("class", "trending_coin_info");
+                
+                    coin_data_div.innerHTML = 
+                    `<img class="trending_coins_image" src="`+ coin_data.image.large +`" ></img>
+                    <h3 class="trending_coins_title"> #`+ coin_data.id +`</h3>  
+                    <p class="trending_coin_description">` + coin_data.description.en + `</p>
+                    <p class="trending_coin_twitter">@` + coin_data.links.twitter_screen_name + `</p>
+                    <p class="trending_coin_ticker">$` + coin_data.symbol + `</p>`
+
+                    // coin_data_div.setAttribute("class", "portfolio_coin_total_value");
+                    document.getElementById('trending_tweets').append(coin_data_div);
+
+                    if (trending_coins_twitter.length == Object.keys(trending_data.coins).length) 
+                    {
+                        resolve();
+                    }
+                });
+            });
+        });
+
+        create_trending_coin_items.then(() => {
+            let overview_tweet_div  = document.createElement('div');
+            overview_tweet_div.setAttribute("class", "trending_coin_info");
+            overview_tweet_div.setAttribute("id", "overview_tweet_div");
+            overview_tweet_div.innerHTML =
+            `<img class="trending_coins_image" src="/static/images/CoinGecko_Logo.png" >
+            <p>#CG_24h_Trending X Top 5 Trending at @CoinGecko</p>
+            <p>Date: `+ new Date().toLocaleDateString() + `</p>
+            <p id="overview_coin_names"> </p>`
+            
+            document.getElementById('trending_tweets').prepend(overview_tweet_div);
+    
+            let overview_coins_info = document.getElementById('overview_coin_names')
+            for (i = 0; i < 7; i++) {
+                overview_coins_info.innerHTML += 
+                `- @` + trending_coins_twitter[i] + `<br>`
+            };
+            overview_coins_info.innerHTML += `1/8 <br>`;
+            
+            for (i = 0; i < 7; i++){
+                overview_coins_info.innerHTML += `$` + trending_coins_ticker[i] + ` `
+            };
+        });
+    });
+    
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function random_coin() {
     fetch("https://api.coingecko.com/api/v3/coins/list")

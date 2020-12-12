@@ -92,11 +92,8 @@ Project start
 ### Saturday 12-12-2020
 - Added chart transparency
 - Added coin logo shadow
+- Trending tweet thread generator
 
-achtegrond portfolio ovevrview minder donker
-iets minder wit
-
-icons infront of titels
 delete from portfolio warning
 delete from note warning
 delete from rade warning

@@ -43,7 +43,35 @@ ul, li {
   #login_link {
     color: blue;
   }
-  
+
+#trending_tweets_thread_display {
+  width: 55%;
+  height: 80%;
+}
+#trending_tweets {
+  width: 96%;
+  height: 85%;
+  margin-bottom: 15px;
+
+  border: 1px solid rgba(53, 169, 180, 0.562);
+  border-radius: 10px;
+  overflow-y: scroll;
+}
+.trending_coin_info {
+  margin: 10px;
+  padding: 5px 30px 5px 5px;
+}
+.trending_coin_description {
+  padding-right: 80px;
+}
+.trending_coins_title {
+  text-transform: uppercase;
+}
+.trending_coins_image {
+  width: 50px;
+  float: right;
+}
+
 /* NAVBAR */
 #navbar_left {
   height: 60px;
@@ -336,6 +364,7 @@ h1 {
     overflow-y: scroll;
     border: 1px solid rgba(53, 169, 180, 0.562);
     border-radius: 3px;
+    overflow-y: scroll;
   }
 
 /* Note block */
