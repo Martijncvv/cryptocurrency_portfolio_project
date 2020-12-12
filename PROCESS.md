@@ -89,6 +89,12 @@ Project start
 - Fixed portfolio overview; long coin name
 - Added 'delete trade' button
 
+### Saturday 12-12-2020
+- Added chart transparency
+- Added coin logo shadow
+
+achtegrond portfolio ovevrview minder donker
+iets minder wit
 
 icons infront of titels
 delete from portfolio warning

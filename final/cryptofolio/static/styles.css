@@ -1,6 +1,6 @@
 h2 {
   font-size: large;
-  color: rgb(255, 255, 255);
+  color: rgb(255,255,255);
 }
 
 ul, li { 
@@ -15,6 +15,7 @@ ul, li {
 }
 
 .row {
+  background-color: rgb(255,255,255);
   margin: 0;
   padding: 0;
 }
@@ -30,7 +31,7 @@ ul, li {
     left: 50%;
     transform: translate(-50%, -50%);
 
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(255,255,255);
     border: 1px solid rgba(53, 169, 180, 0.562);
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(53, 169, 180, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281); 
@@ -51,7 +52,7 @@ ul, li {
 #navbar_middle {
   height: 60px;
   padding-left: 5px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255,255,255);
   color: rgba(53, 64, 82, 0.89);
 }
 
@@ -62,7 +63,7 @@ ul, li {
 
 #navbar_right {
   height: 60px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(255,255,255);
 }
 #signed_in {
   margin-right: 50px;
@@ -71,7 +72,7 @@ ul, li {
 h1 {
   font-size: xx-large;
   text-transform: uppercase;
-  color: rgb(255, 255, 255);
+  color: rgb(255,255,255);
 }
 
 .nav_button {
@@ -87,7 +88,7 @@ h1 {
   }
   #footer_right {
     height: 30px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(255,255,255);
   }
   #cg_branding {
     margin: 0 10px 0 0;
@@ -106,7 +107,7 @@ h1 {
     margin-bottom: 20px;
   }
   #search_error {
-    color: white;
+    color: rgb(255,255,255);
   }
 
    /* trending  */
@@ -136,7 +137,7 @@ h1 {
     max-height: 280px;
     overflow-y: scroll;
 
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(255,255,255);
     border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(131, 131, 160, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281);
     
@@ -185,7 +186,7 @@ h1 {
 
   #portfolio_chart {
     margin-top: 10px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(255,255,255);
     border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(118, 116, 141, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281);
   }
@@ -204,7 +205,7 @@ h1 {
     max-height: 150px;
     overflow-y: scroll;
 
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(255,255,255);
     border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(118, 116, 141, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281);
   }
@@ -234,13 +235,13 @@ h1 {
   #right_sidebar {
     margin-bottom: 10px;
     padding-top: 10px;
-    background-color: rgb(237, 242, 246);
+    background-color: rgb(255,255,255);
   }
 
   #coin_chart_block {
     margin-right: 5px;
     padding: 3px 10px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(255,255,255);
     border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(53, 169, 180, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281);
   }
@@ -265,7 +266,7 @@ h1 {
     padding: 20px 50px;
     height: 930px;
 
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(255,255,255);
     border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(53, 169, 180, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281);
   }
@@ -283,7 +284,7 @@ h1 {
   #coin_data_block {
     margin-left: 5px;
     padding: 3px 10px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(255,255,255);
     border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(53, 169, 180, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281);
   }
@@ -294,6 +295,7 @@ h1 {
   }
   #coin_image {
     height: 70px;
+    filter: drop-shadow(3px 3px 3px rgba(100, 100, 100, 0.685)); 
   }
 
   #add_trade, #portfolio_button {
@@ -342,7 +344,7 @@ h1 {
     padding: 20px 30px;
     max-height: 400px;
 
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(255,255,255);
     border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(53, 169, 180, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281); 
   }
@@ -362,7 +364,7 @@ h1 {
     width: 12px;
   }
   ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: rgb(255,255,255);
   }
   ::-webkit-scrollbar-thumb {
     background: rgba(53, 169, 180, 0.4);
@@ -408,7 +410,7 @@ h1 {
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: rgb(255,255,255);
   -webkit-transition: .4s;
   transition: .4s;
 }

@@ -88,7 +88,6 @@ document.addEventListener('DOMContentLoaded', function() {
     coin_info(coin_page_name);
 });
 
-
 function coin_info(coin) {
     // get value from searchbar if the searchbar was used
     let coin_name_search = document.querySelector('#search_value');
@@ -277,6 +276,7 @@ function add_trade() {
     document.querySelector("#addtrade_field").style.display = "block";
 }
 
+
 function trade_history() {
     // display number of trades in 'portfolio info'
     document.getElementById("total_nr_trades").innerHTML = "Number of trades: " + trade_history_data.length;
@@ -368,7 +368,7 @@ function total_coin_values() {
     // add total coin values to html
     total_value_list.forEach(function (value) {
         let li_total_value  = document.createElement('li');
-        li_total_value.innerHTML = "$" + value.toLocaleString();
+        li_total_value.innerHTML = value.toLocaleString();
         
         li_total_value.setAttribute("class", "portfolio_coin_total_value");
         document.querySelector('.portfolio_total_value_list').append(li_total_value);
@@ -453,6 +453,7 @@ function coin_chart(coin_name, time_frame) {
             resize: "true",
             redraw: "true",
             lineColors: ["#35a9b4"],
+            fillOpacity: "0.8"
             });
         }); 
         
@@ -483,6 +484,14 @@ function portfolio_history_chart(time_frame) {
             unique_coins.push(trade.coin_name);
         }
     });
+    // hide chart field if no history available
+    if (unique_coins.length == 0) {
+        document.getElementById("portfolio_chart_data").hidden = true;
+        return;
+    } 
+    else {
+        document.getElementById("portfolio_chart_data").hidden = false;
+    }
 
     // get historic chart data of all unique coins
     let coins_chart_data_object = {};
@@ -571,6 +580,7 @@ function portfolio_history_chart(time_frame) {
         pointSize: "0",
         lineWidth: "0",
         lineColors: ["#35a9b4"],
+        fillOpacity: "0.8"
         });
     });
       // create portfolio chart timeframe buttons
