@@ -28,24 +28,10 @@
         <div id="user_portfolio_overview">
             <h2>Portfolio</h2>
             <div class="row" id="portfolio_overview_table">
-                <div class="col-3">
-                    <p id="portfolio_overview_table_header">Coin</p>
-                    {% for coin in user_portfolio %}
-                    <div>
-                        <button class="btn btn-sm btn-info portfolio_coin" onClick="coin_info('{{coin.coin_name}}')">{{ coin.coin_name }}</button>
-                    </div>
-                    {%  endfor %}
-                </div>
+                <div class="col-3" id="portfolio_overview_names"> </div>
     
                 <div class="col-3">
-                    <ul class="portfolio_coin_amount_list">
-                        <p id="portfolio_overview_table_header">Amount</p>
-                        {% for coin in user_holdings_amount %}
-                        <li class="portfolio_coin_amount">
-                            {{ coin }}
-                        </li>
-                        {%  endfor %}
-                    </ul>
+                    <ul id="portfolio_coin_amount_list"> </ul>
                 </div>
                 
                 <div class="col-3">
@@ -118,12 +104,12 @@
             <div class="col-5" id="coin_data_block">
                 <div class="d-flex justify-content-start">
                     <h3>General info</h3> 
-                    <button id="add_trade" class="btn btn-sm btn-info ">Add trade</button>
+                    <button id="add_trade" class="btn btn-sm btn-info disabled_setting">Add trade</button>
                 
                     <!-- Delete / Add coin to portfolio  -->
                     <form action="{% url 'index' %}" method="POST">
                         {% csrf_token %}
-                        <button class="btn btn-sm btn-info" value="" id="portfolio_button" name="addportfolio">Add to portfolio</button>
+                        <button class="btn btn-sm btn-info disabled_setting" value="" id="portfolio_button" name="addportfolio">Add to portfolio</button>
                     </form>
                 </div>
                 <!-- image  -->
@@ -183,13 +169,13 @@
                         {% csrf_token %}
                         <input class="form-control" type="text" name="coin_note" placeholder="Write a note">
                         <br>
-                        <button class="btn btn-sm btn-info" value="" id="add_note_button" name="add_note_button">Add Note</button>
+                        <button class="btn btn-sm btn-info disabled_setting" value="" id="add_note_button" name="add_note_button">Add Note</button>
                     </form>
                 </span>
                 <span style="display: inline-block;">
                     <form action="{% url 'index' %}" method="POST">
                         {% csrf_token %}
-                        <button class="btn btn-sm btn-info" value="" id="delete_note_button" name="delete_note_button">Delete Note</button>
+                        <button class="btn btn-sm btn-info disabled_setting" value="" id="delete_note_button" name="delete_note_button">Delete Note</button>
                     </form>
                 </span>
             </div>
@@ -306,7 +292,7 @@
             BUY
         </div>
         <div class="d-flex justify-content-around">
-            <input class="btn btn-info" type="submit" value="Add trade" name="add_trade">
+            <input class="btn btn-info disabled_setting" type="submit" value="Add trade" name="add_trade">
             <input class="btn btn-info close_field" type="submit" value="close">
         </div>
     </form>
@@ -345,7 +331,9 @@
 {% csrf_token %}
 
 <script> 
-    var user_portfolio_data = JSON.parse("{{portfolio_data_JSON|escapejs}}"); 
+    // var user_portfolio_data = JSON.parse("{{portfolio_coin_name_data_JSON|escapejs}}"); 
+    var portfolio_coin_name_data = JSON.parse("{{portfolio_coin_name_data_JSON|escapejs}}"); 
+    var portfolio_coin_amount_data = JSON.parse("{{portfolio_coin_amount_data_JSON|escapejs}}"); 
     var trade_history_data = JSON.parse("{{trade_data_JSON|escapejs}}"); 
     var notes_data = JSON.parse("{{notes_data_JSON|escapejs}}"); 
     var language_preference_data = JSON.parse("{{language_preference_JSON|escapejs}}"); 
