@@ -96,7 +96,28 @@ document.addEventListener('DOMContentLoaded', function() {
     // load all coin info
     coin_page_name = document.getElementById('coin_page_name').innerHTML;
     coin_info(coin_page_name);
+
+    load_portfolio();
 });
+
+
+
+
+
+
+function load_portfolio() {
+    console.log(user_portfolio_data);
+}
+
+
+
+
+
+
+
+
+
+
 
 function search_bar() {
     coin_names = []
@@ -313,7 +334,7 @@ function close_field() {
 
 function add_trade() {
     // get coin name and set name in "add trade field"
-    coin_name = document.getElementById('coin_info_name').innerHTML;
+    coin_name = document.getElementById('coin_page_name').innerHTML;
     coin_price_LocaleString = document.getElementById('coin_info_price').innerHTML;
     // convert LocaleString price to decimal price
     coin_price = coin_price_LocaleString.replace(".","").replace(",", '.').replace("$", '');
@@ -472,7 +493,7 @@ function trending_tweet_thread_generator() {
                 
                     coin_data_div.innerHTML = 
                     `<img class="trending_coins_image" src="`+ coin_data.image.large +`" ></img>
-                    <h3 class="trending_coins_title"> #`+ coin_data.id +`</h3>  
+                    <h3 class="trending_coins_title"> #`+ coin_data.id.replace("-", "_") +`</h3>  
                     <p class="trending_coin_description">` + coin_data.description.en + `</p>
                     <p class="trending_coin_twitter">@` + coin_data.links.twitter_screen_name + `</p>
                     <p class="trending_coin_ticker">$` + coin_data.symbol + `</p>`

@@ -95,6 +95,8 @@ Project start
 - Trending tweet thread generator
 - Added dynamic search bar
 
+form validation 
+
 delete from portfolio warning
 delete from note warning
 delete from rade warning

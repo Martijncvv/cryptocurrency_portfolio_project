@@ -139,7 +139,7 @@ h1 {
 /* LEFT SIDEBAR  */
 #left_sidebar {
   padding: 10px 1% 30px 1%;
-  background-color: rgb(53, 64, 82);
+  background-color: rgba(53, 64, 82, 0.966);
   border-right: 1px solid rgb(53, 169, 180);
   }
 /* search  */
@@ -166,7 +166,7 @@ h1 {
     
     background-color: rgba(102, 205, 171, 0);; 
     border: rgba(102, 205, 171, 0);
-    color: rgb(165, 174, 189);
+    color: rgb(196, 205, 219);
   } 
 
   /* portfolio  */
@@ -221,7 +221,7 @@ h1 {
     }
 
   #portfolio_chart_data p {
-    color: rgb(165, 174, 189);
+    color: rgb(196, 205, 219);
   }
 
   #portfolio_chart {

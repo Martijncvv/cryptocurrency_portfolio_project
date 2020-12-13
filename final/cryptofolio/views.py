@@ -204,7 +204,6 @@ def index(request):
             "tradetype": trade.tradetype
         }
         trade_history_list.append(trade_dict)
-
     # create JSON variable to send trade data to Javascript
     trade_data_JSON = dumps(trade_history_list) 
 
@@ -215,11 +214,20 @@ def index(request):
     # create JSON variable to send note data to Javascript
     notes_data_JSON = dumps(note_dict) 
 
+
+    # converts user portfolio data to JSON to send to Javascript
+    user_portolio_holding_list = []
+    for coin in user_portfolio:
+        user_portolio_holding_list.append(coin.coin_name)
+   # create JSON variable to send trade data to Javascript
+    portfolio_data_JSON = dumps(user_portolio_holding_list)
+
     return render(request, "cryptofolio/index.html", {
         "trade_history": trade_history,
         "user_portfolio": user_portfolio,
         "coin_page_name": coin_page_name.strip(),
         "user_holdings_amount": user_holdings,
+        "portfolio_data_JSON": portfolio_data_JSON,
         "trade_data_JSON": trade_data_JSON,
         "notes_data_JSON": notes_data_JSON,
         "language_preference_JSON": dumps(prefered_language)

@@ -345,6 +345,7 @@
 {% csrf_token %}
 
 <script> 
+    var user_portfolio_data = JSON.parse("{{portfolio_data_JSON|escapejs}}"); 
     var trade_history_data = JSON.parse("{{trade_data_JSON|escapejs}}"); 
     var notes_data = JSON.parse("{{notes_data_JSON|escapejs}}"); 
     var language_preference_data = JSON.parse("{{language_preference_JSON|escapejs}}"); 
