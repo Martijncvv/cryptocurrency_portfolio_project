@@ -93,6 +93,7 @@ Project start
 - Added chart transparency
 - Added coin logo shadow
 - Trending tweet thread generator
+- Added dynamic search bar
 
 delete from portfolio warning
 delete from note warning

@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function() {    
-    // search function
-    document.querySelector('#submit_search').addEventListener('click', coin_info);
     // register button
     document.querySelector('#register').addEventListener('click', register);
     // add coin button
@@ -9,6 +7,17 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#explore').addEventListener('click', random_coin);
     // settings button
     document.querySelector('#settings').addEventListener('click', settings);
+
+    // search function
+    document.querySelector('#submit_search').addEventListener('click', function() {     
+        // get value from searchbar
+        let coin_name_search = document.querySelector('#search_value');
+        if (coin_name_search.value !== ""){
+            coin_info(coin_name_search.value);
+            coin_name_search.value = ""
+        }
+        
+    });
 
      // Add eventListeners to login classes
     let login_button = document.querySelectorAll('.login');
@@ -23,9 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
     // Select the submit buttons and inputs to be used later
-    // search field
-    const submit_search = document.querySelector('#submit_search');
-    const coin_name_search = document.querySelector('#search_value');
+    // // search field
+    // const submit_search = document.querySelector('#submit_search');
+    // const coin_name_search = document.querySelector('#search_value');
     // login field
     const login_password_field = document.querySelector('#login_password_field');
     const login_field_button = document.querySelector('#login_field_button');
@@ -34,19 +43,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const register_field_button = document.querySelector('#register_field_button');
     
     // disable submit buttons
-    submit_search.disabled = true;
+    // submit_search.disabled = true; 
     login_field_button.disabled = true;
     register_field_button.disabled = true;
 
-    // listen for input to be typed into coinsearch input field
-    coin_name_search.onkeyup = () => {
-        if (coin_name_search.value.length > 0) {
-            submit_search.disabled = false;
-        }
-        else {
-            submit_search.disabled = true;
-        }
-    }
+    // // listen for input to be typed into coinsearch input field
+    // coin_name_search.onkeyup = () => {
+    //     if (coin_name_search.value.length > 0) {
+    //         submit_search.disabled = false;
+    //     }
+    //     else {
+    //         submit_search.disabled = true;
+    //     }
+    // }
     // listen for input to be typed into login input field
     login_password_field.onkeyup = () => {
         if (login_password_field.value.length > 0) {
@@ -77,9 +86,9 @@ document.addEventListener('DOMContentLoaded', function() {
     else {
         logged_out()
     }
-    
-    // display trending coins
-    trending_coins();
+
+    // search_bar settings
+    search_bar();
 
     // set prefered language
     document.getElementById("current_language").innerHTML = "Current language: " + language_preference_data;
@@ -89,17 +98,53 @@ document.addEventListener('DOMContentLoaded', function() {
     coin_info(coin_page_name);
 });
 
-function coin_info(coin) {
-    // get value from searchbar if the searchbar was used
-    let coin_name_search = document.querySelector('#search_value');
-    if (coin_name_search.value !== ""){
-        coin = coin_name_search.value;
-    }
-    // clear out input field:
-    coin_name_search.value = "";
-    // disable the submit button again:
-    submit_search.disabled = true;
+function search_bar() {
+    coin_names = []
+    fetch("https://api.coingecko.com/api/v3/coins/list")
+    .then(response => response.json())
+    .then(coin_list => { 
+        coin_list.forEach((coin) => {
+            coin_names.push(coin.id)
+        });
+    });
+     // search field
+     const submit_search = document.querySelector('#submit_search');
+     const coin_name_search = document.querySelector('#search_value');
 
+    // listen for input to be typed into coinsearch input field
+    coin_name_search.onkeyup = () => {
+        if (coin_name_search.value.length > 0) {
+            submit_search.disabled = false;
+            document.getElementById("search_header").innerHTML = "Search ";
+        }
+        else {
+            submit_search.disabled = true;
+            document.getElementById("trending_header").innerHTML = "Trending (24h)";
+            trending_coins();
+        }
+        coin_suggestion = coin_names.filter(coin => coin.includes(coin_name_search.value));
+       
+        document.getElementById("trending_coins").innerHTML = "";
+        coin_suggestion.forEach((coin_filter) => {
+            let trending_coin_button = document.createElement('button');
+            trending_coin_button.innerHTML = coin_filter;
+            trending_coin_button.setAttribute("class", "btn btn-sm btn-info trending_coin_button");
+            trending_coin_button.setAttribute("autocomplete", "off");
+            trending_coin_button.setAttribute("onClick", "coin_info('" + coin_filter + "')");
+            document.getElementById("trending_coins").append(trending_coin_button);
+            document.getElementById("trending_header").innerHTML = "Search results";
+        })
+    }
+}
+
+
+function coin_info(coin) {
+    // display trending coins
+    trending_coins();
+    
+    document.querySelector('#search_value').value = "";
+    // disable the submit button:
+    submit_search.disabled = true;
     // fetch coin data
     fetch("https://api.coingecko.com/api/v3/coins/"+ coin.toLowerCase() +"?localization=true&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false")
     .then(response => response.json())
@@ -143,9 +188,10 @@ function coin_info(coin) {
         document.getElementById("coin_image").setAttribute("src", data.image.large );
 
         // Add data to General Info elements
+        console.log(data.links.homepage[0])
         document.title = data.name;
         document.getElementById("coin_page_name").innerHTML = data.id;
-        document.getElementById("coin_info_name").innerHTML = data.id;
+        document.getElementById("coin_info_name").innerHTML = `<a href="` + data.links.homepage[0] + `" target="_blank">` + data.id + `</a>`;
         document.getElementById("coin_info_ticker").innerHTML = data.symbol;
         document.getElementById("coin_info_price").innerHTML = "$" + data.market_data.current_price.usd.toLocaleString();
         document.getElementById("coin_info_marketcap").innerHTML = "$" + data.market_data.market_cap.usd.toLocaleString();
@@ -213,9 +259,11 @@ function coin_info(coin) {
         })
         // Add Twitter Timeline
         twitter_feed(data.links.twitter_screen_name)
+
+        // draw coin chart
+        coin_chart(coin.toLowerCase(), 7);
     });
-    // draw coin chart
-    coin_chart(coin.toLowerCase(), 30);
+    
 }
 
 function logged_in() {
@@ -392,13 +440,11 @@ function trending_coins() {
             trending_coin_button.innerHTML = coin.item.id;
             trending_coin_button.setAttribute("class", "btn btn-sm btn-info trending_coin_button");
            
-            trending_coin_button.setAttribute("onClick", "coin_info('"+coin.item.id+"')");
+            trending_coin_button.setAttribute("onClick", "coin_info('" + coin.item.id + "')");
             document.getElementById("trending_coins").append(trending_coin_button);
         })
     });
 }
-
-
 
 
 function trending_tweet_thread_generator() {
@@ -499,6 +545,7 @@ function coin_chart(coin_name, time_frame) {
     }
 
     // get chart data
+    console.log(coin_name);
     fetch("https://api.coingecko.com/api/v3/coins/" + coin_name + "/market_chart?vs_currency=usd&days=" + time_frame)
         .then(response => response.json())
         .then(chart_data => {
