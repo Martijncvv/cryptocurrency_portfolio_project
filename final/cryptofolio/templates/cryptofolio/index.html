@@ -24,9 +24,9 @@
 
         <div id="trending_coins"> </div>
         
-<!-- PORTFOLIO COINS -->
+<!-- PORTFOLIO HOLDINGS -->
         <div id="user_portfolio_overview">
-            <h2>Portfolio</h2>
+            <h2>Portfolio Holdings</h2>
             <div class="row" id="portfolio_overview_table">
                 <div class="col-3" id="portfolio_overview_names"> </div>
     
@@ -81,7 +81,6 @@
                             <br>
                             <div class="d-flex flex-column justify-content-center align-items-center" id="trade_history_delete_buttons"> </div>
                         </div> 
-                    <!-- </div> -->
                 </div>
             </div>
         </div>
@@ -103,7 +102,7 @@
 <!-- GENERAL INFO  -->
             <div class="col-5" id="coin_data_block">
                 <div class="d-flex justify-content-start">
-                    <h3>General info</h3> 
+                    <h3>General Info</h3> 
                     <button id="add_trade" class="btn btn-sm btn-info disabled_setting">Add trade</button>
                 
                     <!-- Delete / Add coin to portfolio  -->
@@ -328,7 +327,6 @@
 {% csrf_token %}
 
 <script> 
-    // var user_portfolio_data = JSON.parse("{{portfolio_coin_name_data_JSON|escapejs}}"); 
     var portfolio_coin_name_data = JSON.parse("{{portfolio_coin_name_data_JSON|escapejs}}"); 
     var portfolio_coin_amount_data = JSON.parse("{{portfolio_coin_amount_data_JSON|escapejs}}"); 
     var trade_history_data = JSON.parse("{{trade_data_JSON|escapejs}}"); 
