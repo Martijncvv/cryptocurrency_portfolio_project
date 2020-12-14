@@ -18,7 +18,7 @@ class Settings(models.Model):
 
 class Portfolio(models.Model):
     """
-    Information about portfolio
+    User portfolio data
     """
     user = models.ForeignKey("User", on_delete=models.CASCADE)
     coin_name = models.CharField(max_length=30)
@@ -29,7 +29,7 @@ class Portfolio(models.Model):
 
 class Trade(models.Model):
     """
-    Information about trade 
+    User trade data
     """
     user = models.ForeignKey("User", on_delete=models.CASCADE)
     coin_name = models.CharField(max_length=30)

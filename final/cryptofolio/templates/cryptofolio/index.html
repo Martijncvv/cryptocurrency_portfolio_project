@@ -1,14 +1,9 @@
 {% extends "cryptofolio/layout.html" %}
 {% load static %}
 
-{% block title %}
-
-{% endblock %}
-
 {% block body %}
 
-<!-- SEARCH  -->
-
+<!-- search field -->
 <div class="row">
     <div class="col-3" id="left_sidebar">
         <h2 id="search_header">Search</h2>
@@ -19,12 +14,11 @@
         </div>
         <p id="search_error" ></p>
 
-<!-- TRENDING  -->
+<!-- trending field -->
         <h2 id="trending_header"> Trending (24h) </h2> 
-
         <div id="trending_coins"> </div>
         
-<!-- PORTFOLIO HOLDINGS -->
+<!-- portfolio holdings field -->
         <div id="user_portfolio_overview">
             <h2>Portfolio Holdings</h2>
             <div class="row" id="portfolio_overview_table">
@@ -35,17 +29,17 @@
                 </div>
                 
                 <div class="col-3">
-                    <p id="portfolio_overview_table_header">Value $</p>
+                    <p class="portfolio_overview_table_header">Value $</p>
                     <ul class="portfolio_price_list"> </ul>
                 </div>
     
                 <div class="col-3">
-                    <p id="portfolio_overview_table_header">Total $</p>
+                    <p class="portfolio_overview_table_header">Total $</p>
                     <ul class="portfolio_total_value_list"> </ul>
                 </div>
             </div>
     
-<!-- PORTFOLIO INFO + CHART -->
+<!-- portfolio info + chart -->
             <div id="portfolio_chart_data">
                 <h2>Portfolio Info</h2> 
                 <p id="total_portfolio_value">None</p> 
@@ -59,61 +53,64 @@
                 <div id="portfolio_chart_timeframe_buttons"> </div>
             </div>
                 
-<!-- TRADE HISTORY  -->
+<!-- trade history  -->
             <h2>Trade history</h2>
             <div id="trade_history_block">
                 <div class="row d-flex justify-content-around">
-                        <div>
-                            <p class="trade_history_header">Coin</p>
-                            <ul id="trade_history_coin_name"> </ul>
-                        </div>
-                        <div>
-                            <p class="trade_history_header">Price</p>
-                            <ul id="trade_history_price"> </ul>
-                        </div> 
-                        <div>
-                            <p class="trade_history_header">Amount</p>
-                            <ul id="trade_history_amount"> </ul>
-                        </div> 
-                        <div>
-                            <p class="trade_history_header">Date</p>
-                            <ul id="trade_history_time"> </ul>
-                        </div> 
-                        <div id="delete_trade_column">
-                            <br>
-                            <div class="d-flex flex-column justify-content-center align-items-center" id="trade_history_delete_buttons"> </div>
-                        </div> 
+                    <div>
+                        <p class="trade_history_header">Coin</p>
+                        <ul id="trade_history_coin_name"> </ul>
+                    </div>
+
+                    <div>
+                        <p class="trade_history_header">Amount</p>
+                        <ul id="trade_history_amount"> </ul>
+                    </div> 
+
+                    <div>
+                        <p class="trade_history_header">Price</p>
+                        <ul id="trade_history_price"> </ul>
+                    </div> 
+
+                    <div>
+                        <p class="trade_history_header">Date</p>
+                        <ul id="trade_history_time"> </ul>
+                    </div> 
+
+                    <div id="delete_trade_column">
+                        <br>
+                        <div class="d-flex flex-column justify-content-center align-items-center" id="trade_history_delete_buttons"> </div>
+                    </div> 
                 </div>
             </div>
         </div>
     </div>
     
-<!-- COIN CHART  -->
+<!-- coin chart -->
     <div class="col-9" id="right_sidebar">
         <div class="row" id="coin_info_row">
             <div class="col text-center" id="coin_chart_block">
-
                 <h4 id="coin_chart_timeframe_header"></h4>
-
                 <div id="coin_chart">
                     <p>coin chart</p>
                 </div>
                 <div id="coin_chart_timeframe_buttons"> </div>
             </div>
         
-<!-- GENERAL INFO  -->
+<!-- general coin info  -->
             <div class="col-5" id="coin_data_block">
                 <div class="d-flex justify-content-start">
                     <h3>General Info</h3> 
                     <button id="add_trade" class="btn btn-sm btn-info disabled_setting">Add trade</button>
                 
-                    <!-- Delete / Add coin to portfolio  -->
+                    <!-- delete / add coin to portfolio  -->
                     <form action="{% url 'index' %}" method="POST">
                         {% csrf_token %}
                         <button class="btn btn-sm btn-info disabled_setting" value="" id="portfolio_button" name="addportfolio">Add to portfolio</button>
                     </form>
                 </div>
-                <!-- image  -->
+
+                <!-- coin image  -->
                 <div id="coin_image_div">
                     <img id="coin_image">
                 </div>
@@ -129,6 +126,7 @@
                             <li>All-time low:</li>
                         </ul>
                     </div>
+
                     <div class="col-3">
                         <ul>
                             <li id="coin_info_name" ></li>
@@ -139,6 +137,7 @@
                             <li id="coin_info_atl"></li>
                         </ul>
                     </div>
+
                     <div class="col">
                         <ul>
                             <br> <br> <br> <br>
@@ -147,20 +146,23 @@
                         </ul>
                     </div>
                 </div>
+
                 <div class="row" id="coin_description_box">
                     <h4>Description</h4>
                     <div id="coin_info_description"> </div>
                 </div>
+
             </div>
         </div>
-<!-- SOCIALS  -->
+
+<!-- Twitter field  -->
         <div class="row">
             <div class="col" id="twitter_block">
                 <h3>Twitter</h3>
                 <div id="twitter_channel"> </div>
             </div>     
 
-<!-- NOTE  -->
+<!-- note field  -->
             <div class="col-5" id="coin_note_block">
                 <h3> Coin Note</h3> 
                 <p id="coin_note_field"> None </p>   
@@ -173,6 +175,7 @@
                         <button class="btn btn-sm btn-info disabled_setting" value="" id="add_note_button" name="add_note_button">Add Note</button>
                     </form>
                 </span>
+
                 <span style="display: inline-block;">
                     <form action="{% url 'index' %}" method="POST">
                         {% csrf_token %}
@@ -184,10 +187,11 @@
     </div>
 </div>
 
-<!-- SETTINGS FIELD  -->
+<!-- settings field  -->
 <div id="settings_field" class="frontfield" style="display: none">
     <h3>Settings</h3>
     <h4>Language</h4>
+
     <form action="{% url 'index' %}" method="POST">
         {% csrf_token %}
         <select id="selected_language" name="selected_language">
@@ -212,18 +216,16 @@
     <input class="btn btn-info close_field" type="submit" value="close">
 </div>
 
- <!-- TRENDING TWEETS THREADS  -->
+ <!-- trending tweets thread generator  -->
 <div id="trending_tweets_thread_display" class="frontfield" style="display: none">
-    <div id="trending_tweets">
-
-    </div>
+    <div id="trending_tweets"> </div>
     <input class="btn btn-info close_field" type="submit" value="close">
 </div>
 
-<!-- LOGIN FIELD -->
+<!-- login field -->
 {% if message_login %}
     <div id="login_field" class="frontfield" style="display: block">
-        {{ message_login }}
+    {{ message_login }}
 {% else %}
     <div id="login_field" class="frontfield" style="display: none">
 {% endif %}
@@ -232,17 +234,18 @@
             <div class="form-group">
                 <input autofocus class="form-control" type="email" name="email" placeholder="Email">
             </div>
+
             <div class="form-group">
                 <input id="login_password_field" class="form-control" type="password" name="password" placeholder="Password">
             </div>
+
             <input id="login_field_button" class="btn btn-info" type="submit" value="Login">
         </form>
         <p> Don't have an account? Register <span id="register">here</span>. </p>
-        
         <input class="btn btn-info close_field" type="submit" value="close">
     </div>
 
-<!-- REGISTER FIELD-->
+<!-- register field -->
 {% if message_register %}
     <div id="register_field" class="frontfield" style="display: block">
         {{ message_register }}
@@ -254,41 +257,48 @@
             <div class="form-group">
                 <input class="form-control" autofocus type="text" name="username" placeholder="Username">
             </div>
+
             <div class="form-group">
                 <input class="form-control" type="email" name="email" placeholder="Email Address">
             </div>
+
             <div class="form-group">
                 <input class="form-control" type="password" name="password" placeholder="Password">
             </div>
+
             <div class="form-group">
                 <input id="register_password_field" class="form-control" type="password" name="confirmation" placeholder="Confirm Password">
             </div>
+
             <input id="register_field_button" class="btn btn-info" type="submit" value="Register">
         </form>
         <p> Already have an account? Log In <span id="login_link" class="login">here</span>. </p>
-        
         <input class="btn btn-info close_field" type="submit" value="close">
     </div>
 
-<!-- ADD-TRADE FIELD-->
+<!-- add-trade field -->
 <div id="addtrade_field" class="frontfield" style="display: none">
     <form action="{% url 'index' %}" method="POST">
         {% csrf_token %}
         <div class="form-group">
             Name: <input id="addtrade_input_name" autofocus class="form-control" type="text" name="coin_name" placeholder="Coin name" required>
         </div>
+
         <div class="form-group">
             Amount: <input class="form-control" type="text" name="coin_amount" placeholder="Amount" required>
         </div>
+
         <div class="form-group">
             Price in $: <input id="addtrade_input_price" class="form-control" type="text" name="coin_price" placeholder="Amount" required>
         </div>
+
         <div class="form-group d-flex align-items-center">
             <label class="switch">
                 <input type="checkbox" name="trade_type" checked>
                 <span class="slider round"></span>
               </label>
         </div>
+
         <div class="d-flex justify-content-around">
             <input class="btn btn-info disabled_setting" type="submit" value="Add trade" name="add_trade">
             <input class="btn btn-info close_field" type="submit" value="close">
@@ -296,7 +306,7 @@
     </form>
 </div>  
 
-<!-- FOOTER  -->
+<!-- footer  -->
 <div class="row">
     <div class="col-3" id="footer_left"> </div>
     <div class="col-6 d-flex justify-content-center align-items-end" id="footer_right"> 
@@ -305,7 +315,6 @@
             <a href="https://www.coingecko.com/en/api#explore-api"></a>
                 <img width="14px" src="{% static 'images/CoinGecko_Logo.png' %}" alt="CoinGecko Logo">
             </a>
-            
         </div>
     </div>
     <div class="col-3"> </div>
@@ -314,26 +323,27 @@
 {% endblock %}
 
 {% block script %}
+    <!-- check if user logged in  -->
+    {% if user.is_authenticated %}
+        <script>
+            var user_signed_in = true;
+        </script>
+    {% else %} 
+        <script>
+            var user_signed_in = false;
+        </script>
+    {% endif %}
 
-<!-- check if user logged in  -->
-{% if user.is_authenticated %}
-    <script>
-        var user_signed_in = true;
+    <!-- csrf token voor JS -->
+    {% csrf_token %}
+
+    <!-- scripts to communicate Django data to JS  -->
+    <script> 
+        var portfolio_coin_name_data = JSON.parse("{{portfolio_coin_name_data_JSON|escapejs}}"); 
+        var portfolio_coin_amount_data = JSON.parse("{{portfolio_coin_amount_data_JSON|escapejs}}"); 
+        var trade_history_data = JSON.parse("{{trade_data_JSON|escapejs}}"); 
+        var notes_data = JSON.parse("{{notes_data_JSON|escapejs}}"); 
+        var language_preference_data = JSON.parse("{{language_preference_JSON|escapejs}}"); 
     </script>
-{% else %} 
-    <script>
-        var user_signed_in = false;
-    </script>
-{% endif %}
-
-{% csrf_token %}
-
-<script> 
-    var portfolio_coin_name_data = JSON.parse("{{portfolio_coin_name_data_JSON|escapejs}}"); 
-    var portfolio_coin_amount_data = JSON.parse("{{portfolio_coin_amount_data_JSON|escapejs}}"); 
-    var trade_history_data = JSON.parse("{{trade_data_JSON|escapejs}}"); 
-    var notes_data = JSON.parse("{{notes_data_JSON|escapejs}}"); 
-    var language_preference_data = JSON.parse("{{language_preference_JSON|escapejs}}"); 
-</script>
-<script src="{% static 'index.js' %}"></script>
+    <script src="{% static 'index.js' %}"></script>
 {% endblock %}

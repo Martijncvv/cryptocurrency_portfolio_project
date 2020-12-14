@@ -26,7 +26,6 @@ Project start
 - Added "create a note" input field.
 
 - Decided to change database from 'storing 'coin_tickers' to storing 'coin_names' for an easier commmunication with the API.
-- Mental breakdown confirmed
 - Fixed refresh bug; when adding a coin to your portfolio, coin changed to the homepage instead of the same coin page.
 - Added basic recent prices in portfolio overview
 
@@ -103,12 +102,7 @@ Project start
 - Added function descriptions 
 - Added 'initial investment value' at 'portfolio info'.
 - Added 'portfolio ROI' at 'portfolio info'.
+- Added confirmation prompt if user deletes trade or note.
 
-add profit
-delete from trade warning
 
-To do (self)
-Sort projects on market cap
-Get projects between 2-8mm market cap
-Compare trading volumes and upcoming events
 

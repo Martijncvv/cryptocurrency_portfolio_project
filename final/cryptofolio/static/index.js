@@ -160,7 +160,7 @@ function load_portfolio_data() {
     document.getElementById("portfolio_overview_names").innerHTML = "";
     let portfolio_overview_name_header  = document.createElement('div');
     portfolio_overview_name_header.innerHTML = 
-    `<p id="portfolio_overview_table_header">Coin</p>`;
+    `<p id="portfolio_overview_coin_name" class="portfolio_overview_table_header">Coin</p>`;
     document.getElementById("portfolio_overview_names").append(portfolio_overview_name_header);
 
     portfolio_coin_name_data.forEach((coin_name) => {
@@ -174,7 +174,7 @@ function load_portfolio_data() {
     document.getElementById("portfolio_coin_amount_list").innerHTML = "";
     let portfolio_overview_amount_header  = document.createElement('div');
     portfolio_overview_amount_header.innerHTML = 
-    `<p id="portfolio_overview_table_header">Amount</p>`;
+    `<p class="portfolio_overview_table_header">Amount</p>`;
     document.getElementById("portfolio_coin_amount_list").append(portfolio_overview_amount_header);
 
     portfolio_coin_amount_data.forEach((coin_amount) => {
@@ -269,13 +269,13 @@ function total_coin_values() {
 
     // calculates ROI (profit/loss) and displays right style in 'portfolio info' field
     let portfolio_roi = total_portfolio_value - document.getElementById("initial_investment_value").innerHTML;
+    let portfolio_roi_perc = (total_portfolio_value - document.getElementById("initial_investment_value").innerHTML) / total_portfolio_value * 100;
     if (portfolio_roi > 0) {
-        document.getElementById("portfolio_roi").innerHTML = "Portfolio ROI: " + `<span id="portfolio_roi_profit">$` + portfolio_roi.toFixed(2) + `</span>`;
+        document.getElementById("portfolio_roi").innerHTML = "Portfolio ROI: " + `<span id="portfolio_roi_profit">$` + portfolio_roi.toFixed(2) + `   (` + portfolio_roi_perc.toFixed(2) +`%) </span>`;
     }
     else {
-        document.getElementById("portfolio_roi").innerHTML = "Portfolio ROI: " + `<span id="portfolio_roi_loss">$` + portfolio_roi.toFixed(2) + `</span>`;
+        document.getElementById("portfolio_roi").innerHTML = "Portfolio ROI: " + `<span id="portfolio_roi_loss">$` + portfolio_roi.toFixed(2) + `   (` + portfolio_roi_perc.toFixed(2) +`%) </span>`;
     }
-    
 }
 
 
@@ -318,7 +318,7 @@ function trade_history() {
 
         // adds trade history time
         let li_time  = document.createElement('li');
-        li_time.innerHTML = new Date(trade.time).toLocaleDateString("en-US");
+        li_time.innerHTML = new Date(trade.time).toLocaleDateString();
         li_time.setAttribute("class", "trade_history_overview_data");
         document.getElementById("trade_history_time").append(li_time);
 
@@ -338,9 +338,11 @@ function trade_history() {
         csrf_token.name = 'csrfmiddlewaretoken';
         csrf_token.value = csrftoken;
         document.getElementById("delete_trade_form_" + trade.id).append(csrf_token);
-        // adds button to form
+        
+        // adds 'remove trade' button to form
         let delete_trade_button = document.createElement('button');
-        delete_trade_button.setAttribute("class", "btn btn-sm btn-outline-danger");
+        delete_trade_button.setAttribute("class", "btn btn-sm btn-outline-danger ");
+        delete_trade_button.setAttribute("onclick", "return confirm('You want to delete this " + trade.amount + " " + trade.coin_name.toUpperCase() + " " + trade.tradetype + " trade?')");
         delete_trade_button.setAttribute("id", "delete_trade_button_" + trade.id);
         delete_trade_button.setAttribute("name", "delete_trade_id");
         delete_trade_button.setAttribute("value", trade.id);
@@ -537,7 +539,7 @@ function coin_info(coin) {
             document.getElementById("coin_info_description").innerHTML = "No description available.";
         }
 
-        // adds note to 'note field' if note exists, else removes 'delete button'
+       // adds note to 'note field' if note exists, else hides 'delete button'
         if (notes_data[data.id] == null) {
             document.getElementById("coin_note_field").innerHTML = "Write a note about " + data.name + ".";
             document.getElementById("delete_note_button").style.display = "none"; 
@@ -545,6 +547,8 @@ function coin_info(coin) {
         else {
             document.getElementById("coin_note_field").innerHTML = notes_data[data.id];
             document.getElementById("delete_note_button").style.display = "block"; 
+            // adds a confirmation prompt to 'delete note' button
+            document.getElementById("delete_note_button").setAttribute("onclick", "return confirm('Delete the note of " + data.name + "?')");
         }
 
         // adds Twitter Timeline
@@ -565,16 +569,16 @@ function coin_chart(coin_name, time_frame) {
     // sets coin-value-chart timeframe header
     switch(time_frame) {
         case 1:
-            document.getElementById("coin_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " day";
+            document.getElementById("coin_chart_timeframe_header").innerHTML = time_frame + " day";
             break;
         case 365:
-            document.getElementById("coin_chart_timeframe_header").innerHTML = "Timeframe: 1 year";
+            document.getElementById("coin_chart_timeframe_header").innerHTML = "1 year";
             break;
         case "max":
-            document.getElementById("coin_chart_timeframe_header").innerHTML = "Timeframe: max available days";
+            document.getElementById("coin_chart_timeframe_header").innerHTML = "Max available days";
             break;
         default:
-            document.getElementById("coin_chart_timeframe_header").innerHTML = "Timeframe: " + time_frame + " days";
+            document.getElementById("coin_chart_timeframe_header").innerHTML = time_frame + " days";
     }
 
     // gets chart data
@@ -790,6 +794,7 @@ function logged_out() {
     });
 }
 
+
 function login() {
 // *
 // * Displays login field with form for the user to login.
@@ -798,6 +803,7 @@ function login() {
     document.querySelector("#register_field").style.display = "none";
     document.querySelector("#login_field").style.display = "block";
 }
+
 
 function register() {
 // *
@@ -808,6 +814,7 @@ function register() {
     document.querySelector("#register_field").style.display = "block";
 }
 
+
 function settings() {
 // *
 // * Displays settings field with form for the user to change settings.
@@ -815,6 +822,7 @@ function settings() {
     // displays settings field
     document.querySelector("#settings_field").style.display = "block";
 }
+
 
 function close_field() {
 // *
@@ -827,7 +835,6 @@ function close_field() {
     document.getElementById("settings_field").style.display = "none";
     document.getElementById("trending_tweets_thread_display").style.display = "none";
 }
-
 
 
 // Code below based on:

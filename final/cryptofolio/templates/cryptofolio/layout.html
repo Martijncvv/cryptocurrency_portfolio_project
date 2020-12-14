@@ -3,23 +3,23 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>{% block title %}{% endblock %}</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static 'styles.css' %}">
         <link id="favicon" rel="icon" type="image/png" href= "">
 
-        <!-- CHART OPEN -->
+        <!-- chart links open -->
+        <!-- source: https://morrisjs.github.io/morris.js/index.html -->
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-        <!-- CHART CLOSE -->
+        <!-- chart links close -->
     </head>
 
     <body>
+        <!-- menu -->
         <div class="row">
             <div class="col-3 d-flex justify-content-center align-items-center" id="navbar_left">
-                
                 <h1> <span class="glyphicon glyphicon-name"></span> Cryptofolio</h1>
             </div>
 
@@ -31,7 +31,6 @@
                 </ul>
             </div>
             
-
             <div class="col">
                 <ul class="nav justify-content-end d-flex align-items-center" id="navbar_right" >
                     <li class="nav-item">
@@ -39,34 +38,27 @@
                            <span id="signed_in">Signed in as <strong>{{ user.username }}</strong>.</span> 
                         {% endif %}
                     </li>
-                    
                     <li class="nav-item">
                         <button class="btn btn-sm btn-info nav_button align-items-center" id="explore">Explore</button>
                     </li>
-                    
                     <li class="nav-item" id="display_settings">
                         <button class="btn btn-sm btn-info nav_button align-items-center" id="settings">Settings</button>
                     </li>
-                
                     <li class="nav-item" id="display_logout">
                         <form action="{% url 'index' %}" method="POST">
                             {% csrf_token %}
                             <button class="btn btn-sm btn-info nav_button align-items-center" id="logout" name="logout">Log-Out</button>
                         </form>
                     </li>
-
                     <li class="nav-item" id="display_login">
                         <button class="btn btn-sm btn-info login nav_button align-items-center">Log-in</button>
                     </li>
-                    
                 </ul>
             </div>
         </div>
-    
         {% block body %}
+
         {% endblock %}
-        
-      <h2>{{ HELPMESSAGE }}</h2>
     </body>
     {% block script %}
 

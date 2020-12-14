@@ -103,7 +103,7 @@ def index(request):
             confirmation = request.POST["confirmation"]
             if password != confirmation:
                 return render(request, "cryptofolio/index.html", {
-                    "coin_page_name": coin_page_name.strip(),
+                    "coin_page_name": coin_name.strip(),
                     "message_register": "Passwords must match."
                 })
 
@@ -114,12 +114,12 @@ def index(request):
             # if not possible to create user, returns feedback
             except ValueError:
                 return render(request, "cryptofolio/index.html", {
-                    "coin_page_name": coin_page_name.strip(),
+                    "coin_page_name": coin_name.strip(),
                     "message_register": "Wrong input."
                 })
             except IntegrityError:
                 return render(request, "cryptofolio/index.html", {
-                    "coin_page_name": coin_page_name.strip(),
+                    "coin_page_name": coin_name.strip(),
                     "message_register": "Username already taken."
                 })
             login(request, user)
@@ -138,7 +138,7 @@ def index(request):
                 username = User.objects.get(email = email).username
             except:
                 return render(request, "cryptofolio/index.html", {
-                    "coin_page_name": coin_page_name.strip(),
+                    "coin_page_name": coin_name.strip(),
                     "message_login": "User does not exist."
                 })
 
@@ -149,11 +149,8 @@ def index(request):
                 login(request, user)
             else:
                 return render(request, "cryptofolio/index.html", {
-                    "coin_page_name": coin_page_name.strip(),
+                    "coin_page_name": coin_name.strip(),
                     "message_login": "Invalid email and/or password."})
-
-    # sets new coin page to currently viewing page
-    coin_page_name = coin_name
     
     # gets user's trade history and portfolio coins
     trade_history = Trade.objects.filter(user = user)
@@ -212,7 +209,7 @@ def index(request):
     user_portfolio_coin_holding_list = []
     for coin in user_portfolio:
         user_portfolio_coin_holding_list.append(coin.coin_name)
-   # creates JSON variable
+    # creates JSON variable
     portfolio_coin_name_data_JSON = dumps(user_portfolio_coin_holding_list)
 
     # creates JSON variable to send user holdings to Javascript
@@ -220,7 +217,7 @@ def index(request):
 
     return render(request, "cryptofolio/index.html", {
         "trade_history": trade_history,
-        "coin_page_name": coin_page_name.strip(),
+        "coin_page_name": coin_name.strip(),
         "portfolio_coin_name_data_JSON": portfolio_coin_name_data_JSON,
         "portfolio_coin_amount_data_JSON": portfolio_coin_amount_data_JSON,
         "trade_data_JSON": trade_data_JSON,
