@@ -1,30 +1,32 @@
-h2 {
-  font-size: large;
-  color: rgb(255,255,255);
-}
-
-ul, li { 
-  margin: 0;
-  padding: 0; 
-  list-style-type: none
-}
-a {
-  color: rgb(53, 169, 180);
-}
-
-.col-3 {
-  margin: 0;
-  padding: 0;
-}
-
-.row {
-  background-color: rgb(255,255,255);
-  margin: 0;
-  padding: 0;
-}
+/* GENERAL  */
+  h1 {
+    font-size: xx-large;
+    text-transform: uppercase;
+    color: rgb(255,255,255);
+  }
+  h2 {
+    font-size: large;
+    color: rgb(255,255,255);
+  }
+  ul, li { 
+    margin: 0;
+    padding: 0; 
+    list-style-type: none
+  }
+  a {
+    color: rgb(53, 169, 180);
+  }
+  .col-3 {
+    margin: 0;
+    padding: 0;
+  }
+  .row {
+    background-color: rgb(255,255,255);
+    margin: 0;
+    padding: 0;
+  }
 
 /* POP-UP SCREENS */
-/* Add trade  */
   .frontfield {
     width: 600px;
     height: 400px;
@@ -47,79 +49,65 @@ a {
     color: blue;
   }
 
-#trending_tweets_thread_display {
-  width: 55%;
-  height: 80%;
-}
-#trending_tweets {
-  width: 96%;
-  height: 85%;
-  margin-bottom: 15px;
+  /* trending tweets thread generator  */
+  #trending_tweets_thread_display {
+    width: 55%;
+    height: 80%;
+  }
+  #trending_tweets {
+    width: 96%;
+    height: 85%;
+    margin-bottom: 15px;
 
-  border: 1px solid rgba(53, 169, 180, 0.562);
-  border-radius: 10px;
-  overflow-y: scroll;
-}
-.trending_coin_info {
-  margin: 10px;
-  padding: 5px 30px 5px 5px;
-}
-.trending_coin_description {
-  padding-right: 80px;
-}
-.trending_coins_title {
-  text-transform: uppercase;
-}
-.trending_coin_ticker {
-  text-transform: uppercase;
-}
-.trending_coins_image {
-  width: 50px;
-  float: right;
-}
-#overview_coin_names {
-  text-transform: capitalize;
-}
-#overview_coin_tickers {
-  text-transform: uppercase;
-}
-
+    border: 1px solid rgba(53, 169, 180, 0.562);
+    border-radius: 10px;
+    overflow-y: scroll;
+  }
+  .trending_coin_info {
+    margin: 10px;
+    padding: 5px 30px 5px 5px;
+  }
+  .trending_coin_description {
+    padding-right: 80px;
+  }
+  .trending_coins_title {
+    text-transform: uppercase;
+  }
+  .trending_coin_ticker {
+    text-transform: uppercase;
+  }
+  .trending_coins_image {
+    width: 50px;
+    float: right;
+  }
+  
 /* NAVBAR */
-#navbar_left {
-  height: 60px;
-  background-color: rgb(53, 169, 180);
-}
-#navbar_middle {
-  height: 60px;
-  padding-left: 5px;
-  background-color: rgb(255,255,255);
-  color: rgba(53, 64, 82, 0.89);
-}
-
-#coin_page_name {
-  text-transform: uppercase;
-  color: rgb(53, 169, 180);
-}
-
-#navbar_right {
-  height: 60px;
-  background-color: rgb(255,255,255);
-}
-#signed_in {
-  margin-right: 50px;
-}
-
-h1 {
-  font-size: xx-large;
-  text-transform: uppercase;
-  color: rgb(255,255,255);
-}
-
-.nav_button {
-  margin: 0 5px;
-  height: 30px;
-  width: 80px;
-}
+  #navbar_left {
+    height: 60px;
+    background-color: rgb(53, 169, 180);
+  }
+  #navbar_middle {
+    height: 60px;
+    padding-left: 5px;
+    background-color: rgb(255,255,255);
+    color: rgba(53, 64, 82, 0.89);
+  }
+  #coin_page_name {
+    text-transform: uppercase;
+    color: rgb(53, 169, 180);
+  }
+  #navbar_right {
+    height: 60px;
+    background-color: rgb(255,255,255);
+  }
+  #signed_in {
+    margin-right: 50px;
+  }
+  .nav_button {
+    margin: 0 5px;
+    height: 30px;
+    width: 80px;
+  }
 
 /* FOOTER */
   #footer_left {
@@ -142,6 +130,7 @@ h1 {
   background-color: rgba(53, 64, 82, 0.966);
   border-right: 1px solid rgb(53, 169, 180);
   }
+
 /* search  */
   #search_block {
     margin-bottom: 20px;
@@ -180,27 +169,22 @@ h1 {
     background-color: rgb(255,255,255);
     border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(131, 131, 160, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281);
-    
   }
 
   #portfolio_overview_table_header {
     margin: 0;
-
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 700;
   }
-
   .portfolio_coin {
     width: 90%;
     height: 30px;
     border: none;
-
     background-color: rgba(236, 236, 236, 0);
     
     color: rgb(26, 26, 26); 
     text-transform: capitalize;
-
     font-size: 14px;
     font-weight: 600;
     text-align: left;
@@ -208,7 +192,6 @@ h1 {
     white-space: nowrap;
     overflow: hidden;
   }
-
    .portfolio_coin_amount, .portfolio_coin_price, .portfolio_coin_total_value {
     padding-top: 4px;
     height: 30px;
@@ -219,18 +202,15 @@ h1 {
   #portfolio_chart_data {
     margin: 20px 0 20px 0;
     }
-
   #portfolio_chart_data p {
     color: rgb(196, 205, 219);
   }
-
   #portfolio_chart {
     margin-top: 10px;
     background-color: rgb(255,255,255);
     border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(118, 116, 141, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281);
   }
-
   #portfolio_chart_timeframe_buttons {
     margin: 10px 0 20px 0;
     display: flex;
@@ -239,12 +219,12 @@ h1 {
   .portfolio_chart_timeframe_button {
     margin: 0px 4px;
   }
+
   /* Trade history  */
   #trade_history_block {
     padding: 2px 0 10px 10px;
     max-height: 150px;
     overflow-y: scroll;
-
     background-color: rgb(255,255,255);
     border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(118, 116, 141, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281);
@@ -260,16 +240,13 @@ h1 {
     text-transform: capitalize;
     font-size: 12px;
   }
-
   #delete_trade_column {
     width: 10px;
   }
-  
   .delete_trade_form {
     padding-right: 20%;
     height: 18px;
   }
-
 
 /* MIDDLE BAR  */
   #right_sidebar {
@@ -277,7 +254,6 @@ h1 {
     padding-top: 10px;
     background-color: rgb(255,255,255);
   }
-
   #coin_chart_block {
     margin-right: 5px;
     padding: 3px 10px;
@@ -285,7 +261,6 @@ h1 {
     border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(53, 169, 180, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281);
   }
- 
   #coin_chart {
     height: 430px ;
   }
@@ -293,7 +268,6 @@ h1 {
     margin-bottom: 3%;
     display: flex;
     justify-content: center;
-  
   }
   .coin_chart_timeframe_button {
     margin: 0px 7px;
@@ -310,7 +284,6 @@ h1 {
     border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(53, 169, 180, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281);
   }
-
   #twitter_channel {
     height: 800px;
     overflow-y: scroll;
@@ -318,9 +291,8 @@ h1 {
     border-radius: 3px;
   }
 
-
 /* RIGHT SIDEBAR */
-/* general info  */
+  /* general info  */
   #coin_data_block {
     margin-left: 5px;
     padding: 3px 10px;
@@ -337,25 +309,21 @@ h1 {
     height: 70px;
     filter: drop-shadow(3px 3px 3px rgba(100, 100, 100, 0.685)); 
   }
-
   #add_trade, #portfolio_button {
     font-size: 12px;
     height: 30px;
     margin: 4px 0 0 10px; 
     display: inline-block; 
   } 
-
   #coin_info_heads li {
     font-weight: 600;
   }
-    
   #coin_info_name {
     text-transform: capitalize;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
-
   #coin_info_ticker {
     text-transform: uppercase;
   }
@@ -364,7 +332,6 @@ h1 {
     font-size: small;
     font-style: italic;
   }
-
   #coin_description_box {
     max-height: 320px;
     margin: 3%;
@@ -389,7 +356,6 @@ h1 {
     border-radius: 3px;
     box-shadow: 0 4px 8px 0 rgba(53, 169, 180, 0.555), 0 6px 20px 0 rgba(118, 116, 141, 0.281); 
   }
-
   #coin_note_field {
     padding: 5px;
     max-height: 200px;
@@ -397,7 +363,6 @@ h1 {
     border: 1px solid rgba(53, 169, 180, 0.562);
     border-radius: 3px;
   }
-
 
 /* GENERAL  */
   /* scrollbar  */
@@ -414,24 +379,25 @@ h1 {
     background: rgba(53, 169, 180, 0.8)
   }
 
+
 /* ////////////////////////////////// */
-/* SLIDER
-/* The switch - the box around the slider */
+/* ADD TRADE SLIDER
+  /* The switch - the box around the slider */
 .switch {
   position: relative;
   display: inline-block;
   width: 60px;
   height: 34px;
-}
+  }
   
   /* Hide default HTML checkbox */
   .switch input {
   opacity: 0;
   width: 0;
   height: 0;
-}
+  }
   
-  /* The slider */
+  /* slider */
   .slider {
   position: absolute;
   cursor: pointer;
@@ -442,8 +408,7 @@ h1 {
   background-color: rgb(250, 6, 6);
   -webkit-transition: .4s;
   transition: .4s;
-}
-  
+  }
   .slider:before {
   position: absolute;
   content: "";
@@ -454,27 +419,21 @@ h1 {
   background-color: rgb(255,255,255);
   -webkit-transition: .4s;
   transition: .4s;
-}
-  
+  }
   input:checked + .slider {
   background-color: #02a31d;
-}
-  
+  }
   input:focus + .slider {
   box-shadow: 0 0 1px #02a31d;
-}
-  
+  }
   input:checked + .slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
-}
-  
-  /* Rounded sliders */
+  }
   .slider.round {
-  border-radius: 34px;
-}
-  
+  border-radius: 10px;
+  }
   .slider.round:before {
-  border-radius: 50%;
-} 
+  border-radius: 8px;
+  } 

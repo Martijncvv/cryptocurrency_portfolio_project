@@ -12,6 +12,9 @@ class Settings(models.Model):
     language = models.CharField(max_length=6)
     currency = models.CharField(max_length=10)
 
+    def __str__(self):
+        return f"User:{self.user} | Language:{self.language}  | Currency:{self.currency}"
+
 
 class Portfolio(models.Model):
     """
@@ -35,13 +38,7 @@ class Trade(models.Model):
     tradetype = models.CharField(max_length=4)
     time = models.DateTimeField(auto_now=True)
 
-    
-
     def __str__(self):
-        return f"OBJECT: User:{self.user} | Coin name:{self.coin_name}  | Trade type:{self.tradetype} | Amount:{self.amount}"
+        return f"User:{self.user} | Coin name:{self.coin_name}  | Trade type:{self.tradetype} | Amount:{self.amount}"
 
-
-    # @property boven function; geen () nodig
-
-    # class meta; extra data/limits voor de database
 
