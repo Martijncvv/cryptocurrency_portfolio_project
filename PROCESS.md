@@ -98,16 +98,17 @@ Project start
 ### Sunday 13-12-2020
 - Improved code clarity and effiency; e.g. send portfolio data directly from Django to JS instead of fetching from HTML.
 - Cleaned JS code
+### Monday 14-12-2020
+- Reordered JS functions, cleaned python and html code.
+- Added function descriptions 
+- Added 'initial investment value' at 'portfolio info'.
+- Added 'portfolio ROI' at 'portfolio info'.
 
-delete from portfolio warning
-delete from note warning
-delete from rade warning
+add profit
+delete from trade warning
 
-1. Go to Coingecko/Coinmarketcap
-2. Sort all projects by Market cap
-3. Scan projects between 2mm - 8mm mcap
-4. Check daily trading volume/exchanges traded on.
-5. Check for upcoming events
-6. Understand project fundamentals / purpose.
-7. DCA into solid projects
-8. Wait for a 2-3x
+To do (self)
+Sort projects on market cap
+Get projects between 2-8mm market cap
+Compare trading volumes and upcoming events
+

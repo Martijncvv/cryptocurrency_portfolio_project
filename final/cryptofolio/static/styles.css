@@ -198,6 +198,13 @@
     font-size: 14px;
   }
 
+  #portfolio_roi_profit {
+    color: rgb(1, 190, 1);
+  }
+  #portfolio_roi_loss {
+    color: red;
+  }
+
   /* portfolio chart  */
   #portfolio_chart_data {
     margin: 20px 0 20px 0;
