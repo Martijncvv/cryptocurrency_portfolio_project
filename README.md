@@ -2,7 +2,8 @@
 
 
 # Cryptofolio
-A cryptocurrency portfolio tracker that shows price data and social media data from different other sources.
+A cryptocurrency portfolio tracker that shows price data and social media data from different sources.
+
 By Martijn van Veen
 
 <img src="doc/cryptofolio_screenshot_1_4.png" alt="Website UI Top" width="400"/><img src="doc/cryptofolio_screenshot_2_4.png" alt="Website UI Middle" width="400" />
