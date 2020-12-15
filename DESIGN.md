@@ -3,10 +3,9 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 
 - General Website images
 
-<img src="doc/cryptofolio_screenshot_1_4.png" alt="Website UI Top" width="400" >
-<img src="doc/cryptofolio_screenshot_2_4.png" alt="Website UI Middle" width="400" >
-<img src="doc/cryptofolio_screenshot_3_4.png" alt="Website UI Bottom" width="400" >
-<img src="doc/cryptofolio_screenshot_4_4.png" alt="Website UI Bottom" width="400" >
+<img src="doc/cryptofolio_screenshot_1_4.png" alt="Website UI Top" width="400" > <img src="doc/cryptofolio_screenshot_2_4.png" alt="Website UI Middle" width="400" >
+<img src="doc/cryptofolio_screenshot_3_4.png" alt="Website UI Bottom" width="400" > <img src="doc/cryptofolio_screenshot_4_4.png" alt="Website UI Bottom" width="400" >
+
 
 
 
