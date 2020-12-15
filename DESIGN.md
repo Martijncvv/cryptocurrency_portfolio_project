@@ -6,8 +6,8 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 - Cryptocurrency data is fetched with Javascript from CoinGecko, a cryptocurrency data aggregation website, via an API.
 
 ### General Website images
-<img src="doc/cryptofolio_screenshot_notes_1_n.png" alt="Website UI Top" width="400" > <img src="doc/cryptofolio_screenshot_notes_2_n" alt="Website UI Middle" width="400" >
-<img src="doc/cryptofolio_screenshot_notes_3_n.png" alt="Website UI Bottom" width="400" > 
+<img src="doc/cryptofolio_screenshot_notes_1_n.png" alt="Website UI Top" width="500" > <img src="doc/cryptofolio_screenshot_notes_2_n.png" alt="Website UI Middle" width="500" >
+<img src="doc/cryptofolio_screenshot_notes_3_n.png" alt="Website UI Bottom" width="500" > 
 
 1. Top 7 trending coins in the past 24 hours.
 2. Historical price graph of the by the user selected cryptocurrency. Timeframes: 1 day, 3 days, 7 days, 30 days, 365 days and max available timeframe.
@@ -20,9 +20,10 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 9. Overview of executed trades with button to delete a trade. (Green: buy / red: sell)
 10. Mention and clickable link of CoinGecko for providing data at no cost as a thank you.
 
-<img src="doc/cryptofolio_navbar.png" alt="Website navbar" width="400" > 
-<img src="doc/cryptofolio_searchbar.png" alt="Website searchbar" width="400" > 
+<img src="doc/cryptofolio_navbar.png" alt="Website navbar" width="400" > <img src="doc/cryptofolio_searchbar.png" alt="Website searchbar" width="400" > 
 
+
+11. 
 
 
 
