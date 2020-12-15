@@ -32,7 +32,7 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 14. Option to search for a coin. When user types one or more characters, website displays all available coins with the substring in the name of the coin at the location of the 'Trending coins overview'. It's possible to click the coin the user is looking for or just use the 'search button'. Displays feedback if coin info not available.
 
 
-<img src="doc/cryptofolio_settings_pop-up.png" alt="Website settings pop-up" width="500" > 
+<img src="doc/cryptofolio_settings_pop-up.png" alt="Website settings pop-up" width="500" >  <img src="doc/cryptofolio_generate_trade-data_csv.png" alt="Website settings pop-up" width="500" > 
 
 15. Button to save prefered language of the user; will show coin desciptions in prefered language if available.
 16. Displays a screen with information about the top trending coins in a specific format to post it in a thread on Twitter.
@@ -42,7 +42,7 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 <img src="doc/cryptofolio_twitter_thread_generator_2.png" alt="Website twitter thread generator" width="500" > <img src="doc/cryptofolio_twitter_thread_example_3.png" alt="Website twitter thread example" width="500" > 
 
 18. Example of a coin description whereby the user chose Korean as language preference. 
-19. Example of a generated twitter thread. 
+19. Example of a generated twitter thread; Tweet with coins overview and seperate tweet for each coin 
 20. Example of how a part of the thread is displayed on Twitter.
 
 <img src="doc/cryptofolio_pop-up_add-trade.png" alt="Website add trade" width="500" > <img src="doc/cryptofolio_pop-up_add-delete-portfolio.png" alt="Website add delete portfolio button" width="500" >
@@ -59,7 +59,7 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 
 25. Confirmation pop-up shows up if user clicks 'Delete Trade' button.
 
-<img src="doc/cryptofolio_login-field" alt="Website login field" width="500" >  <img src="doc/cryptofolio_register-field.png" alt="Website register field" width="500" >  
+<img src="doc/cryptofolio_login-field.png" alt="Website login field" width="500" >  <img src="doc/cryptofolio_register-field.png" alt="Website register field" width="500" >  
 
 26. Login pop-up field. 'login button' disabled until user enters password. Displays error message if invalid email/ password.
 27. Register pop-up field. 'Register button' disabled until user enters passwords. Displays error if user already exists.
@@ -67,11 +67,11 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 <img src="doc/cryptofolio_not-signed-in_1-n.png" alt="Website if user not signed in" width="500" >  <img src="doc/cryptofolio_new-user.png" alt="Website if new user signs in" width="500" > 
 
 28. Website if no user signed in. Displays 'login button'.  Disabled 'add trade', 'add to portfolio' and 'add note' buttons. Hides portfolio info field
-29. Website if new user signs in. Hides, portfolio graph and empty 'Portfolio Holdings' and 'Trade history'.
+29. Website if new user signs in. Hides, portfolio graph and displays empty 'Portfolio Holdings' and 'Trade history' field.
 
 <img src="doc/cryptofolio_no-description.png" alt="Website if no description available" width="700" > 
 
-30. Displays 'No description available' if no description available.      Price history graph of the best cryptocurrency scam and a note if you got interested in cryptocurrencies ;)
+30. Displays 'No description available' if no description available. Price history graph of one of the best cryptocurrency scams and a note if you got interested in cryptocurrencies. ;)
 
 
 # Design Document Plan
