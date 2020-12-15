@@ -1,11 +1,17 @@
+
+
+
 # Cryptofolio
 A cryptocurrency portfolio tracker that shows price data and social media data from different other sources.
+By Martijn van Veen
+
+![Website UI Top](doc/cryptofolio_screenshot_1_4.png)
+![Website UI Middle](doc/cryptofolio_screenshot_2_4.png)
+![Website UI Bottom](doc/cryptofolio_screenshot_3_4.png)
 
 ## Problem statement
-
 The cryptocurrency industry has developed in recent years and is expected to grow significantly in the coming years. This can be seen from the dozens of new startups that are added daily with the accompanying coins and tokens, each with their own value.
 Due to the immature and small market, these prices fluctuate a lot and information about these coins can be found scattered on many different platforms. This can be very unclear and inefficient for the investor.
-
 
 ## Solution description
 This application will solve the problem of scattered information. The user can follow the developments of his or her investments on one location. 
@@ -14,7 +20,6 @@ This application will solve the problem of scattered information. The user can f
 The goal is to keep the website as clean as possible. The user will be able to search and add tokens on the left side. By clicking on a certain coin the data of that specific coin will be displayed at the right side.
 
 ![Website design sketch](doc/Cryptofolio_sketch.jpeg)
-
 
 
 ### Data sources

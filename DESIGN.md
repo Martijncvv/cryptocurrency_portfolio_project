@@ -1,4 +1,19 @@
 # Design Document
+- The website is build as a Single Page Website by combining Python, HTML, CSS and Javascript with the CSS framework Bootstrap and the python-based web framework Django.
+
+General Website images
+<img src="doc/cryptofolio_screenshot_1_4.png" alt="Website UI Top" width="400" >
+<img src="doc/cryptofolio_screenshot_2_4.png" alt="Website UI Middle" width="400" >
+<img src="doc/cryptofolio_screenshot_3_4.png" alt="Website UI Bottom" width="400" >
+
+
+
+
+
+
+
+
+# Design Document Plan
 ## Main Features for MVP ('+' = Optional)
 - User accounts; Sign in and register option for users.
 - Search and add cryptocurrencies to a portfolio.

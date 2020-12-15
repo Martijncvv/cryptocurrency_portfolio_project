@@ -7,7 +7,7 @@ Project start
 - Set up everything the same way as we did in previous assignments.
 
 ### Tuesday 01-12-2020
-- Restarted with the document because there was something wrong with the migrations; after 1 hour of trying to fix it I decided to just restart since it costs only 15 minutes to recreate the basic folders.
+- Restarted with the document because there was something wrong with the migrations; after 1 hour of trying to fix it I decided to just restart since it costs only 10 minutes to recreate the basic folders.
 - Created models file.
 - Created basic front-end with the General information connected to the CoinGecko API. 
 - Added JS login pop-up screen. Currently trying to connect it with Django views. Error message still not working. 
@@ -97,12 +97,15 @@ Project start
 ### Sunday 13-12-2020
 - Improved code clarity and effiency; e.g. send portfolio data directly from Django to JS instead of fetching from HTML.
 - Cleaned JS code
+
 ### Monday 14-12-2020
 - Reordered JS functions, cleaned python and html code.
 - Added function descriptions 
 - Added 'initial investment value' at 'portfolio info'.
 - Added 'portfolio ROI' at 'portfolio info'.
 - Added confirmation prompt if user deletes trade or note.
+
+
 
 
 
