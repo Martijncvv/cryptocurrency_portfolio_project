@@ -6,9 +6,10 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 - Cryptocurrency data is fetched with Javascript from CoinGecko, a cryptocurrency data aggregation website, via an API.
 
 ### General Website images
-<img src="doc/cryptofolio_screenshot_notes_1_n.png" alt="Website UI Top" width="500" > <img src="doc/cryptofolio_screenshot_notes_2_n.png" alt="Website UI Middle" width="500" >
-<img src="doc/cryptofolio_screenshot_notes_3_n.png" alt="Website UI Bottom" width="500" > 
+<img src="doc/cryptofolio_screenshot_notes_1_n.png" alt="Website UI Top" width="600" > <img src="doc/cryptofolio_screenshot_notes_2_n.png" alt="Website UI Middle" width="600" >
+<img src="doc/cryptofolio_screenshot_notes_3_n.png" alt="Website UI Bottom" width="600" > 
 
+### Element explanation by number
 1. Top 7 trending coins in the past 24 hours.
 2. Historical price graph of the by the user selected cryptocurrency. Timeframes: 1 day, 3 days, 7 days, 30 days, 365 days and max available timeframe.
 3. General information about the by the user selected cryptocurrency.
@@ -20,10 +21,14 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 9. Overview of executed trades with button to delete a trade. (Green: buy / red: sell)
 10. Mention and clickable link of CoinGecko for providing data at no cost as a thank you.
 
-<img src="doc/cryptofolio_navbar.png" alt="Website navbar" width="400" > <img src="doc/cryptofolio_searchbar.png" alt="Website searchbar" width="400" > 
+### Special website elements
+<img src="doc/cryptofolio_navbar.png" alt="Website navbar" width="500" > <img src="doc/cryptofolio_searchbar.png" alt="Website searchbar" width="700" > 
 
+11. Explore button; displays random coin data from all available coins. 
+12. Opens settings screen
+13. Logs out user
+14. Option to search for a coin. When user types one or more characters, website displays all available coins with the substring in the name at the location of the 'Trending coins overview'. It's possible to click the coin the user is looking for or just use the 'search button'.
 
-11. 
 
 
 
