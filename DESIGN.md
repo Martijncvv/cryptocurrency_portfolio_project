@@ -48,9 +48,8 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 19. Example of a generated twitter thread; Tweet with coins overview and a seperate tweet for each coin.
 20. Example of how a part of the thread is displayed on Twitter.
 
-<div>
-    <img align="left" src="doc/cryptofolio_pop-up_add-trade.png" alt="Website add trade" height="300" > <img align="right" src="doc/cryptofolio_pop-up_add-delete-portfolio.png" alt="Website add delete portfolio button" height="300" >
-</div>
+<img align="left" src="doc/cryptofolio_pop-up_add-trade.png" alt="Website add trade" height="300" > <img align="right" src="doc/cryptofolio_pop-up_add-delete-portfolio.png" alt="Website add delete portfolio button" height="300" >
+
 
 21. Pop-up screen when user clicks 'add trade': (green: buy / red: sell). Current price and coin name is pre-filled but editable by user. When trade added, it also automatically adds coin to portfolio if coin was not in portfolio already.
 22. Button to add coin to portfolio. Displays 'remove' if already in portfolio.
