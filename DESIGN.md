@@ -9,10 +9,12 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 <img src="doc/cryptofolio_home-page-view_btc.png" alt="Website homepage BTC" width="500" > <img src="doc/cryptofolio_home-page-view_eth.png" alt="Website homepage ETH" width="500" >
 
 ## Website images with notes
-<img src="doc/cryptofolio_home-page-view_btc_notes.png" alt="Website with notes" width="500" >
+<p align="center">
+  <img src="doc/cryptofolio_home-page-view_btc_notes.png" alt="Website with notes" width="500" >
+</p>
 
 ### Element explanation by number
-1. Top 7 trending coins in the past 24 hours. Clickable if you hover over the name (see 1b).
+1. Top 7 trending coins in the past 24 hours. Clickable if you hover over the name.
 2. Historical price graph of the by the user selected cryptocurrency. Timeframes: 1 day, 3 days, 7 days, 30 days, 365 days and max available timeframe. If user hovers over the chart, price and time details pop-up at pointer position.
 3. General information about the by the user selected cryptocurrency.
 4. User's portfolio info: coins, amount, current value of coin and total value of coin holding. Coin name is clickable if user hovers over name. Will display coin page if clicked.
@@ -46,7 +48,7 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 19. Example of a generated twitter thread; Tweet with coins overview and a seperate tweet for each coin.
 20. Example of how a part of the thread is displayed on Twitter.
 
-<img src="doc/cryptofolio_pop-up_add-trade.png" alt="Website add trade" width="500" > <img src="doc/cryptofolio_pop-up_add-delete-portfolio.png" alt="Website add delete portfolio button" height="233" >
+<img align="left" src="doc/cryptofolio_pop-up_add-trade.png" alt="Website add trade" width="500" > <img align="right" src="doc/cryptofolio_pop-up_add-delete-portfolio.png" alt="Website add delete portfolio button" height="233" >
 
 21. Pop-up screen when user clicks 'add trade': (green: buy / red: sell). Current price and coin name is pre-filled but editable by user. When trade added it also automatically adds coin to portfolio if coin was not in portfolio already.
 22. Button to add coin to portfolio. Displays 'remove' if already in portfolio.
@@ -56,7 +58,9 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 23. Field to write a note about the coin. 'Delete Note' button gets displayed when user wrote a note already.
 24. Confirmation pop-up shows up if user clicks 'Delete Note' button.
 
-<img src="doc/cryptofolio_delete-trade_pop-up.png" alt="Website delete trade pop-up" width="500" >  
+<p align="center">
+  <img src="doc/cryptofolio_delete-trade_pop-up.png" alt="Website delete trade pop-up" width="500" >  
+</p>
 
 25. Confirmation pop-up shows up if user clicks 'Delete Trade' button.
 
@@ -70,7 +74,9 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 28. Website if no user is signed in. Displays 'login button'.  Disabled 'add trade', 'add to portfolio' and 'add note' buttons. Hides portfolio info field.
 29. Website if new user signs in. Hides portfolio graph until trades are added. Displays empty 'Portfolio Holdings' and 'Trade history' field.
 
-<img src="doc/cryptofolio_no-description.png" alt="Website if no description available" width="700" > 
+<p align="center">
+    <img src="doc/cryptofolio_no-description.png" alt="Website if no description available" width="700" > 
+</p>
 
 30. Displays 'No description available' if no description available. Price history graph of one of the best cryptocurrency scams and a note if you got interested in cryptocurrencies. ;)
 
