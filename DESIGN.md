@@ -52,8 +52,8 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
     <img align="left" src="doc/cryptofolio_pop-up_add-trade.png" alt="Website add trade" width="500" > <img align="right" src="doc/cryptofolio_pop-up_add-delete-portfolio.png" alt="Website add delete portfolio button" height="233" >
 </div>
 
-
-21. Pop-up screen when user clicks 'add trade': (green: buy / red: sell). Current price and coin name is pre-filled but editable by user. When trade added it also automatically adds coin to portfolio if coin was not in portfolio already.
+<p> </p>
+21. Pop-up screen when user clicks 'add trade': (green: buy / red: sell). Current price and coin name is pre-filled but editable by user. When trade added, it also automatically adds coin to portfolio if coin was not in portfolio already.
 22. Button to add coin to portfolio. Displays 'remove' if already in portfolio.
 
 <img src="doc/cryptofolio_add-note.png" alt="Website add note" width="500" >  <img src="doc/cryptofolio_add-note_pop-up.png" alt="Website delete note pop-up" width="500" >  
