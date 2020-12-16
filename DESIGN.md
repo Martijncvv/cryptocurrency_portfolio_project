@@ -22,7 +22,7 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 6. Twitter timeline of the by the user selected cryptocurrency.
 7. Note field for the user to write down a note about the selected cryptocurrency; e.g. reason of investment.
 8. Historical portfolio value chart. Timeframes: 1 day, 3 days, 7 days, 30 days and 365 days.
-9. Overview of executed trades with a button to delete a trade. (Green: buy trade / red: sell trade)
+9. Overview of executed trades with a button to delete a trade (green: buy trade / red: sell trade).
 10. Mention and clickable link of CoinGecko for providing data at no cost as a thank you.
 
 
@@ -32,7 +32,7 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 11. Explore button; picks a coin from all available coins and displays data. 
 12. Opens settings screen
 13. Logs out user
-14. Field to search for a coin. When user types one or more characters, website displays all available coins with the substring in the name of the coin at the location of the 'Trending coins overview'. It's possible to click a coin in the list or use the 'search button'. Displays feedback if user uses 'searh button' and coin info is not available.
+14. Field to search for a coin. When user types one or more characters, website displays all available coins with the substring in the name of the coin at the location of the 'Trending coins overview'. It's possible to click a coin in the list or use the 'search button'. Displays feedback if user uses 'search button' and coin info is not available.
 
 
 <img src="doc/cryptofolio_settings_pop-up.png" alt="Website settings pop-up" width="500" >  <img src="doc/cryptofolio_generate_trade-data_csv.png" alt="Website settings pop-up" width="500" > 
@@ -80,7 +80,10 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 </p>
 
 30. Displays 'No description available' if no description available. Price history graph of one of the best cryptocurrency scams and a note if you got interested in cryptocurrencies. ;)
-
+  
+  
+   
+   
 
 # Design Document Plan
 ## Main Features for MVP ('+' = Optional)
