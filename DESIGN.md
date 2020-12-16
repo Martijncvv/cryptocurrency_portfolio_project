@@ -9,7 +9,7 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 <img src="doc/cryptofolio_home-page-view_btc.png" alt="Website homepage BTC" width="500" > <img src="doc/cryptofolio_home-page-view_eth.png" alt="Website homepage ETH" width="500" >
 
 ## Website images with notes
-<img src="doc/cryptofolio_home-page-view_btc-notes.png" alt="Website with notes" width="500" >
+<img src="doc/cryptofolio_home-page-view_btc_notes.png" alt="Website with notes" width="500" >
 
 ### Element explanation by number
 1. Top 7 trending coins in the past 24 hours. Clickable if you hover over the name (see 1b).
