@@ -45,6 +45,7 @@
 - Added Twitter timelines; took some to find out how because the page didn't refresh when a new coin is clicked.
 - Added basic coin graph
 
+## Week 2
 ### Monday 07-12-2020
 - Fixed bug in twitter timeline
 - Added function to send trade_data from Django to Javascript
@@ -102,7 +103,7 @@
 - Added 'initial investment value' at 'portfolio info'.
 - Added 'portfolio ROI' at 'portfolio info'.
 - Added confirmation prompt if user deletes trade or note.
-
+- Done
 
 
 
