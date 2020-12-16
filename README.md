@@ -5,9 +5,10 @@
 A cryptocurrency portfolio tracker that shows price data and social media data from different sources.
 
 By Martijn van Veen
-
-<img src="doc/cryptofolio_home-page-view_btc.png" alt="Website UI top" width="800" >
-<img src="doc/cryptofolio_screenshot_4_4.png" alt="Website Settings Screen" width="500" >
+<p align="center"> 
+  <img src="doc/cryptofolio_home-page-view_btc.png" alt="Website UI top" width="800" >
+  <img src="doc/cryptofolio_screenshot_4_4.png" alt="Website Settings Screen" width="500" >
+</p>
 
 ## Problem statement
 The cryptocurrency industry has developed in recent years and is expected to grow significantly in the coming years. This can be seen from the dozens of new startups that are added daily with the accompanying coins and tokens, each with their own value.
