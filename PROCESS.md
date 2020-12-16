@@ -1,16 +1,14 @@
 # Process Book
 ## Week 1
 ### Monday 30-11-2020
-Project start
+- Project start
 - Made Design document.
 - Added all needed basic files; folders, templates, settings, urls.py, views.py.
-- Set up everything the same way as we did in previous assignments.
 
 ### Tuesday 01-12-2020
-- Restarted with the document because there was something wrong with the migrations; after 1 hour of trying to fix it I decided to just restart since it costs only 10 minutes to recreate the basic folders.
 - Created models file.
-- Created basic front-end with the General information connected to the CoinGecko API. 
-- Added JS login pop-up screen. Currently trying to connect it with Django views. Error message still not working. 
+- Created basic front-end for the General information connected to the CoinGecko API. 
+- Added JS login pop-up screen. Currently trying to connect it with Django views; Error message still not working. 
 
 ### Wednesday 02-12-2020
 - Finished basic login, logout and register functionality
@@ -44,7 +42,7 @@ Project start
 - Added a more effiecient way for fetching of price data; 1 request instead of a request for each coin.
 - Found out API doesn't return values in the same order as asked for.
 - Added "total current portfolio" value.
-- Added Twitter timelines; took some to find out how because the page doesn't refresh when a new coin is clicked.
+- Added Twitter timelines; took some to find out how because the page didn't refresh when a new coin is clicked.
 - Added basic coin graph
 
 ### Monday 07-12-2020
@@ -91,7 +89,7 @@ Project start
 ### Saturday 12-12-2020
 - Added chart transparency
 - Added coin logo shadow
-- Trending tweet thread generator
+- Added Trending tweet thread generator
 - Added dynamic search bar
 
 ### Sunday 13-12-2020
