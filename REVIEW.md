@@ -5,8 +5,8 @@
 
 - Verbeterpunten / opmerkingen
     - Maak een mooiere confirmation pop-up voor 'delete trade/ delete note'.
-    - Vaak terugkomende stukken code; delete_trade_button.setAttribute, document.querySelector'/ 'document.getElementById', weet zelf niet of dit efficienter kan.
-    - Een chart function toevoegen waar je variabele kunt invoeren ipv 2 losse chart functies voor portfolio en coin charts.
+    - Veel terugkomende onderdelen in code; 'setAttribute', document.querySelector'/ 'document.getElementById', weet zelf niet of dit efficienter kan.
+    - Een chart-teken function toevoegen waar je variabele kunt invoeren ipv 2 losse chart-teken code blokken voor portfolio en coin charts.
     - Aangezien het een one-pager is kan de index.html en layout.html page worden samengevoegd.
     - 'portfolio_history_chart' functie heeft meerdere forEach loops in elkaar en is veel code waardoor het onoverzichtelijk is wat het precies doet. 
 
@@ -14,7 +14,7 @@
 - Eigen verbeterpunten
     - Als ik de website opnieuw zou maken zou ik de layout anders op bouwen. Bij de 'portfolio informatie' zou ik bijvoorbeeld een table plaatsen met data in plaats van losse collumn divs waarin lists met de data staan.
     - De schaalbaarheid van de webpage voor veschillende window afmetingen werkt nog niet optimaal; de onderdelen schuiven wel onder elkaar bij verkleining van het scherm maar vult vervolgens niet de volledige breedte van de window.
-    - Ik denk dat de CSS stylesheet efficienter kan door meerdere classes toe te voegen aan bepaalde vergelijkbare elementen.
+    - Ik denk dat de CSS stylesheet efficienter kan door classes toe te voegen aan bepaalde vergelijkbare elementen of door gebruik te maken van inheritance.
     - Javascript en eventueel HTML in 3 losse files scheiden zodat 'algemene elementen', 'portfolio elementen' en 'coin elementen' makkelijker terug te vinden zijn.
 
     - Meer info opties toevoegen; huidige profit per trade, trading volumes van coins vergelijken.
