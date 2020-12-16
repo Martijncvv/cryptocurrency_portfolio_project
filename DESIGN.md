@@ -6,7 +6,7 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 - Cryptocurrency data is fetched with Javascript from CoinGecko, a cryptocurrency data aggregation website, via an API.
 
 ## Website
-<img src="doc/cryptofolio_home-page-view_btc.png" alt="Website UI top" width="500" > <img src="doc/cryptofolio_screenshot_notes_1_n.png" alt="Website homepage ETH" width="500" >
+<img src="doc/cryptofolio_home-page-view_btc.png" alt="Website UI top" width="500" > <img src="doc/cryptofolio_home-page-view_eth.png.png" alt="Website homepage ETH" width="500" >
 
 ## Website images with notes
 <img src="doc/cryptofolio_screenshot_notes_1_n.png" alt="Website UI top" width="500" > <img src="doc/cryptofolio_home-page-view_eth.png" alt="Website homepage BTC" width="500" >
@@ -15,7 +15,7 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 
 ### Element explanation by number
 1. Top 7 trending coins in the past 24 hours. Clickable if you hover over the name (see 1b).
-2. Historical price graph of the by the user selected cryptocurrency. Timeframes: 1 day, 3 days, 7 days, 30 days, 365 days and max available timeframe.
+2. Historical price graph of the by the user selected cryptocurrency. Timeframes: 1 day, 3 days, 7 days, 30 days, 365 days and max available timeframe. If user hovers over the chart, price and time details pop-up at pointer position.
 3. General information about the by the user selected cryptocurrency.
 4. User's portfolio info: coins, amount, current value of coin and total value of coin holding. Coin name is clickable if user hovers over name. Will display coin page if clicked.
 5. General user portfolio info; total value, initial investment, current return on investment (green: profit / red: loss), nr of coins in portfolio, nr of trades executed.
