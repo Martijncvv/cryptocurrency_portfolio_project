@@ -6,12 +6,10 @@ The website is build as a Single Page Website by combining Python, HTML, CSS and
 - Cryptocurrency data is fetched with Javascript from CoinGecko, a cryptocurrency data aggregation website, via an API.
 
 ## Website
-<img src="doc/cryptofolio_home-page-view_btc.png" alt="Website UI top" width="500" > <img src="doc/cryptofolio_home-page-view_eth.png" alt="Website homepage ETH" width="500" >
+<img src="doc/cryptofolio_home-page-view_btc.png" alt="Website homepage BTC" width="500" > <img src="doc/cryptofolio_home-page-view_eth.png" alt="Website homepage ETH" width="500" >
 
 ## Website images with notes
-<img src="doc/cryptofolio_screenshot_notes_1_n.png" alt="Website UI top" width="500" > <img src="doc/cryptofolio_home-page-view_eth.png" alt="Website homepage BTC" width="500" >
-
-<img src="doc/cryptofolio_screenshot_notes_3_n.png" alt="Website UI bottom" width="500" > 
+<img src="doc/cryptofolio_home-page-view_btc-notes.png" alt="Website with notes" width="500" >
 
 ### Element explanation by number
 1. Top 7 trending coins in the past 24 hours. Clickable if you hover over the name (see 1b).
