@@ -4,23 +4,23 @@
 
 - Verbeterpunten / opmerkingen
     - Maak een mooiere confirmation pop-up voor 'delete trade/ delete note'.
-    - Veel terugkomende onderdelen in code; 'setAttribute', document.querySelector'/ 'document.getElementById', weet zelf niet of dit efficienter kan.
-    - Een chart-teken function toevoegen waar je variabele kunt invoeren ipv 2 losse chart-teken code blokken voor portfolio en coin charts.
+    - Veel terugkomende onderdelen in code; 'setAttribute', document.querySelector'/ 'document.getElementById', weet zelf niet of dit efficienter kan, maar zou het minder ingewikkeld maken.
+    - Een grafiek-render functie toevoegen waar je variabele kunt invoeren in plaats van 2 losse grafiek-render code blokken voor de portfolio waarde grafiek en coin grafiek.
     - Aangezien het een one-pager is kan de index.html en layout.html page worden samengevoegd.
     - 'portfolio_history_chart' functie heeft meerdere forEach loops in elkaar en is veel code waardoor het onoverzichtelijk is wat het precies doet. 
 
 ## Eigen review
 - Eigen opmerkingen
-    - Om de 'portfolio_history_chart' functie te verduidelijken zou ik in de functie-documentation uitgebreider uitleggen wat er precies gebeurt tussen welke code blocken als toevoeging op de comments bij losse code lines E.g.: 
-    L 360-390: Fetches price data of all portfolio coins. 
-    L 390-440: For each coin in portfolio; Loops over every timestamp and checks user's coin-holding-amount, coin price and adds multiplication of this to total portfolio value at timestamp. 
-    L 440-460: Creates chart based on array with timestamp:portfolio_value dictionary.  
+    - Om de 'portfolio_history_chart' functie te verduidelijken zou ik in de functie-documentation uitgebreider uitleggen wat er precies gebeurt tussen welke code blocken als toevoeging op de comments bij losse code lines E.g.:  
+    L 360-390: Fetches price data of all portfolio coins.  
+    L 390-440: For each coin in portfolio; Loops over every timestamp and checks user's coin-holding-amount and coin price and adds multiplication of this to total portfolio value at the timestamp.  
+    L 440-460: Creates chart based on array with timestamp:portfolio_value dictionaries.  
     - Om te voorkomen dat het 2 grote files met code zijn zou ik Javascript en eventueel HTML in 3 losse files scheiden zodat 'algemene elementen', 'portfolio elementen' en 'coin elementen' makkelijker terug te vinden zijn.
     - Als ik de website opnieuw zou maken zou ik de layout anders op bouwen. Bij de 'portfolio informatie' zou ik bijvoorbeeld een table plaatsen met data in plaats van losse collumn-divs waarin lists met de data staan.
     - De schaalbaarheid van de webpage voor verschillende window afmetingen werkt nog niet optimaal; de onderdelen schuiven wel onder elkaar bij verkleining van het scherm maar vult vervolgens niet de volledige breedte van de window.
     - Ik denk dat de CSS stylesheet efficienter kan door classes toe te voegen aan bepaalde vergelijkbare elementen of door gebruik te maken van inheritance.
     
-- Functionaliteit toevoegingen
+- Functionele toevoegingen
     - Meer info opties toevoegen; huidige profit per trade, trading volumes van coins vergelijken.
     - Trade historie connecten met een API van een exchange zodat trades automatisch worden toegevoegd.
     - Optie toevoegen om een custom timeframe in de grafiek te selecteren door met je muis een gebied te selecteren in de grafiek.
