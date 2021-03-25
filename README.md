@@ -19,7 +19,3 @@ This application will solve the problem of scattered information. The user can f
 ## Acknowledgements
 I would like to thank CoinGecko for providing real-time cryptocurrency data at no cost.  
 https://www.coingecko.com/en/api 
- 
-## Screencast
-Click to view screencast
-[![cryptofolio screencast](doc/Cryptofolio_screencast.png)](https://video.uva.nl/media/Final_cryptofolio_Martijn-van-Veen.mp4/0_jou1i77h "Final_cryptofolio_Martijn-van-Veen")
