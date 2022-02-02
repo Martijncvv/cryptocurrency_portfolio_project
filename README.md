@@ -4,7 +4,7 @@
 # Cryptofolio
 A clean cryptocurrency portfolio tracker that shows price data, social media data and has the functionality to explore new investment opportunities. 
 
-By Martijn van Veen
+By Martijn vv
 <p align="center"> 
   <img src="doc/cryptofolio_home-page-view_btc.png" alt="Website UI top" width="800" >
 </p>
